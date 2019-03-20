@@ -1,0 +1,59 @@
+#include <queue>
+#include <iostream>
+
+using namespace std;
+
+class Solution {
+public:
+	void push(int x) {
+		queue1.push(x);
+	}
+	int pop() {
+		if (!queue1.empty()) {
+			//int size = queue1.size();
+			while (queue1.size()>1) {
+				queue2.push(queue1.front());
+				queue1.pop();
+			}
+			int value = queue1.front();
+			queue1.pop();
+			return value;
+		}
+		else {
+			if (queue2.empty()) {
+				cout << "The stack is empty." << endl;
+				return -1;
+			}
+			while (queue2.size()>1) {
+				queue1.push(queue2.front());
+				queue2.pop();
+			}
+			int value = queue2.front();
+			queue2.pop();
+			return value;
+		}
+	}
+private:
+	queue<int> queue1;
+	queue<int> queue2;
+};
+
+int main() {
+	Solution stack;
+	for (int i = 1; i <= 3; i++) {
+		stack.push(i);
+	}
+	cout << stack.pop() << endl;
+	cout << stack.pop() << endl;
+	for (int i = 4; i <= 5; i++) {
+		stack.push(i);
+	}
+	cout << stack.pop() << endl;
+	cout << stack.pop() << endl;
+	cout << stack.pop() << endl;
+	cout << stack.pop() << endl;
+	cout << stack.pop() << endl;
+
+
+	return 0;
+}
