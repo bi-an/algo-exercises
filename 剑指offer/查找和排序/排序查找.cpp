@@ -126,7 +126,7 @@ int Partition(int numbers[], int len, int start, int end) {
 	for (i = start; i < end; i++) {
 		if (numbers[i] < numbers[end]) {
 			++small; //small始终指向当前遍历到的左边值最后一个位置
-			if (i != small) //此时index指向左边值的位置，small指向的是右边值的位置
+			if (i != small) //此时index指向左边值的位置，small指向的是右边值的位置, 这个if好像可以去掉
 				swap(numbers[i], numbers[small]);
 		}
 	}
