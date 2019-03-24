@@ -124,7 +124,7 @@ int getMaxValue_solution2(const int *values, int rows, int cols){
 
 
 // Athor zzg
-// 递归 《动态规划的思考艺术》 https://github.com/tianyicui/DP-Book
+// 递归 《动态规划的思考艺术》 https://github.com/tianyicui/DP-Book  path.pdf《2.1 矩阵中的寻路》
 int getMaxValueCore(const int* values, int rows, int cols, int x, int y, int res);
 
 int getMaxValue_solution3(const int *values, int rows, int cols) {
