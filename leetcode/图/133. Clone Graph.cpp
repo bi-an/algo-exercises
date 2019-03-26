@@ -61,3 +61,42 @@ public:
 private:
 	map<Node*,Node*> hash;
 };
+
+// DFS iteratively
+class Solution{
+public:
+	Node* cloneGraph(Node* node){
+		if(node==nullptr) return nullptr;
+
+		stack<Node*> vertexStack;
+		unordered_map<Node*> hash;
+		stack<int> idx; //记录当前顶点邻居的iterator
+
+		Node* copy=new Node(node->val, {});
+		vertexStack.push(node);
+		hash[node]=copy;
+		idx.push(0);
+
+		while(!vertexStack.empty()){
+			Node *topStack=vertexStack.top();
+			for(Node *nextNeighbor : topStack->neighbors){
+				if(hash.find(nextNeighbor)==hash.end()){
+					hash[topStack]->neighbors.push_back(new Node(nextNeighbor,{}));
+					vertexStack.push(nextNeighbor);
+					idx.push(0);
+				}
+				else{
+					hash[topStack]->nextNeighbor.push_back(hash[nextNeighbor]);
+					idx.top()++;
+				}
+			}
+			if(idx.top()==topStack->neighbors.size()){
+				vertexStack.pop();
+				idx.pop();
+			}
+		}
+
+		return copy;
+
+	}
+};

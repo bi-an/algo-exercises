@@ -1,10 +1,10 @@
 
 // 快速排序标准写法
 // https://en.wikipedia.org/wiki/Quicksort
-// 选取最后一个元素作为比较标准pivot
 // 一趟分割
+// 交换次数：small值的个数+1(选取的元素)
 int Partition(int *arr, int lo, int hi) {
-	int pivot = arr[hi];
+	int pivot = arr[hi]; // 选取最后一个元素作为比较标准pivot
 	int i = lo; //i指向下一个small值
 	for (int j = lo; j <= hi - 1; j++) {
 		if (arr[j] < pivot) { //把每一个small值换到相应位置
@@ -29,6 +29,7 @@ void quickSort(int *arr, int lo, int hi) {
 
 
 // 快速排序： 随机化快排
+// 交换次数：small值的个数+2(选取的元素交换了2次)
 int Partition(int *arr, int lo, int hi) {
 	int pos = rand() % (hi - lo + 1) + lo;
 	int pivot = arr[pos];
