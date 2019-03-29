@@ -1,3 +1,7 @@
+/*
+题目：二维数组，从左至右递增，从上至下递增
+*/
+
 class Solution {
 public:
 	bool Find(int target, vector<vector<int> > array) {
@@ -45,7 +49,7 @@ public:
 		int rows = array.size();
 		int cols = array[0].size();
 		for (int i = 0; i < rows; i++) {
-			for (int j = cols - 1; j >= 0; j--) {
+			for (int j = cols - 1; j >= 0; j--) { //从右上方开始查找
 				if (array[i][j] == target)
 					return true;
 				if (array[i][j] > target) {
