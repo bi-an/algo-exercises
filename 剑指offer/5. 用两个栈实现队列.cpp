@@ -1,3 +1,7 @@
+// 两个栈，每次push放在stack1,
+// 当pop（同时取出值），如果stack2为空，则把stack1的元素全部倒入stack2，（此时就是先进先出的顺序）然后取出；
+// 		如果stack2不为空，直接取出stack2的顶端值。
+
 //写法1
 class Solution
 {

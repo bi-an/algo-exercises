@@ -59,6 +59,7 @@ public:
 };
 
 //方法3：利用vector可以在头部插入，或者用反向迭代器
+// 分析：vector线性结构，在头部插入效率非常低下。
 class Solution {
 public:
 	vector<int> printListFromTailToHead(ListNode* head) {
