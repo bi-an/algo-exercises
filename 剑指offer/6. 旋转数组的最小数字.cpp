@@ -47,7 +47,7 @@ public:
 		int left = 0, right = rotateArray.size() - 1;
 		//if (right == 0) return rotateArray[0];
 		//当左右相等时，如：1,0,1,1,1和1,1,1,0,1，没法判断下一步min属于哪个区间，应该顺序寻找。
-		if (rotateArray[left] == rotateArray[right]) { // Question: 好像有错误？
+		if (rotateArray[left] == rotateArray[right]) { // Question: 好像有错误？  ->  如果左中右都相等，则无法判断
 			while (left < right) {
 				if (rotateArray[right] < rotateArray[right - 1])
 					return rotateArray[right];
