@@ -1,0 +1,93 @@
+1. 题目 [编程之美]随机数的扩展
+
+    给定一个随机数生成器，这个生成器能均匀生成1到5(1,5)的随机数，如何使用这个生成器生成均匀分布的1到7(1,7)的数?
+   思路
+
+   方法一：生成两个（1,5）的随机数，这样一共是25种情况，注意这两个数是有顺序的，从这25种情况中，取前21种，每三种代表（1,7）中的一个数字，如果取到的是这21种以外的情况，丢掉重新取。
+
+   方法二：生成三个（1,5）的随机数，分别表示一个二进制位，其中1和2映射为0,3跳过，4和5映射为1。这样产生的三位二进制数，即1-8这8个数字都是等概率的。如果产生的是8，那么丢弃即可。
+
+   方法三：生成两个（1,5）的随机数，产生一个两位的五进制数，5 * (random5() – 1) + random5()。这个公式能够等概率产生1-25，即第一个随机数代表：0,5,10,15,20，地位代表1,2,3,4,5。
+   这样对这个数字（1-25的数字），采用方法一的方法，只用1-21，分7分，代表1-7,22-25这4个数字扔掉。
+   
+	
+// 解法1 : 似乎无法实现
+int rand10(){
+	int numbers[10]={};
+	// 调用rand6()10次，让1~10出现的概率都是6/60
+	for(int i=0;i<10;i++)
+		numbers[i]=(rand6()+i)%10;
+	
+}
+
+
+// 解法2
+int rand7()
+{
+    int vals[5][5] = {
+        { 1, 2, 3, 4, 5 },
+        { 6, 7, 1, 2, 3 },
+        { 4, 5, 6, 7, 1 },
+        { 2, 3, 4, 5, 6 },
+        { 7, 0, 0, 0, 0 }
+    };
+
+    int result = 0;
+    while (result == 0)
+    {
+        int i = rand5();
+        int j = rand5();
+        result = vals[i-1][j-1];
+    }
+    return result;
+}
+How does it work? Think of it like this: 
+imagine printing out this double-dimension array on paper, 
+tacking it up to a dart board and randomly throwing darts at it. 
+If you hit a non-zero value, it's a statistically random value between 1 and 7, 
+since there are an equal number of non-zero values to choose from. 
+If you hit a zero, just keep throwing the dart until you hit a non-zero. 
+That's what this code is doing: the i and j indexes randomly select a location on the dart board, 
+and if we don't get a good result, we keep throwing darts.
+
+Like Adam said, this can run forever in the worst case, but statistically the worst case never happens. :)
+
+
+// 解法3
+int rand7(){
+	int i;
+	do
+	{
+	  i = 5 * (rand5() - 1) + rand5();  // i is now uniformly random between 1 and 25
+	} while(i > 21);
+	// i is now uniformly random between 1 and 21
+	return i % 7 + 1;  // result is now uniformly random between 1 and 7
+}
+
+// i = 5 * (rand5() - 1) + rand5(); 
+解释：两次调用rand5(),产生的结果有25种，下面对1~25的出现可能情况列举：设x=rand5()第一次，y=rand5()第二次
+1 : x=1, y=1;
+2 : x=1, y=2;
+ ...
+25: x=5, y=5; 
+所以，1~25出现的情况都只有一种，这样每个数出现的概率都是1/25.
+
+// while(i>21);
+解释：这样会等概率(1/25)产生1~21中的一个数。
+
+// return i%7+1;
+解释：21能够整除7,所以能够等概率(3/21)地产生0~6,加上1之后就是1~7.
+
+
+1. 题目
+
+    给定一个随机数生成器，这个生成器能均匀生成1到5(1,5)的随机数，如何使用这个生成器生成均匀分布的1到7(1,7)的数?
+
+2. 思路
+
+   方法一：生成两个（1,5）的随机数，这样一共是25种情况，注意这两个数是有顺序的，从这25种情况中，取前21种，每三种代表（1,7）中的一个数字，如果取到的是这21种以外的情况，丢掉重新取。
+
+   方法二：生成三个（1,5）的随机数，分别表示一个二进制位，其中1和2映射为0,3跳过，4和5映射为1。这样产生的三位二进制数，即1-8这8个数字都是等概率的。如果产生的是8，那么丢弃即可。
+
+   方法三：生成两个（1,5）的随机数，产生一个两位的五进制数，5 * (random5() – 1) + random5()。这个公式能够等概率产生1-25，即第一个随机数代表：0,5,10,15,20，地位代表1,2,3,4,5。
+   这样对这个数字（1-25的数字），采用方法一的方法，只用1-21，分7分，代表1-7,22-25这4个数字扔掉。
