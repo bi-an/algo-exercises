@@ -1,10 +1,11 @@
+// 借助辅助内存
 class Solution {
 public:
 	void reOrderArray(vector<int> &array) {
 		vector<int> odd, even;
 		for (auto iter = array.begin(); iter != array.end(); iter++) {
 			int item = *iter;
-			if (item & 1 == 0) {
+			if ((item & 1) == 0) {
 				even.push_back(item);
 			}
 			else {
@@ -20,7 +21,6 @@ public:
 	}
 };
 
-
 //两个指针，p1从头开始，p2从尾开始。
 //不满足要求，这样奇奇之间、偶偶之间顺序会变化。
 class Solution {
@@ -32,20 +32,22 @@ public:
 				if (!isEven(array[post])) {
 					swap(array[pre], array[post]);
 					pre++;
-					post--;
-					continue;
+					//post--;
 				}
+				//else
+				post--;
 			}
 			else
 				pre++;
 		}
 	}
 	bool isEven(int num) {
-		return (num & 1) == 0; //& 优先级低于 == 
+		return (num & 1) == 0; // & 优先级低于 == 
 	}
 };
 
-//发散思维，输入函数指针，这样可以改变isEven这样的判断函数
+//同样不满足，因为奇奇之间、偶偶之间会改变顺序
+//可扩展的解法：输入函数指针，这样可以改变isEven这样的判断函数
 void reOrderArray(vector<int> &array, bool (*pf) (int)) {
 	int pre = 0, post = array.size() - 1;
 	while (pre < post) {
@@ -54,8 +56,9 @@ void reOrderArray(vector<int> &array, bool (*pf) (int)) {
 				swap(array[pre], array[post]);
 				pre++;
 				post--;
-				continue;
 			}
+			else
+				post--;
 		}
 		else
 			pre++;
@@ -65,6 +68,7 @@ void reOrderArray(vector<int> &array, bool (*pf) (int)) {
 
 //冒泡法
 //时间复杂度：O(n^2)
+//实际测试：3ms
 class Solution {
 public:
 	void reOrderArray(vector<int> &array) {

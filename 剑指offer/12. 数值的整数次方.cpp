@@ -98,7 +98,7 @@ public:
         //if (exponent == -1) return 1.0 / base;
         int flag = 1;
         if (exponent < 0) flag = -1;
-        double result = Power(base, flag*exponent / 2);//这里不能用exponent>>1，因为对于负数，不断右移，会达到-1之后不再变化，陷入死循环
+        double result = Power(base, flag*exponent / 2);//这里不能用exponent>>=1，因为对于负数，不断右移，会达到-1之后不再变化，陷入死循环
         result *= result;
         if ((exponent & 0x1) == 1)//注意：==优先级比&高
             result *= base;
@@ -109,7 +109,8 @@ public:
 };
 
 
-//注：递归并不会比循环效率高，只是因为循环经常可以减少不必要的计算，如Fibonacci
+// 注：递归并不会比循环效率高，只是因为循环经常可以减少不必要的计算，如Fibonacci
+// 注意：-3右移一位，结果是-2，不是-1，要从二进制位来看。-9右移一位是-5，但是-9/2=-4.(VS编译环境下)
 class Solution {
 public:
     //去掉注释，则安全性加强。
@@ -118,12 +119,14 @@ public:
         //if(base == 0 && exponent <=0) {g_ValidInput=false; return 1;}
         if (exponent == 0) return 1;
         if (exponent == 1) return base;
-        if (exponent == -1) return 1.0 / base;
+        if (exponent == -1) return 1.0 / base; // 若exponent为负数，不断右移，最终到达-1
 
-        double result = Power(base,exponent>>1);
+        double result = Power(base,exponent>>1); // 这里如果是exponent/2，则结果不正确
+
         result *= result;
         if ((exponent & 0x1) == 1)
-            result *= base;
+            result *= base; // 这是因为如果exponent是奇数，不断右移，即使是负数，会不断向-inf方向取整，例如-9，不断右移变成-5,-3,-2,-1,
+        // 这样最终一定会到达-2, 正好多乘了一个base^-1
 
         return result;
     }

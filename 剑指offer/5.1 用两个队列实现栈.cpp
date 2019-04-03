@@ -3,6 +3,11 @@
 
 using namespace std;
 
+
+// push: 每次都放进queue1;
+// pop: 如果queue1不为空，则把queue1的size-1个元素全部倒进queue2,将最后一个元素弹出；
+//		若queue1为空，则把queue2的size-1个元素全部倒进queue1,将最后一个元素弹出。
+// TODO: 这样效率很低，有没有更好的方法？
 class Solution {
 public:
 	void push(int x) {

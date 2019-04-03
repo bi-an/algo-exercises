@@ -39,7 +39,8 @@ public:
 
 
 //自己写的。
-//发现规律：左边第一个数一定大于等于最右边的数
+//发现规律：左边第一个数一定大于等于最右边的数（如果有旋转的话）
+// 时间复杂度: O(logn)
 class Solution {
 public:
 	int minNumberInRotateArray(vector<int> rotateArray) {
@@ -59,12 +60,12 @@ public:
 		int middle = 0;
 		while (rotateArray[left] >= rotateArray[right]){//比while (left < right)效率高一些
 			if (right - left == 1)
-				return rotateArray[left] > rotateArray[right] ? rotateArray[right] : rotateArray[left];
+				return rotateArray[right]; //rotateArray[left] > rotateArray[right] ? rotateArray[right] : rotateArray[left];
 			else {
 				middle = (left + right) / 2;
 				if (rotateArray[middle] <= rotateArray[right])
 					right = middle;
-				else if (rotateArray[middle] >= rotateArray[left])
+				else //if (rotateArray[middle] >= rotateArray[left])
 					left = middle;
 				//其他情况不存在，所以不需要写else，实际上，上面可以写成if...else...
 			}

@@ -50,3 +50,20 @@ public:
 		return third;
 	}
 };
+
+
+class Solution {
+public:
+    int rectCover(int number) {
+        if(number<=0) return 0;
+        if(number==1) return 1;
+        int first=1, second=1;
+        int res=0;
+        for(int i=2;i<=number;i++){
+            res=first+second;
+            first=second;
+            second=res;
+        }
+        return res;
+    }
+};

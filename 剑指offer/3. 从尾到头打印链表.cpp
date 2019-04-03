@@ -73,7 +73,8 @@ public:
 	}
 };
 
-
+// 测试结果：效率最高
+// 分析，vector是数组结构，存取效率比栈高
 class Solution {
 public:
 	vector<int> printListFromTailToHead(struct ListNode* head) {
