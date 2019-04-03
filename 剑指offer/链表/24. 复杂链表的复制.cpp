@@ -36,19 +36,21 @@ public:
 		// 解决random的指向
 		p = pHead;
 		while (p) {
-			if(p->random) //防止越界
-				p->next->random = p->random->next;
-			p = p->next->next;
-		}
-		// 拆开链表
+			RandomListNode *pNew = p->next;
+			if (p->random) { // 防止越界
+				pNew->random = p->random->next;
+			}
+			p = pNew->next;
+		} 
+		// 拆开链表  注意：一定要在草稿纸上手绘拆开过程，而且要一条条指针拆开，不然很容易遗忘某些东西
 		p = pHead;
 		RandomListNode *res = p->next;
 		while (p) {
-			RandomListNode *pTmp = p->next;
-			p->next = pTmp->next;
-			if (p->next)
-				pTmp->next = p->next->next;
-			p = p->next;
+			RandomListNode *pNew = p->next;
+            p->next=pNew->next;
+            p=p->next;
+            if(p)
+                pNew->next=p->next;
 		}
 		return res;
 	}
