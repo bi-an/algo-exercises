@@ -62,3 +62,37 @@ public:
 };
 
 //递归
+
+
+
+// @Athor zzg
+class Solution {
+public:
+    ListNode* Merge(ListNode* pHead1, ListNode* pHead2)
+    {
+        if(pHead1==nullptr) return pHead2;
+        if(pHead2==nullptr) return pHead1;
+        
+        ListNode *p1=pHead1, *p2=pHead2;
+        while(p1!=nullptr && p2!=nullptr){
+            if(p1->val<=p2->val){
+                ListNode *p3=p1->next;
+                p1->next=p2;
+                p1=p3;
+            }
+            else{
+                ListNode *p3=p2->next;
+                p2->next=p1;
+                p2=p3;
+            }
+        }
+        ListNode *res=nullptr;
+        if(pHead1->val<=pHead2->val)
+            res=pHead1;
+        else
+            res=pHead2;
+        
+        return res;
+        
+    }
+};

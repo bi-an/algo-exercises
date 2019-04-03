@@ -57,3 +57,30 @@ public:
 			&& DoesParentHasChild(parent->right, child->right);
 	}
 };
+
+
+// 写法3
+class Solution {
+public:
+    bool HasSubtree(TreeNode* pRoot1, TreeNode* pRoot2)
+    {
+        bool res=false;
+        if(pRoot1!=nullptr && pRoot2!=nullptr){
+            if(pRoot1->val==pRoot2->val)
+                 res=DoesTree1HasTree2(pRoot1,pRoot2);
+            if(!res)
+                 res=DoesTree1HasTree2(pRoot1->left,pRoot2) || DoesTree1HasTree2(pRoot1->right,pRoot2);
+       }
+        return res;
+    }
+    
+    bool DoesTree1HasTree2(TreeNode *pRoot1, TreeNode *pRoot2){
+        if(pRoot2==nullptr) return true; // pRoot2到达叶子节点
+        if(pRoot1==nullptr) return false; // pRoot1到达叶子，而pRoot2还没有到达叶子
+        if(pRoot1->val!=pRoot2->val) return false;
+        
+        bool bLeft=DoesTree1HasTree2(pRoot1->left,pRoot2->left);
+        bool bRight=DoesTree1HasTree2(pRoot1->right,pRoot2->right);
+        return bLeft && bRight;
+    }
+};

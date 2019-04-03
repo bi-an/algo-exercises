@@ -23,10 +23,10 @@ public:
 				for (int i = right - 1; i >= left; i--)
 					result.push_back(matrix[bottom][i]);
 			//从下往上
-			if (left != right) {
+			if (left != right) 
 				for (int i = bottom-1; i > top; i--)
 					result.push_back(matrix[i][top]);
-			}
+				
 			left++; right--; top++; bottom--;
 		}
 		return result;
