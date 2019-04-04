@@ -105,7 +105,7 @@ public:
         if (input.empty() || k<=0 || k>input.size()) return res; //注意:1<=k<=size
         int start = 0, end = input.size() - 1;
         int index = Partition(input, start, end);
-        while (index != k-1) { //如果k=size，那么最多只能遍历到k-1，否则越界错误
+        while (index != k-1) { // 如果k=size，那么最多只能遍历到k-1，否则越界错误
             if (index > k-1) {
                 end = index - 1;
             }
