@@ -19,11 +19,11 @@ public:
 				result.push_back(matrix[i][right]);
 			}
 			//从右到左
-			if (top != bottom)
+			if (top != bottom) // 从右到左的下标检测在循环条件中，所以只需要检测上下下标即可
 				for (int i = right - 1; i >= left; i--)
 					result.push_back(matrix[bottom][i]);
 			//从下往上
-			if (left != right) 
+			if (left != right) // 上下的下标检测在循环条件中，所以只需要检测左右下标
 				for (int i = bottom-1; i > top; i--)
 					result.push_back(matrix[i][top]);
 				

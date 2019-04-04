@@ -89,6 +89,30 @@ public:
 	}
 };
 
+
+// 测试
+int main() {
+	Solution sol;
+
+	vector<RandomListNode*> list;
+	RandomListNode *pHead = new RandomListNode(1), *p=pHead;
+	list.push_back(pHead);
+	for (int i = 2; i <= 6; i++) {
+		RandomListNode *pNew = new RandomListNode(i);
+		p->next = pNew;
+		p = pNew;
+		list.push_back(pNew);
+	}
+
+	list[2]->random = list[5];
+	list[3]->random = list[1];
+
+	auto res = sol.Clone(pHead);
+
+	return 0;
+}
+
+
 /*RandomListNode* ConstructRandomList(int* pHead,size_t len) {
 	if (!pHead || len <= 0) return NULL;
 	RandomListNode* head=new RandomListNode(pHead[0]);

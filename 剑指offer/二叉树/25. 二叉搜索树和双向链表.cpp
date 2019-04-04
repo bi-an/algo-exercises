@@ -16,6 +16,9 @@ struct TreeNode {
 // 二叉搜索树：根节点大于所有左子树节点，小于所有右子树节点。
 // 所以，最左边的节点是最小的，最右边的节点是最大的。
 // 对应地，最左边节点的根节点是次小的，最右边节点的左子树的最左边节点是次小的。
+
+// 易错点：右子树最左节点要与根相连
+
 class Solution {
 public:
     TreeNode* Convert(TreeNode* pRootOfTree)
@@ -52,6 +55,71 @@ public:
             p = p->right;
         }
         return pRootOfTree;
+    }
+};
+
+
+// 写法2
+class Solution {
+public:
+    TreeNode* Convert(TreeNode* pRootOfTree)
+    {
+        if (pRootOfTree == nullptr) return nullptr;
+        stack<TreeNode*> S;
+        TreeNode *p = pRootOfTree, *res = nullptr;
+
+        while (p) {
+            S.push(p);
+            p = p->left;
+        }
+        if (!S.empty())
+            res = S.top();
+
+        TreeNode *pMax = nullptr; // 关键：保存当前最大节点
+        // 易错点：右子树最左节点要与根相连
+
+        while (p || !S.empty()) {
+            if (p) {
+                S.push(p);
+                p = p->left;
+            }
+            else {
+                p = S.top();
+                S.pop();
+                p->left = pMax;
+                if (pMax)
+                    pMax->right = p;
+                pMax = p;
+                p = p->right;
+            }
+        }
+
+        return res;
+    }
+};
+
+// 递归
+class Solution {
+public:
+    TreeNode* Convert(TreeNode* pRootOfTree)
+    {
+        if (pRootOfTree == nullptr) return nullptr;
+        TreeNode* pLastMax = nullptr;
+        ConvertCore(pRootOfTree, pLastMax); // 退出时，pLastMax指向最右一个节点
+        while (pRootOfTree && pRootOfTree->left) { // 这是一种优化：pRootOfTree在中间，而不是最右节点
+            pRootOfTree = pRootOfTree->left;
+        }
+        return pRootOfTree;
+
+    }
+    void ConvertCore(TreeNode *pRoot, TreeNode *&pLastMax) {
+        if (pRoot == nullptr) return;
+        ConvertCore(pRoot->left, pLastMax);
+        pRoot->left = pLastMax;
+        if (pLastMax)
+            pLastMax->right = pRoot;
+        pLastMax = pRoot;
+        ConvertCore(pRoot->right, pLastMax); //这一步也会改变pLastMax,所以最后一次递归（到达最右子树）的改变为pLastMax的最终值
     }
 };
 

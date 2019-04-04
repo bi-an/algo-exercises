@@ -122,7 +122,6 @@ public:
 		if (sequence.empty()) return false;
 		size_t forIdx = 0, backIdx = sequence.size();
 		while (backIdx--) {
-			//注意：这里的while(backIdx--)与while(--backIdx)是一样的，要先执行自减运算再判断，因为括号的优先级高
 			while (sequence[forIdx] < sequence[backIdx]) forIdx++;
 			while (sequence[forIdx] > sequence[backIdx]) forIdx++;//结束时，forIdx应该和backIdx相等
 			if (forIdx < backIdx) return false;

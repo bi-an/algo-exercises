@@ -6,29 +6,29 @@
 class Solution {
 public:
     void push(int value) {
-        m_data.push();
-        if(m_min.empty() || value<m_min.top()){
-        	m_min.push(value);
+        m_data.push(value);
+        if(m_min.empty() || value<=m_min.top()){
+            m_min.push(value);
         }
     }
     void pop() {
         if(m_data.top()==m_min.top())
-        	m_min.pop();
+            m_min.pop();
         m_data.pop();
     }
     int top() {
         if(m_data.empty()){
-        	return 0; //assert(m_data.size()>0);
+            return 0; //assert(m_data.size()>0);
         }
         return m_data.top();
     }
     int min() {
         if(m_min.empty())
-        	return 0;
+            return 0;
         return m_min.top();
     }
 
 private:
-	stack<int> m_data;
-	stack<int> m_min;
+    stack<int> m_data;
+    stack<int> m_min;
 };

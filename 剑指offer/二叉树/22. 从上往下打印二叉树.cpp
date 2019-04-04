@@ -2,7 +2,7 @@
 从上往下打印出二叉树的每个节点，同层节点从左至右打印。
 */
 
-
+/*
 struct TreeNode {
 	int val;
 	struct TreeNode *left;
@@ -11,6 +11,7 @@ struct TreeNode {
 			val(x), left(NULL), right(NULL) {
 	}
 };
+*/
 
 class Solution {
 public:
@@ -32,32 +33,6 @@ public:
 		}
 		return vec;
 	}
-};
-
-
-// @Athor : zzg
-class Solution {
-public:
-    vector<int> PrintFromTopToBottom(TreeNode* root) {
-    	vector<int> res;
-    	if(root==nullptr) return res;
-
-    	queue<TreeNode*> que;
-    	TreeNode *p=root;
-    	que.push(p);
-		while(!que.empty()){
-			p=que.front();
-			que.pop();
-			if(p->left){
-				que.push(p->left);
-			}
-			if(p->right){
-				que.push(p->right);
-			}
-			res.push_back(p->val);
-		}
-		return res;
-    }
 };
 
 

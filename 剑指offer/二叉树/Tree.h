@@ -19,7 +19,7 @@ static void PrintByInorder_Recursively(TreeNode *root) {
 	PrintByInorder_Recursively(root->right);
 }
 
-static std::vector<int> PrintByInorder_Iteratively(TreeNode *root) {
+static std::vector<int> StoreByInorder_Iteratively(TreeNode *root) {
 	std::vector<int> vec;
 	if (root == nullptr) return vec;
 	std::stack<TreeNode*> stk;
@@ -37,6 +37,25 @@ static std::vector<int> PrintByInorder_Iteratively(TreeNode *root) {
 	return vec;
 }
 
+static void PrintByInorder_Iteratively(TreeNode *root) {
+	if (root == nullptr) return;
+	TreeNode *p = root;
+	stack<TreeNode*> S;
+	while (p || !S.empty()) {
+		if (p) {
+			S.push(p);
+			p = p->left;
+		}
+		else {
+			p = S.top();
+			S.pop();
+			printf("%d\t", p->val);
+			p = p->right;
+		}
+	}
+	printf("\n");
+}
+
 //先序遍历
 static void PrintByPreorder_Recursively(TreeNode *root) {
 	if (root == nullptr) return;
@@ -45,7 +64,29 @@ static void PrintByPreorder_Recursively(TreeNode *root) {
 	PrintByPreorder_Recursively(root->right);
 }
 
-static std::vector<int> PrintByPreorder_Iteratively(TreeNode *root) {
+static void PrintByPreorder_Iteratively(TreeNode *root){
+	if(root==nullptr) return;
+	TreeNode *p=root;
+	stack<TreeNode*> S;
+	while(p || !S.empty()){
+		if(p){
+			printf("%d\t",p->val);
+			if(p->right)
+				S.push(p->right);
+			// if(p->left)
+				// S.push(p->left);
+			p=p->left;
+		}
+		else{
+			p=S.top();
+			S.pop();
+			// p=p->right;
+		}
+	}
+	printf("\n");
+}
+
+static std::vector<int> StoreByPreorder_Iteratively(TreeNode *root) {
 	std::vector<int> vec;
 	if (root == nullptr) return vec;
 	std::stack<TreeNode*> stk;
@@ -60,6 +101,7 @@ static std::vector<int> PrintByPreorder_Iteratively(TreeNode *root) {
 		p = p->right;
 		stk.pop();
 	}
+	return vec;
 }
 
 // 后序遍历
