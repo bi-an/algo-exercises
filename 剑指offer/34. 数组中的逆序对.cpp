@@ -6,6 +6,9 @@ static const auto io_sync_off = []() {
     return nullptr;
 }( );//lambda表达式，最后一个小括号表示调用，分号表示声明
 
+
+// 归并排序并统计逆序对数，排序是为了避免重复计算
+
 class Solution {
 public:
 	static constexpr int P = 1000000007;
@@ -24,9 +27,9 @@ public:
 			return 0;
 		}
 
-		int mid = begin + (end - begin) / 2;
-		int left = InversePairsCore(copy, data, begin, mid) % P;
-		int right = InversePairsCore(copy, data, mid + 1, end) % P;
+		int mid = (begin+end)/2;
+		int left = InversePairsCore(copy, data, begin, mid) % P; // 记得交换copy和data
+		int right = InversePairsCore(copy, data, mid + 1, end) % P; // 记得交换copy和data
 
 		int cnt = 0;
 		int pre = mid;
@@ -54,6 +57,6 @@ public:
 			copy[cpIdx--] = data[post];
 		}
 
-		return (cnt + left + right) % P;
+		return (cnt + left + right) % P; // 保证每次的返回数值都小于P
 	}
 };

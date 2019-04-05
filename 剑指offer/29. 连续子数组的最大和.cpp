@@ -34,6 +34,30 @@ public:
 };
 
 
+// @Athor zzg
+// 如果下一个数是负数，那么当前和加上它一定会变小，那么存下当前和，因为当前和可能是最大和；
+// 如果当前和小于0，那么它加上下一个数则会小于下一个数，所以最大和一定不可能是它们的和，所以把当前和重置为下一个数；
+// 否则当前和加上下一个数
+class Solution {
+public:
+    int FindGreatestSumOfSubArray(vector<int> array) {
+        if(array.empty()) return 0;
+        int maxSum=array[0];
+        int curSum=array[0];
+        for(int i=1;i<array.size();i++){
+            if(array[i]<0){
+                if(maxSum<curSum) // 如果把这个放到最后判断，那么不需要判断array[i]是否小于0
+                    maxSum=curSum;
+            }
+            if(curSum<0)
+                curSum=array[i];
+            else
+                curSum+=array[i];
+        }
+        return maxSum>curSum?maxSum:curSum;
+    }
+};
+
 // 思路3：动态规划
 //
 // 用f(i)表示第i个数字结尾的子数组的最大和
