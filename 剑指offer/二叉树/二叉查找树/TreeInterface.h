@@ -1,0 +1,29 @@
+#pragma once
+#include "Iterator.h"
+
+// 基本操作
+template <class T> class TreeInterface{
+public:
+	T getRootData();
+	int getHeight();
+	int getNumberOfNodes();
+	bool isEmpty();
+	void clear();
+};
+
+// 遍历方法
+template<class T> class TreeIteratorInterface : public zlib::Iterator<T>{
+public:
+	// todo: iterator
+	zlib::Iterator<T> getPreorderIterator();
+	zlib::Iterator<T> getInorderIterator();
+	zlib::Iterator<T> getPostorderIterator();
+	zlib::Iterator<T> getLevelOrderIterator();
+};
+
+// 二叉树接口
+template<class T> class BinaryTreeInterface : public TreeInterface<T>, public TreeIteratorInterface<T>{
+public:
+	void setTree(T rootData);
+	void setTree(T rootData, BinaryTreeInterface<T> *leftTree, BinaryTreeInterface<T> *rightTree);
+};

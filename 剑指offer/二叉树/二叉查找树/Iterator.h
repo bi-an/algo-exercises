@@ -1,0 +1,10 @@
+#pragma once
+#include <iterator> // todo
+
+namespace zlib{
+template<typename T> class Iterator : public std::iterator<std::random_access_tag, T>{
+public:
+	Iterator(){}
+	// TODO
+};
+}
