@@ -2,12 +2,12 @@
 
 template<class T> class BinaryNode{
 private:
-	T data;
-	BinaryNode *leftChild;
-	BinaryNode *rightChild;
+	T val;
+	BinaryNode *left;
+	BinaryNode *right;
 
 public:
-	BinaryNode():leftChild(nullptr),rightChild(nullptr){
+	BinaryNode():left(nullptr),right(nullptr){
 
 	}
 
@@ -16,12 +16,12 @@ public:
 	}
 
 	BinaryNode(T dataPortion, BinaryNode *newLeftChild, BinaryNode *newRightChild){
-		data=dataPortion;
-		leftChild=newRightChild;
-		rightChild=newRightChild;
+		val=dataPortion;
+		left=newRightChild;
+		right=newRightChild;
 	}
 
 	T getData(){
-		return data;
+		return val;
 	}	
 };
