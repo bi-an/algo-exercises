@@ -6,6 +6,9 @@ HF作为牛客的资深元老,自然也准备了一些小游戏。
 从他的下一个小朋友开始,继续0...m-1报数....这样下去....直到剩下最后一个小朋友,可以不用表演,并且拿到牛客名贵的“名侦探柯南”典藏版(名额有限哦!!^_^)。
 请你试着想下,哪个小朋友会得到这份礼品呢？(注：小朋友的编号是从0到n-1)
 */
+
+
+// 用环形链表模拟圆圈
 class Solution {
 public:
 	int LastRemaining_Solution(int n, int m)
@@ -13,15 +16,15 @@ public:
 		if (n==0) return -1;
 		if (m == 0) return n - 1;
 
-		list<int> List;
+		list<int> List; // list不是环形结构，所以每次到达List.end()要将其换成链表头List.begin()
 		for (size_t i = 0; i < n; i++) {
 			List.push_back(i);
 		}
 		int pos = 0;
 		while (List.size() > 1) {
-			pos += m-1;
+			pos += m-1; // pos不断累加，保证下一次循环从下一个小朋友开始
 			if (pos >= List.size()) {
-				pos %= List.size();
+				pos %= List.size(); // list不是环形结构，所以每次到达List.end()要将其换成链表头List.begin()
 			}
 			auto itr = List.begin();
 			for (int i = 0; i < pos; i++)

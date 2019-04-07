@@ -4,6 +4,10 @@
 后来才意识到，这家伙原来把句子单词的顺序翻转了，正确的句子应该是“I am a student.”。
 Cat对一一的翻转这些单词顺序可不在行，你能帮助他么？
 */
+
+// 思路1：利用string的+操作符
+// 先分隔单词，放在vector<string>，然后反向遍历，拼接。
+
 //运行：4ms
 class Solution {
 public:
@@ -28,6 +32,9 @@ public:
 	}
 };
 
+
+// 思路2：第一次翻转所有字符；第二次逐个翻转单词。
+
 //运行：2ms
 class Solution {
 public:
@@ -38,7 +45,7 @@ public:
 		for (size_t i = 0; i < str.size();i++) {
 			if (str[i] == ' ') {
 				Reverse(&str[pos],&str[i-1]);
-				pos = i + 1;
+				pos = i + 1; // 指向下一个单词的开始位置
 			}
 		}
 		Reverse(&str[pos],&str[str.size()-1]);
@@ -47,7 +54,7 @@ public:
 
 	void Reverse(char *pBegin, char *pEnd) {
 		if (pEnd <= pBegin || pBegin==NULL || pEnd==NULL) return;
-		while (pEnd >= pBegin) {
+		while (pEnd > pBegin) {
 			char tmp = *pEnd;
 			*pEnd = *pBegin;
 			*pBegin = tmp;

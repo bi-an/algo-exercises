@@ -15,7 +15,7 @@ int TreeHeight(TreeNode* pRoot){
 	int leftH=TreeHeight(pRoot->left);
 	int rightH=TreeHeight(pRoot->right);
 
-	return leftH>rightH?leftH+1:rightH+1;
+	return (leftH>rightH?leftH:rightH)+1; // 最后加上的这个1表示root节点占一个高度单位
 }
 
 //队列保存每一层

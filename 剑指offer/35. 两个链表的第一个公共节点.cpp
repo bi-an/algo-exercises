@@ -4,6 +4,17 @@
 //		  ->6->7
 //    1->2
 
+
+// 思路1：从后往前看，就是第一个不同的节点的下一个节点。可以先用两个栈来保存这两个链表节点，然后由后往前比较
+// 时间复杂度：O(m+n)  m和n分别是两个链表长度
+// 空间复杂度：O(m+n)
+
+
+
+
+// 思路2：两个指针分别指向两个链表，长度长的链表指针先走diff步
+// 时间复杂度：O(m+n)  m和n分别是两个链表长度
+// 空间复杂度：无辅助空间
 class Solution(){
 public:
 	ListNode* FindFirstCommonNode(ListNode* pHead1, ListNode* pHead2) {
@@ -35,12 +46,10 @@ public:
 		}
 		
 		for (int i = 0; i < diff; i++) {
-			p1 = p1->next;
+			p1 = p1->next; // p1先走diff步
 		}
 
-		while (p1 && p2) {
-			if (p1 == p2)
-				break;
+		while (p1 && p2 && p1!=p2) {
 			p1 = p1->next;
 			p2 = p2->next;
 		}
