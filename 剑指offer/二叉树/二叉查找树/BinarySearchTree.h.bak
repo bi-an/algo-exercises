@@ -1,0 +1,77 @@
+#pragma once
+#include "BinaryNode.h"
+
+template<typename Comparable> class BinarySearchTree{
+public:
+	BinarySearchTree();
+	BinarySearchTree(const BinarySearchTree& rhs);
+	~BinarySearchTree();
+
+	const Comparable& findMin() const;
+	const Comparable& findMax() const;
+	bool contains(const BinarySearchTree& x) const;
+	bool isEmpty() const;
+	void printTree() const;
+
+	void makeEmpty();
+	void insert(const Comparable& x);
+	void remove(const Comparable& x);
+
+	const BinarySearchTree& operator=(const BinarySearchTree & rhs); // 为什么要返回const引用呢，这里的const和引用似乎都没有起到作用
+
+private:
+	BinaryNode<Comparable> *root;
+
+	void insert(const Comparable& x, BinaryNode<Comparable>* &t) const; // 即使是const成员函数，也可以通过传入引用或指针来改变成员变量
+	void remove(const Comparable& x, BinaryNode<Comparable>* &t) const;
+	BinaryNode<Comparable>* findMin(BinaryNode<Comparable>* t) const;
+	BinaryNode<Comparable>* findMax(BinaryNode<Comparable>* t) const;
+	bool contains(const Comparable& x, BinaryNode<Comparable>* t) const;
+	void makeEmpty(BinaryNode<Comparable>* &t) const;
+	void printTree(BinaryNode<Comparable> *t) const;
+	BinaryNode<Comparable>* clone(BinaryNode<Comparable> *t) const;
+};
+
+template<typename Comparable> BinarySearchTree<Comparable>::BinarySearchTree() {
+
+}
+
+template<typename Comparable> BinarySearchTree<Comparable>::~BinarySearchTree() {
+
+}
+
+template<typename Comparable> const Comparable& BinarySearchTree<Comparable>::findMin() const{
+	return *root; // TODO
+}
+
+template<typename Comparable> const Comparable& BinarySearchTree<Comparable>::findMax() const{
+	return *root; // TODO
+}
+
+template<typename Comparable> bool BinarySearchTree<Comparable>::contains(const BinarySearchTree& x) const{
+	return true; // TODO
+}
+
+template<typename Comparable> bool BinarySearchTree<Comparable>::isEmpty() const{
+	return true; // TODO
+}
+
+template<typename Comparable> void BinarySearchTree<Comparable>::printTree() const{
+	return true; // TODO
+}
+
+// todo: 似乎有错，根本没有将节点连接起来
+template<typename Comparable> void BinarySearchTree<Comparable>::insert(const Comparable& x, BinaryNode<Comparable>* &t) const {
+	if(t==nullptr)
+		t=new BinaryNode(x,nullptr,nullptr);
+	else if(x < t->val)
+		insert(x, t->left);
+	else if(x > t->val)
+		insert(x, t->right);
+	else
+		; // Duplicate; do nothing
+}
+
+template<typename Comparable> void BinarySearchTree<Comparable>::insert(const Comparable& x){
+	insert(x,root);
+}
