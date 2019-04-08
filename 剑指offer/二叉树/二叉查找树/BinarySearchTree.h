@@ -32,6 +32,34 @@ private:
 	BinaryNode<Comparable>* clone(BinaryNode<Comparable> *t) const;
 };
 
+template<typename Comparable> BinarySearchTree<Comparable>::BinarySearchTree() {
+
+}
+
+template<typename Comparable> BinarySearchTree<Comparable>::~BinarySearchTree() {
+
+}
+
+template<typename Comparable> const Comparable& BinarySearchTree<Comparable>::findMin() const{
+	return *root; // TODO
+}
+
+template<typename Comparable> const Comparable& BinarySearchTree<Comparable>::findMax() const{
+	return *root; // TODO
+}
+
+template<typename Comparable> bool BinarySearchTree<Comparable>::contains(const BinarySearchTree& x) const{
+	return true; // TODO
+}
+
+template<typename Comparable> bool BinarySearchTree<Comparable>::isEmpty() const{
+	return true; // TODO
+}
+
+template<typename Comparable> void BinarySearchTree<Comparable>::printTree() const{
+	return true; // TODO
+}
+
 // todo: 似乎有错，根本没有将节点连接起来
 template<typename Comparable> void BinarySearchTree<Comparable>::insert(const Comparable& x, BinaryNode<Comparable>* &t) const {
 	if(t==nullptr)
