@@ -35,7 +35,7 @@ private:
 
 	AVLNode *root;
 
-	int getHeight(AVLNode *t) const;
+	int getHeight(AVLNode<T> *t) const;
 	AVLNode* rotateLeft(AVLNode * nodeN); // 可以用*&
 	AVLNode* rotateRight(AVLNode * nodeN);
 	AVLNode* rotateLeftRight(AVLNode *nodeN);
@@ -49,6 +49,7 @@ private:
 	void makeEmpty(AVLNode *&t) const;
 	void printTree(AVLNode *t) const;
 	AVLNode* clone(AVLNode *t) const;
+	AVLNode* rebalance(AVLNode *t);
 
 };
 
@@ -89,3 +90,5 @@ template<typename T> int AVLTree<T>::getHeight(AVLNode *t) const{
 template<typename T> void AVLTree<T>::insert(const T& x, AVLNode*& t) const{
 	
 }
+
+template<typename T> AVLNode
