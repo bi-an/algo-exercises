@@ -71,8 +71,8 @@ template<typename T> AVLNode* AVLTree<T>::rotateRight(AVLNode *nodeN){
 	nodeN->left=nodeC->right;
 	nodeC->right=nodeN;
 	// 高度更新
-	nodeC->height=std::max(getHeight(nodeC->left),getHeight(nodeC->right))+1; // 有没有必要这么求？直接用getHeight(nodeC)行不行？
-	nodeN->height=std::max(getHeight(nodeN->left),nodeC->height)+1; // nodeN的右孩子是nodeC
+	nodeC->height=std::max(getHeight(nodeC->left),getHeight(nodeC->right))+1; // 有没有必要这么求？直接用getHeight(nodeC)行不行？->好像可以，插入或递归倒退到nodeN时，nodeC的高度已经更新了。
+	nodeN->height=std::max(getHeight(nodeN->left),nodeC->height)+1; // nodeN的右孩子是nodeC。不可以直接getHeight(nodeN)，因为此时nodeN的高度没有更新。
 	return nodeC; // 返回原来nodeN的左孩子
 }
 
@@ -105,7 +105,7 @@ template<typename T> void AVLTree<T>::insert(const T& x, AVLNode*& t) const{
 		insert(x,t->left);
 		// 左子树的高度插入前最多比右子树小1，插入之后一定大于等于右子树高度；左子树高度插入前最多比右子树大1，插入之后最多比右子树大2
 		if(getHeight(t->left)-getHeight(t->right)==2){
-			if(t<t->left->val)
+			if(x<t->left->val)
 				rotateRight(t);
 			else
 				rotateLeftRight(t);

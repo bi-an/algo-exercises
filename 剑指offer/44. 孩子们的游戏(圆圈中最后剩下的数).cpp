@@ -35,7 +35,7 @@ public:
 	}
 };
 
-//设f(n,m)表示最后的结果（当前有n个小朋友）
+//设f(n,m)表示最后的结果(当前选出的小朋友编号)（当前有n个小朋友）
 class Solution {
 public:
 	int LastRemaining_Solution(int n, int m)
@@ -44,7 +44,7 @@ public:
 		int res=0;//n=1时，f(n,m)=0
 		for(size_t i=2;i<=n;i++){
 			//res=(res+m)%n;//wrong
-			res=(res+m)%i;//f(n,m)=[f(n-1,m)+m]%n, 这里的n实际上是i，需要不断迭代
+			res=(res+m)%i;//f(n,m)=[f(n-1,m)+m]%n, 这里的n实际上是i，需要不断迭代。 注释：表示在上一次的基础上，再沿环走m步
 		}
 		return res;
 	}
