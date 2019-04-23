@@ -28,8 +28,8 @@ public:
                 result.push_back(input[i]);
             }
             else{
-                for(int j = k / 2; j >= 0; j--){
-                    HeadAdjust(result, j, k);
+                for(int j = k / 2; j >= 0; j--){ // 从倒数第二层开始，调整成最大堆
+                    HeadAdjust(result, j, k); // 每次调整的时间复杂度是O(h)，h是高度；总时间复杂度是O(n)，n是堆的总节点数
                 }
                 for(int j = k - 1; j > 0; j--){
                     swap(result[0], result[j]);
@@ -43,8 +43,55 @@ public:
         return result;
     }
 private:
+	// 将根节点值不断下沉，直到找到根节点的值对应的位置
     void HeadAdjust(vector<int> &input, int parent, int length){
-        int temp = input[parent];
+        int temp = input[parent]; // 保存根节点的值，这样只需要不断向上覆盖，从而避免交换
+        int child = 2 * parent + 1;
+        while(child < length){
+            if(child + 1 < length && input[child] < input[child+1]){
+                child++;
+            }
+            if(temp >= input[child]){
+                break;
+            }
+            input[parent] = input[child];
+            
+            parent = child;
+            child = 2 * parent + 1;
+        }
+        input[parent] = temp;
+    }
+};
+
+// 最大堆（手动建立）
+// @Athor zzg
+class Solution {
+public:
+    vector<int> GetLeastNumbers_Solution(vector<int> input, int k) {
+        vector<int> result;
+        int length = input.size();
+        if(length <= 0 || k <= 0 || k > length){
+            return result;
+        }
+        
+        for(int i=0;i<k;i++){
+            result.push_back(input[i]); // 复制k个值到堆空间
+        }
+        for(int i=k/2;i>=0;i--){
+            HeadAdjust(result,i,k); // 从倒数第二层开始，调整成最大堆
+        }
+        for(int i=k;i<input.size();i++){
+            if(result[0]>input[i]){
+                swap(result[0],input[i]);
+                HeadAdjust(result,0,k);
+            }
+        }
+        return result;
+    }
+private:
+	// 将根节点值不断下沉，直到找到根节点的值对应的位置
+    void HeadAdjust(vector<int> &input, int parent, int length){
+        int temp = input[parent]; // 保存根节点的值，这样只需要不断向上覆盖，从而避免交换
         int child = 2 * parent + 1;
         while(child < length){
             if(child + 1 < length && input[child] < input[child+1]){
