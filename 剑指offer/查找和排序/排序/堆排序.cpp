@@ -3,7 +3,7 @@
 // 时间复杂度: O(h)=O(logn)
 void reheap(int heap[], int rootIndex, int lastIndex) {
 	bool done = false;
-	int orphan = heap[rootIndex]; // 暂存堆顶，以后会反复用来比较并下移(实际上是孩子上移)
+	int orphan = heap[rootIndex]; // 暂存堆顶，以后会反复用来比较并下移(实际上是孩子上移)，这样可以避免交换
 	int leftChildIndex = rootIndex * 2 + 1;
 	while (!done && leftChildIndex <= lastIndex) { // 堆是完全二叉树,没有左子结点就一定没有右子节点;如果既没有左孩子又没有右孩子，说明到达叶子，退出
 		int largerChildIndex = leftChildIndex;
