@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "../Operation.h"
+#include "Operation.h"
 
 // 简单工厂
 class OperationFactory{

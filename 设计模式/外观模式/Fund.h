@@ -13,7 +13,7 @@ public:
 		nd1=new NationalDebt1;
 		rt1=new Realty1;
 	}
-	~Fund(){
+	~Fund(){ // 如果不是用来作为基类，不应该使用虚析构函数
 		delete stock1;
 		delete stock2;
 		delete stock3;

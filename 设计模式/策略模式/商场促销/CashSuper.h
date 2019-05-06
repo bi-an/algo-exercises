@@ -1,10 +1,12 @@
 #pragma once
 
+// 策略公共接口
 class CashSuper{
 public:
 	virtual double acceptCash(double money)=0;
 };
 
+// 具体策略/算法
 // 正常收费
 class CashNormal: public CashSuper{
 public:

@@ -4,6 +4,8 @@
 
 // 策略模式
 // 需要在客户端判断打折类型
+
+// 上下文切换类
 class CashContext{
 public:
 	CashContext(CashSuper *csuper) // 通过构造函数，传入具体策略指针
@@ -18,7 +20,7 @@ private:
 };
 
 // 策略模式 + 工厂模式
-// 把打折策略判断移入工厂，不需要在客户端判断打折类型
+// 把打折策略判断移入工厂，不需要在客户端判断打折类型，由工厂实例化对象
 class CashContextFactory{
 public:
 	CashContextFactory(std::string type){ // 参数不再是策略对象指针
