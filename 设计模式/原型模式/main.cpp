@@ -1,4 +1,4 @@
-#include "ICloneable.h"
+﻿#include "ICloneable.h"
 
 int main() {
 	Resume resume1("小明");
@@ -9,7 +9,7 @@ int main() {
 
 	std::cout << "\n";
 
-	Resume *resume2 = (Resume*)resume1.Clone();
+	Resume *resume2 = (Resume*)resume1.Copy(); // 深拷贝
 	resume2->SetPersonalInfo("男", "25");
 	resume2->SetWorkExperience("2018-2019", "谷歌");
 

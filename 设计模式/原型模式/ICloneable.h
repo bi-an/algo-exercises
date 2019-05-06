@@ -23,8 +23,12 @@ public:
 class Resume : public ICloneable {
 public:
 	Resume(std::string name) :name(name),work(nullptr) {}
-	Resume(const Resume& rhs):Resume(rhs.work) { // 注意：默认的复制构造函数进行浅拷贝
-		// 其他的成员复制，仍然由编译器完成
+	//Resume(const Resume& rhs):Resume(rhs.work) { // 注意：默认的复制构造函数进行浅拷贝
+	//	// 其他的成员复制，或者放在初始化列表中
+
+	//}
+	~Resume(){
+		delete work;
 	}
 
 	// 设置个人信息
@@ -39,9 +43,15 @@ public:
 		work->timeArea = timeArea;
 		work->company = company;
 	}
-	// 复制
+	// 浅拷贝
 	void* Clone() override {
 		Resume* result = new Resume(*this); // 默认的复制构造函数进行浅拷贝
+		return result;
+	}
+	// 深拷贝
+	void* Copy() {
+		Resume* result = new Resume(*this);
+		result->work = (WorkExperience*)work->Clone();
 		return result;
 	}
 	void Display() {
@@ -60,5 +70,6 @@ private:
 	// 私有构造函数，实现work的深拷贝
 	Resume(WorkExperience *work) {
 		this->work = (WorkExperience*)work->Clone();
+		// 复制其他成员
 	}
 };
