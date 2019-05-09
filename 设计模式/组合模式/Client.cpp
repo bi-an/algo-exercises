@@ -38,7 +38,10 @@ void test() {
 
 int main(){
 
-	test(); // 离开作用域时, shared_ptr自动析构, 由于程序是栈模式(各个shared_ptr放在栈中)，所以最后一个shared_ptr管理的指针最先析构
+	test(); 
+	// 离开作用域时, shared_ptr自动析构, 由于程序是栈模式(各个shared_ptr放在栈中)，所以share_ptr倒序销毁，同时管理内存指针的其他shared_ptr的use_count减1；
+	// 当某个内存指针的最后一个shared_ptr管理者即将消亡之前，这个shared_ptr的引用计数降为0，此时将析构这片内存
+
 	/* 所以析构顺序是：
 		Single Leaf D 
 		Leaf C 

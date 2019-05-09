@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 #include <set>
-#include <typeinfo>
+#include <typeinfo> // type_id   也可以使用__func__宏
 
 class Action; // 访问者抽象类
 
