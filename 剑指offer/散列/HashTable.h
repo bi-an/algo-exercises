@@ -38,7 +38,10 @@ public:
 
 	bool remove(const T& x) {
 		std::list<T> &whichList = theLists[myhash(x)];
-		auto itr = std::find(whichList.begin(), whichList.end(), x); // 这里必须用auto，std::list<T>::iterator会报错
+		// auto itr = std::find(whichList.begin(), whichList.end(), x); // 这里必须用auto，std::list<T>::iterator会报错
+		// https://www.cnblogs.com/wuchanming/p/3765345.html
+		// typename 指出下面紧跟着的名称是一个类型
+		typename std::list<T>::iterator itr = std::find(whichList.begin(), whichList.end(), x); // 前面必须有typename,不然可能会被编译器解释成其他东西（大于号？）；
 		if (itr == whichList.end())
 			return false;
 		whichList.erase(itr);
