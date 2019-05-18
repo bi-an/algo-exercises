@@ -8,6 +8,7 @@ template <typename T> class HashTable {
 public:
 	// 哈希桶个数是质数
 	// explicit: 如果T是int，那么HashTable(10)有可能是调用复制构造函数，这里禁止这种隐式转化
+	// 装填因子为1，如果超过1就再散列
 	explicit HashTable(int size = 101):currentSize(0), theLists(size) { // std::vector的构造函数是explicit的，100是分配内存大小，不存在歧义
 
 	}
@@ -24,7 +25,7 @@ public:
 
 	bool insert(const T& x) {
 		std::list<T> &whichList = theLists[myhash(x)]; // 这里必须是引用
-		if (!contains(x))
+		if (contains(x))
 			return false;
 
 		whichList.push_back(x);
@@ -52,7 +53,7 @@ private:
 	void rehash() {
 		std::vector<std::list<T>> oldLists = theLists;
 		theLists.resize(nextPrime(2 * theLists.size())); // TODO: nextPrime()
-		for (int i = 0; i < theLists.size(); i++)
+		for (int i = 0; i < theLists.size(); i++) // makeEmpty()
 			theLists[i].clear(); // 之前的位置全部要重新计算
 		currentSize = 0;
 		for (int i = 0; i < theLists.size(); i++) {
@@ -66,7 +67,7 @@ private:
 	int myhash(const T& x) const {
 		int hashVal = hash(x); // TODO: 由外部提供
 		hashVal %= theLists.size();
-		if (hashVal < 0) {
+		if (hashVal < 0) { // 如果溢出，那么可能为负数
 			hashVal += theLists.size();
 		}
 		return hashVal;
