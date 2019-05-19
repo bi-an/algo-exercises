@@ -17,10 +17,10 @@ public:
 				res.push_back(vec);
 				last++; // 从前往后寻找
 			}
-			if (tmp > sum) {
+			else if (tmp > sum) {
 				first++;
 			}
-			if (tmp < sum) {
+			else{
 				last++;
 			}
 		}

@@ -14,7 +14,7 @@
 
 // 思路2：两个指针分别指向两个链表，长度长的链表指针先走diff步
 // 时间复杂度：O(m+n)  m和n分别是两个链表长度
-// 空间复杂度：无辅助空间
+// 空间复杂度：0
 class Solution(){
 public:
 	ListNode* FindFirstCommonNode(ListNode* pHead1, ListNode* pHead2) {

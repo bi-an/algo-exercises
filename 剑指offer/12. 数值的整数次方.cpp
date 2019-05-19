@@ -122,8 +122,8 @@ public:
         if (exponent == -1) return 1.0 / base; // 若exponent为负数，不断右移，最终到达-1
 
         double result = Power(base,exponent>>1); // 这里如果是exponent/2，则结果不正确
-
         result *= result;
+        
         if ((exponent & 0x1) == 1)
             result *= base; // 这是因为如果exponent是奇数，不断右移，即使是负数，会不断向-inf方向取整，例如-9，不断右移变成-5,-3,-2,-1,
         // 这样最终一定会到达-2, 正好多乘了一个base^-1

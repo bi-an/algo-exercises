@@ -17,8 +17,8 @@ public:
 	}
 
 	//TODO: 可以先判断left和right部分是否等于k，若等于，则不需要再去二分查找了
-	//若有顺序查找，时间复杂度为O(n)
-	//一直使用二分法，时间复杂度为O(log2(n))
+	//若用顺序查找，时间复杂度为O(n)
+	//一直使用二分法，时间复杂度为O(log(n))
 	int GetFirstK(vector<int> data,int k) {
 		int left = 0, right = data.size() - 1;
 		int mid = 0;
