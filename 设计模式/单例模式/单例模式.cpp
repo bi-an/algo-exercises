@@ -5,16 +5,16 @@ private:
 		cout << "Constructor of the singleton object." << endl;
 	}
 
-	~Singleton() { // 私有析构函数表示，不可以在外部用delete来释放
+	~Singleton() { // 私有析构函数表示，不可以在外部用delete来释放，Singleton消亡时，也不可以调用-->只能通过Garbo对象来析构，作为成员对象的garbo对象析构时，调用Singleton的析构函数把pm释放掉
 		cout << "Deconstructor of the singleton object." << endl;
 	}
 
 	class Garbo {
-	public:
+	public: // 这里必须是public，因为要在外部析构（对象或者delete形式都可以），这里static对象相当于全局对象，在程序结束时析构
 		~Garbo() {
 			if (pm != NULL) {
 				cout << "Delete the Singleton." << endl;
-				delete pm;
+				delete pm; // 类内调用Singleton的析构函数
 				pm = NULL;
 			}
 		}
@@ -30,7 +30,7 @@ public:
 
 private:
 	static Singleton* pm;
-	static Garbo garbo;
+	static Garbo garbo; // 静态对象在类外定义，在main之前构造
 };
 
 Singleton::Garbo Singleton::garbo;//类外定义, 全局对象在程序结束时会被自动调用
