@@ -5,7 +5,7 @@ private:
 		cout << "Constructor of the singleton object." << endl;
 	}
 
-	~Singleton() {
+	~Singleton() { // 私有析构函数表示，不可以在外部用delete来释放
 		cout << "Deconstructor of the singleton object." << endl;
 	}
 
