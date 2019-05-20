@@ -41,30 +41,18 @@ Singleton* Singleton::pm = NULL;//类外定义
 class Singleton {
 private:
 	Singleton() {
-		file_name = "output1.txt";
-		ofstream out(file_name);
 		cout << "Constructor of the singleton object." << endl;
-		out << "Constructor of the singleton object." << endl;
-		out.close();
 	}
 	~Singleton() {
-		ofstream out(file_name,ofstream::app);
 		cout << "Deconstructor of the singleton object." << endl;
-		out << "Deconstructor of the singleton object." << endl;
-		out.close();
 	}
 
 private:
-	string file_name;
-
 	class Garbo {
 	public:
 		~Garbo() {
 			if (sm_pInstance != NULL) {
-				ofstream out("output1.txt", ofstream::app);
 				cout << "Garbo deconstruct the singleton object." << endl;
-				out << "Garbo deconstruct the singleton object." << endl;
-				out.close();
 				delete sm_pInstance;
 				sm_pInstance = NULL;
 			}
@@ -74,8 +62,8 @@ private:
 public:
 	static Singleton* getInstance() {
 		if (sm_pInstance == NULL) {
-			sm_mutex.lock();
-			if (sm_pInstance == NULL)
+			sm_mutex.lock(); // TODO： 会不会发生锁竞争
+			if (sm_pInstance == NULL) // 进入临界区，再次检查，确保安全
 				sm_pInstance = new Singleton();
 			sm_mutex.unlock();
 		}
