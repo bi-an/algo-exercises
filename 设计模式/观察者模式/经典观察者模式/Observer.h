@@ -7,6 +7,7 @@ class Subject; // 发布者
 // 观察者/订阅者接口
 class Observer{
 public:
+	// 因为观察者有且仅有一个发布者，所以构造时把发布者绑定到观察者上
 	Observer(std::string name, Subject *sub) : name(name), sub(sub){}
 	virtual void Update()=0; // 订阅者状态更新
 
@@ -55,6 +56,7 @@ public:
 // 具体发布者/通知者： 前台秘书、老板等
 class Publisher : public Subject {
 public:
+	// 因为发布者可以有0个或多个观察者，所以用专门函数来添加、删除观察者，而不是用构造函数增添
 	void Attach(Observer *observer) override { // 抽象观察者
 		for (Observer* o : observers) { // 防止同一观察者添加多次 TODO: 效率低下
 			if (o == observer)
