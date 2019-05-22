@@ -1,5 +1,5 @@
-#include "thread_guard.h"
-#include "func.h"
+#include "../inc/thread_guard.h"
+#include "../inc/func.h"
 
 void f(){
 	int some_local_state=0;

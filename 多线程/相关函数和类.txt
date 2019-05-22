@@ -1,0 +1,8 @@
+类：
+std::thread
+std::mutex 
+std::lock_guard 以对象管理mutex
+std::recursive_mutex 允许同一线程多重锁定
+
+函数：
+std::lock 同时锁定多个mutex

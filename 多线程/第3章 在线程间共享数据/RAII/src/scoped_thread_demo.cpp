@@ -1,5 +1,5 @@
-#include "scoped_thread.h"
-#include "func.h"
+#include "../inc/scoped_thread.h"
+#include "../func.h"
 
 void f(){
 	int some_local_state;
