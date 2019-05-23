@@ -1,7 +1,9 @@
 类：
 std::thread
 std::mutex 
-std::lock_guard 以对象管理mutex
+std::lock_guard 以对象管理mutex，可以同时传入std::adopt_lock对象作为参数
+std::unique_lock 比lock_guard更加灵活（延迟锁定、将互斥元的所有权从一个作用域转移到另一个作用域），
+				但是比lock_guard占用更多空间，并且略慢。比如它允许std::defer_lock，而允许对象不持有mutex的这条信息必须要存储、更新、检查。
 std::recursive_mutex 允许同一线程多重锁定
 
 函数：

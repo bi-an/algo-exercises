@@ -124,6 +124,25 @@ Singleton_L_Lock::GGarbo Singleton_L_Lock::garbo;
 pthread_mutex_t Singleton_L_Lock::mutex;
 Singleton_L_Lock* Singleton_L_Lock::pm = NULL;
 
+// 双检锁存在数据竞争
+// 这是由于编译器的优化，可能的执行顺序是：申请内存，返回指针，构造对象
+// 改进为 std::call_once或者返回一个static变量，C++11保证了初始化不存在竞争
+// @Athor zzg
+// TODO: 正确吗？
+class Singleton {
+	Singleton() {
+		cout << "Singleton()" << endl;
+	}
+	~Singleton() { // 为什么作为private也可以被析构呢？
+		cout << "~Singleton()" << endl;
+	}
+public:
+	static Singleton* getInstance() {
+		static Singleton instance; // static局部变量在C++11是线程安全的，static全局只有一份，所以是单例
+		return &instance;
+	}
+};
+
 
 //饿汉式，以空间换时间，不涉及线程安全
 class Singleton_E {
