@@ -10,7 +10,10 @@ private:
 	}
 
 	class Garbo {
-	public: // 这里必须是public，因为要在外部析构（对象或者delete形式都可以），这里static对象相当于全局对象，在程序结束时析构
+	public: 
+	// 这里必须是public，因为要在外部析构（对象消亡），这里static对象相当于全局对象，在程序结束时析构
+	// TODO: 发现一个问题，在VS中，如果定义一个对象，必须有public的构造、析构函数
+	// 如果是new出来的对象，析构函数可以是private
 		~Garbo() {
 			if (pm != NULL) {
 				cout << "Delete the Singleton." << endl;
@@ -128,6 +131,7 @@ Singleton_L_Lock* Singleton_L_Lock::pm = NULL;
 // 这是由于编译器的优化，可能的执行顺序是：申请内存，返回指针，构造对象
 // 改进为 std::call_once或者返回一个static变量，C++11保证了初始化不存在竞争
 // @Athor zzg
+// static局部变量
 // TODO: 正确吗？
 class Singleton {
 	Singleton() {
@@ -142,6 +146,40 @@ public:
 		return &instance;
 	}
 };
+
+// @Athor zzg
+// std::call_once和std::once_flag
+class Singleton {
+	Singleton() {
+		cout << "Singleton()" << endl;
+	}
+	~Singleton() {
+		cout << "~Singleton()" << endl;
+	}
+	static Singleton* instance;
+	static std::once_flag init_flag;
+	static void getInit() {
+		instance = new Singleton;
+	}
+
+	class Garbo {
+	public:
+		~Garbo() {
+			delete instance;
+		}
+	};
+	static Garbo garbo;
+
+public:
+	static Singleton* getInstance() {
+		std::call_once(init_flag, &Singleton::getInit);
+		return instance;
+	}
+};
+
+Singleton* Singleton::instance = nullptr;
+std::once_flag Singleton::init_flag;
+Singleton::Garbo Singleton::garbo;
 
 
 // 饿汉式，以空间换时间
