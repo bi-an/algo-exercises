@@ -33,9 +33,9 @@ public:
 				break;
 			}
 		}
-		if (pos >= 0)
+		if (pos >= 0) // 有左子树，则检查左子树
 			res = res && VerifyCore(sequence, start, start + pos); // left=VerifyCore(sequence, start, start + pos);
-		if (pos < end-1)
+		if (pos < end-1) // 有右子树，则检查右子树
 			res = res && VerifyCore(sequence, pos + 1, end - 1); // right=VerifyCore(sequence, pos + 1, end - 1);
 
 		return res; //return left&&right;
