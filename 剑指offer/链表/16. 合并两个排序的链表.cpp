@@ -1,3 +1,7 @@
+// 错误，但是能通过牛客测试
+// 牛客网的bug: 
+// 反例 1->2->4->7->8
+// 3->5->6
 class Solution {
 public:
 	ListNode* Merge(ListNode* pHead1, ListNode* pHead2)
@@ -33,7 +37,8 @@ public:
 	}
 };
 
-
+// 正确
+// 推荐写法
 class Solution {
 public:
 	ListNode* Merge(ListNode* pHead1, ListNode* pHead2)
@@ -66,33 +71,35 @@ public:
 
 
 // @Athor zzg
+// 正确
 class Solution {
 public:
-    ListNode* Merge(ListNode* pHead1, ListNode* pHead2)
-    {
-        if(pHead1==nullptr) return pHead2;
-        if(pHead2==nullptr) return pHead1;
-        
-        ListNode *p1=pHead1, *p2=pHead2;
-        while(p1!=nullptr && p2!=nullptr){
-            if(p1->val<=p2->val){
-                ListNode *p3=p1->next;
-                p1->next=p2;
-                p1=p3;
-            }
-            else{
-                ListNode *p3=p2->next;
-                p2->next=p1;
-                p2=p3;
-            }
-        }
-        ListNode *res=nullptr;
-        if(pHead1->val<=pHead2->val)
-            res=pHead1;
-        else
-            res=pHead2;
-        
-        return res;
-        
-    }
+	ListNode* Merge(ListNode* pHead1, ListNode* pHead2)
+	{
+		if (pHead1 == nullptr) return pHead2;
+		if (pHead2 == nullptr) return pHead1;
+
+		ListNode *p1 = pHead1, *p2 = pHead2;
+		while (p1 != nullptr && p2 != nullptr) {
+			if (p1->val <= p2->val) {
+				ListNode *p3 = p1->next;
+				if (p3==nullptr || p3 != nullptr && p3->val > p2->val) // 这一步很重要，牛客网有bug，没有这一步也可以通过
+					p1->next = p2;
+				p1 = p3;
+			}
+			else {
+				ListNode *p3 = p2->next;
+				if (p3==nullptr || p3 != nullptr && p3->val > p2->val)
+					p2->next = p1;
+				p2 = p3;
+			}
+		}
+		ListNode *res = nullptr;
+		if (pHead1->val <= pHead2->val)
+			res = pHead1;
+		else
+			res = pHead2;
+
+		return res;
+	}
 };

@@ -33,6 +33,25 @@ public:
 };
 
 // @Athor zzg
+// 层序遍历，每次交换左右节点
+// 没有必要计算每次width，再打印一层，因为按照队列顺序，本身就是层序的
+class Solution {
+public:
+  void Mirror(TreeNode *pRoot){
+      if(pRoot==nullptr) return;
+      queue<TreeNode*> Q;
+      Q.push(pRoot);
+      while(!Q.empty()){
+          TreeNode *p=Q.front();
+          Q.pop();
+          if(p->left) Q.push(p->left);
+          if(p->right) Q.push(p->right);
+          swap(p->left, p->right);
+      }
+  }
+};
+
+// @Athor zzg
 // 思想如上； 效率没有上面高，因为把nullptr也放入了队列
 class Solution{
 public:

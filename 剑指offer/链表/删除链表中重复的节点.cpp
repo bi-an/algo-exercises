@@ -25,7 +25,7 @@ public:
                     delete pNode;
                     pNode = pNext;
                 }
-                if (pPre == nullptr) {
+                if (pPre == nullptr) { // 第一次
                     pNewHead = pNode;
                 }
                 else {
@@ -42,4 +42,35 @@ public:
         }
         return pNewHead;
     }
+};
+
+
+// @Athor zzg
+class Solution {
+public:
+	ListNode* deleteDuplication(ListNode* pHead)
+	{
+		if (pHead == nullptr) return nullptr;
+		ListNode* pNewHead = new ListNode(-1); // 哨兵
+		pNewHead->next = pHead;
+		ListNode *p = pHead, *pre = pNewHead;
+		while (p) {
+			ListNode *post = p->next;
+			int value = p->val;
+			if (post && post->val == p->val) {
+				while (p && p->val == value) {
+					post = p->next;
+					delete p;
+					p = post;
+				}
+				pre->next = post;
+				continue;
+			}
+			pre = p;
+			p = p->next;
+		}
+		p = pNewHead->next;
+		delete pNewHead; // 删除哨兵
+		return p;
+	}
 };
