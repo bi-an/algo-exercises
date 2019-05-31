@@ -10,7 +10,7 @@ public:
 			delete (data + i);
 	}
 	void push(T val) {
-		if (m_size >= m_capacity)
+		if (m_size >= m_capacity) // 此时要插入新元素，所以即使相等也需要扩容
 			resize();
 		m_front %= m_capacity;
 		m_back %= m_capacity;
@@ -59,7 +59,7 @@ private:
 	void resize() {
 		int sz = m_capacity * 2;
 		T *data_new = new T[sz];
-		for (int i = 0; i < m_capacity; i++) {
+		for (int i = 0; i < m_capacity; i++) { // 此时m_capacity==m_size
 			data_new[i] = data[i];
 		}
 		for (int i = 0; i < m_capacity; i++)
