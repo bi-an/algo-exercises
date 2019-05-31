@@ -17,7 +17,7 @@ public:
             slow = digitSquareSum(slow);
             fast = digitSquareSum(fast);
             fast = digitSquareSum(fast); // 如果平方和达到1，那么之后的平方和将一直是1
-        } while(slow != fast); //  Floyd Cycle detection algorithm.
+        } while(slow != fast); //  Floyd Cycle detection algorithm. 弗洛伊德判圈算法
         if (slow == 1) return 1;
         else return 0;
     }
