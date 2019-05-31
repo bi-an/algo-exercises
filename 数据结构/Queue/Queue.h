@@ -1,44 +1,46 @@
 #pragma once
-#include <exception>
+#include <iostream>
+#include <cassert>
 
 template<typename T>
 class Queue {
 public:
 	Queue() :data(new T[1]), m_front(0), m_back(0), m_capacity(1), m_size(0) {}
 	~Queue() {
-		for (int i = 0; i < m_capacity; i++)
-			delete (data + i);
+		delete[] data; // for(int i=0;i<m_capacity;i++) delete (data+i); 出错？这个new[size]的size信息到底存放在哪里？
 	}
 	void push(T val) {
 		data[m_back] = val;
-		m_back++;
-		m_back %= m_capacity;
 		m_size++;
 		if (m_size >= m_capacity) // 此时要预留空间以插入新元素，所以即使相等也需要扩容
 			resize();
+		m_back++;
+		m_back %= m_capacity;
 	}
 	void pop() {
-		if (m_front >= 0 && m_front!=m_back) { // 队列为空的标志：m_front==m_back
+		// m_front >= 0 && m_front < m_capacity 的判断似乎不需要
+		assert(m_front != m_back);
+		if (m_front != m_back) { // 队列为空的标志：m_front==m_back
 			m_front++;
 			m_front %= m_capacity;
 			m_size--;
 		}
-		else
-			throw std::exception("队列为空");
+		//else {
+		//	fprintf(stderr, "队列为空");
+		//	exit(1); // 个人认为exit比异常方便，stderr可以重定向 // 或者用assert
+		//}
 	}
 	T front() {
-		if (m_front >= 0 && m_front!=m_back)
+		assert(m_front != m_back);
+		if (m_front != m_back)
 			return data[m_front];
-		else
-			throw std::exception("队列为空");
 	}
 
 	// 这个back函数实际上不需要
 	T back() {
-		if (m_back < m_capacity && m_back>0)
+		assert(m_front != m_back);
+		if (m_front!=m_back)
 			return data[m_back];
-		else
-			throw std::exception("队列为空");
 	}
 
 	int size() {
@@ -66,20 +68,18 @@ private:
 				data_new[i] = data[i];
 		}
 		else {
-			for(int i=0;i<m_capacity;i++)
+			for (int i = 0; i < m_capacity; i++)
 				data_new[i] = data[i];
 		}
-		for (int i = 0; i < m_capacity; i++)
-			delete (data + i);
+		delete[] data;
 		m_capacity = sz;
 		data = data_new;
 	}
 };
 
-
 // 测试
-#include <iostream>
 using namespace std;
+#include <queue>
 
 int main() {
 	Queue<int> Q;
@@ -97,9 +97,13 @@ int main() {
 	//cout << Q.size() << endl;
 	Q.pop();
 	cout << Q.front() << endl;
+	Q.pop();
 
 	cout << "队列容量：" << Q.capacity() << endl;
 	cout << "队列元素个数：" << Q.size() << endl;
+
+	//std::queue<int> Q2;
+	//Q2.pop();
 
 	return 0;
 }
