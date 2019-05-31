@@ -8,11 +8,11 @@ public:
 	vector<int> maxInWindows(const vector<int>& num, unsigned int size)
 	{
 		vector<int> res;
-		if (num.empty() || size <= 0 || size>num.size()) return res;
+		if (num.empty() || size <= 0 || size > num.size()) return res;
 
 		deque<int> index; //存储下标，用来判断是否在滑动窗口内
 		for (int i = 0; i < size; i++) {
-			while (!index.empty() && num[index.back()] < num[i])
+			while (!index.empty() && num[index.back()] < num[i]) // 如果队列中已有数字小于待存入数字，那么这些数字不可能是最大值，删掉它；否则留下它
 				index.pop_back(); //保持双端队列头为当前最大值
 			index.push_back(i);
 		}
