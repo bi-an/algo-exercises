@@ -10,16 +10,15 @@ public:
 			delete (data + i);
 	}
 	void push(T val) {
-		if (m_size >= m_capacity) // 此时要插入新元素，所以即使相等也需要扩容
-			resize();
-		m_front %= m_capacity;
-		m_back %= m_capacity;
 		data[m_back] = val;
 		m_back++;
+		m_back %= m_capacity;
 		m_size++;
+		if (m_size >= m_capacity) // 此时要预留空间以插入新元素，所以即使相等也需要扩容
+			resize();
 	}
 	void pop() {
-		if (m_front >= 0 && m_front < m_back) {
+		if (m_front >= 0 && m_front!=m_back) { // 队列为空的标志：m_front==m_back
 			m_front++;
 			m_front %= m_capacity;
 			m_size--;
@@ -28,15 +27,16 @@ public:
 			throw std::exception("队列为空");
 	}
 	T front() {
-		if (m_front >= 0 && m_front < m_back)
+		if (m_front >= 0 && m_front!=m_back)
 			return data[m_front];
 		else
 			throw std::exception("队列为空");
 	}
 
+	// 这个back函数实际上不需要
 	T back() {
 		if (m_back < m_capacity && m_back>0)
-			return data[m_back - 1];
+			return data[m_back];
 		else
 			throw std::exception("队列为空");
 	}
@@ -59,8 +59,15 @@ private:
 	void resize() {
 		int sz = m_capacity * 2;
 		T *data_new = new T[sz];
-		for (int i = 0; i < m_capacity; i++) { // 此时m_capacity==m_size
-			data_new[i] = data[i];
+		if (m_back < m_front) {
+			for (int i = m_front; i < m_capacity; i++) // 此时m_capacity==m_size
+				data_new[i] = data[i];
+			for (int i = 0; i < m_back; i++)
+				data_new[i] = data[i];
+		}
+		else {
+			for(int i=0;i<m_capacity;i++)
+				data_new[i] = data[i];
 		}
 		for (int i = 0; i < m_capacity; i++)
 			delete (data + i);
