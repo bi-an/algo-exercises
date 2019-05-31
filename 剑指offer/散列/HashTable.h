@@ -4,6 +4,9 @@
 #include <algorithm>
 #include <string>
 
+// 哈希表，value是唯一的，所以只需要判断是否存在value，即下面的contains()函数
+// 哈希Map，key和value是对应的，key是唯一的
+
 template <typename T> class HashTable {
 public:
 	// 哈希桶个数是质数

@@ -23,9 +23,7 @@ public:
 		int pos = 0;
 		while (List.size() > 1) {
 			pos += m-1; // pos不断累加，保证下一次循环从下一个小朋友开始
-			if (pos >= List.size()) {
-				pos %= List.size(); // list不是环形结构，所以每次到达List.end()要将其换成链表头List.begin()
-			}
+			pos %= List.size(); // list不是环形结构，所以每次到达List.end()要将其换成链表头List.begin()
 			auto itr = List.begin();
 			for (int i = 0; i < pos; i++)
 				++itr;
@@ -34,6 +32,10 @@ public:
 		return List.front();
 	}
 };
+
+// 优化思路：
+// 1. 环形链表模拟圈，最重要的两步：itr=begin, list.size()每次都要重算。 所以，不需要list，只要每次保存list.size()和下一次的第一个人编号就可以。
+// 2. 上面从n个人到最后一个人，这样会有很多重复运算（其实没有重复计算，与动态规划是一样的）-> 动态规划：从第一个人到第n个人。
 
 //设f(n,m)表示最后的结果(当前选出的小朋友编号)（当前有n个小朋友）
 class Solution {
