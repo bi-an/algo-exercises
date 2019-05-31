@@ -19,12 +19,10 @@ public:
 	}
 	void pop() {
 		// m_front >= 0 && m_front < m_capacity 的判断似乎不需要
-		assert(m_front != m_back);
-		if (m_front != m_back) { // 队列为空的标志：m_front==m_back
-			m_front++;
-			m_front %= m_capacity;
-			m_size--;
-		}
+		assert(m_front != m_back); // 队列为空的标志：m_front==m_back
+		m_front++;
+		m_front %= m_capacity;
+		m_size--;
 		//else {
 		//	fprintf(stderr, "队列为空");
 		//	exit(1); // 个人认为exit比异常方便，stderr可以重定向 // 或者用assert
@@ -32,15 +30,13 @@ public:
 	}
 	T front() {
 		assert(m_front != m_back);
-		if (m_front != m_back)
-			return data[m_front];
+		return data[m_front];
 	}
 
 	// 这个back函数实际上不需要
 	T back() {
 		assert(m_front != m_back);
-		if (m_front!=m_back)
-			return data[m_back];
+		return data[m_back];
 	}
 
 	int size() {
