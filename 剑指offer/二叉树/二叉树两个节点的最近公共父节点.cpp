@@ -17,7 +17,7 @@ TreeNode* findLowestCommonAncestor(TreeNode *root, TreeNode *a, TreeNode *b){
 		return root;
 	TreeNode *left=findLowestCommonAncestor(root->left,a,b);
 	TreeNode *right=findLowestCommonAncestor(root->right,a,b);
-	if(left && right) // 当找到这个根节点，层层返回这个根(条件1)
+	if(left && right) // a和b在root两侧 当找到这个根节点，层层返回这个根(条件1)
 		return root;
 	return left?left:right; // 如果到达a或者b，层层返回a或者b(条件2)，用来作为上层条件1的判断标准
 }

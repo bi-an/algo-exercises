@@ -1,27 +1,27 @@
 // @Athor zzg
 class Solution {
 public:
-        vector<vector<int> > Print(TreeNode* pRoot) {
-        	vector<vector<int>> res;
-        	if(pRoot==nullptr) return res;
+    vector<vector<int> > Print(TreeNode* pRoot) {
+    	vector<vector<int>> res;
+    	if(pRoot==nullptr) return res;
 
-        	TreeNode *p=pRoot;
-        	queue<TreeNode*> que;
-        	que.push(p);
-        	while(!que.empty()){
-        		int width=que.size();
-        		vector<int> row;
-        		for(int i=0;i<width;i++){
-        			p=que.front();
-        			que.pop();
-        			row.push_back(p->val);
-        			if(p->left) que.push(p->left);
-        			if(p->right) que.push(p->right);
-        		}
-        		res.push_back(row);
-        	}
-        	return res;
-        }
+    	TreeNode *p=pRoot;
+    	queue<TreeNode*> que;
+    	que.push(p);
+    	while(!que.empty()){
+    		int width=que.size();
+    		vector<int> row;
+    		for(int i=0;i<width;i++){
+    			p=que.front();
+    			que.pop();
+    			row.push_back(p->val);
+    			if(p->left) que.push(p->left);
+    			if(p->right) que.push(p->right);
+    		}
+    		res.push_back(row);
+    	}
+    	return res;
+    }
 };
 
 

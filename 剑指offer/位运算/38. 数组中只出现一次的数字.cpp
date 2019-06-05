@@ -24,7 +24,7 @@ public:
 		}
 
 		//找出右数第一个非0比特位
-		int f_bit = (tmp ^ (tmp - 1))&tmp; // 结果仅保留temp中最右边的一个1，其他bit都置0
+		int f_bit = (tmp ^ (tmp - 1))&tmp; // 结果仅保留tmp中最右边的一个1，其他bit都置0
 
 		vector<int> left, right;
 		for (size_t i = 0; i < data.size(); i++) {
