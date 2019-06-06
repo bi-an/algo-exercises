@@ -39,7 +39,7 @@ public:
 			sum += ap;
 		}
 		else
-			slices(A, i - 1); // 注意，ap=slices(A,i-1)是错误的
+			slices(A, i - 1); // 注意，此时不应该接受slices()的返回值
 		return ap;
 	}
 
@@ -63,6 +63,24 @@ public:
 			}
 			else
 				dp[i] = 0;
+		}
+		return sum;
+	}
+};
+
+// 优化的动态规划
+// 空间复杂度降低到O(1)
+class Solution {
+public:
+	int numberOfArithmeticSlices(vector<int>& A) {
+		int sum = 0, cur = 0; // 只用一个变量存储上一次结果即可
+		for (int i = 2; i < A.size(); i++) {
+			if (A[i] - A[i - 1] == A[i - 1] - A[i - 2]) {
+				cur = cur + 1;
+				sum += cur;
+			}
+			else
+				cur = 0;
 		}
 		return sum;
 	}
