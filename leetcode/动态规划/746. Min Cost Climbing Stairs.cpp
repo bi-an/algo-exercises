@@ -29,7 +29,7 @@ class Solution {
 public:
     int minCostClimbingStairs(vector<int>& cost) {
         if(cost.empty()) return std::numeric_limits<int>::max();
-        if(cost.size()==1) return cost[0];
+        if(cost.size()==1) return cost[0]; // 实际上，即使没有这两个判断，也可以通过测试
         int f1=cost[0], f2=cost[1];
         for(int i=2;i<cost.size();i++){
             int f3=cost[i]+std::min(f1,f2);
@@ -43,9 +43,19 @@ public:
 // 方法二：从后往前迭代
 // f(i)表示从第i阶开始到最后一阶的cost和
 // f(i)=cost[i]+min(f(i+1),f(i+2))
+// 初始条件：f1=0, f2=0
+// 可以解释为:如果只有最后一阶，那么f3=cost[last].
 class Solution {
 public:
     int minCostClimbingStairs(vector<int>& cost) {
-    	
+    	if(cost.empty()) return std::numeric_limits<int>::max();
+        if(cost.size()==1) return cost[0]; // 实际上，即使没有这两个判断，也可以通过测试
+        int f1=0, f2=0;
+        for(int i=cost.size()-1;i>=0;i--){
+            int f3=cost[i]+std::min(f1,f2);
+            f1=f2;
+            f2=f3;
+        }
+        return std::min(f1,f2);
 	}
 };

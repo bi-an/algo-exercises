@@ -47,6 +47,5 @@ public:
 		root->left = DeserializeCore(str, pos);
 		root->right = DeserializeCore(str, pos);
 		return root;
-
 	}
 };
