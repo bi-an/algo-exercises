@@ -77,7 +77,7 @@ public:
 
 		for (int i = m - 1; i >= 0; i--) {
 			dialog += s1[i];
-			dp[n] = dialog;
+			dp[n] = dialog; // dp[n]为dp[i][n]
 			for (int j = n - 1; j >= 0; j--)
 				if (s1[i] == s2[j]) {
 					int tm = dp[j];
@@ -88,7 +88,7 @@ public:
 					temp = dp[j];
 					dp[j] = std::min(s1[i] + dp[j], s2[j] + dp[j + 1]); // 等式左边dp[j]为dp[i][j]，等式右边dp[j]为dp[i+1][j]
 				}
-			temp = dialog;
+			temp = dialog; // temp为dp[i+1][j+1]
 		}
 		return dp[0];
 	}
