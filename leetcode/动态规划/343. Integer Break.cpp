@@ -41,3 +41,20 @@ public:
         return product;
     }
 };
+
+// 动态规划
+class Solution {
+public:
+    int integerBreak(int n) {
+        if(n<=1) return 0;
+        if(n==2) return 1;
+        vector<int> dp(n+1,0); // 第一位不用, dp表示可能的最大积
+        dp[1]=0, dp[2]=1; // 2=1+1, product_max=1*1=1
+        for(int i=3;i<=n;i++){
+            for(int j=1;j<=i/2;j++){
+                dp[i]=std::max(dp[i],std::max(j*(i-j),j*dp[i-j]));
+            }
+        }
+        return dp[n];
+    }
+};
