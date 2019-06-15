@@ -47,8 +47,8 @@ private:
 	T *data;
 	int m_front; // 左闭右开区间，m_back指向下一个元素
 	int m_back;
-	int m_capacity;
-	int m_size;
+	int m_capacity; // 数组容量
+	int m_size; // 数组中存放的数字个数
 
 	void resize() {
 		int sz = m_capacity * 2;
