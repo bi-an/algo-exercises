@@ -8,7 +8,7 @@ class rwlock {
 private:
 	condition_variable _rcon, _wcon; // 因为读队列可以同时唤醒（允许同时读），但是永远只能有一个写线程，故要读写队列分开（故用两个条件变量）
 	mutex _lock;
-	int _reader, _writer; // 就绪/等待队列
+	unsigned _reader, _writer; // 就绪/等待队列
 	int	_active; // 运行态，活动线程池，其绝对值表示活动线程数（大于0，当前线程都为读；小于0，当前线程为写（由于活动写线程只能有一个，所以小于0时只可能等于-1）；等于0，没有活动线程）
 public:
 	void read_lock() {
