@@ -8,6 +8,10 @@ struct ListNode {
 	ListNode(int _val) :val(_val), next(nullptr) {}
 };
 
+// 法一：借助辅助空间，用栈保存，直接修改链表的值
+
+
+// TODO：如果反转头节点，则会出错
 // 将从第start个到第end个之间（闭区间）的节点反转过来
 void reverseList(ListNode *head, int start, int end) {
 	if (head == nullptr || start>end) return;
