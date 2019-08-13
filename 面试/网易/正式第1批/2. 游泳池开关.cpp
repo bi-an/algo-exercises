@@ -55,6 +55,9 @@ int main(){
 
 
 
+// 分析：由于开关动态过程中，要时刻（实际上输入是int，也就是遍历）判断泳池的水是否在0<=water<=m范围内
+// 所以，只能每分钟判断
+
 // @Athor zzg
 #include <iostream>
 #include <vector>
