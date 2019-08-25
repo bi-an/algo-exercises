@@ -4,7 +4,7 @@ static const auto io_sync_off = []() {
     cin.tie(nullptr);
     cout.tie(nullptr);
     return nullptr;
-}( );//lambda表达式，最后一个小括号表示调用，分号表示声明
+}( );//lambda表达式，最后一个小括号表示调用，分号表示声明和定义
 
 
 // 归并排序并统计逆序对数，排序是为了避免重复计算
