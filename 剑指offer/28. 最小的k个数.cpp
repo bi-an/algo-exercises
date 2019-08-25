@@ -1,14 +1,14 @@
 class Solution {
 public:
-	vector<int> GetLeastNumbers_Solution(vector<int> input, int k) {
-		vector<int> res;
-		if (input.empty() || k<=0 || k>input.size()) return res;
-		sort(input.begin(),input.end());//快排，时间复杂度为O( n*log2(n) )
-		for (size_t i = 0; i < k;i++) {
-			res.push_back(input[i]);
-		}
-		return res;
-	}
+    vector<int> GetLeastNumbers_Solution(vector<int> input, int k) {
+        vector<int> res;
+        if (input.empty() || k<=0 || k>input.size()) return res;
+        sort(input.begin(),input.end());//快排，时间复杂度为O( n*log2(n) )
+        for (size_t i = 0; i < k;i++) {
+            res.push_back(input[i]);
+        }
+        return res;
+    }
 };
 
 // 最大堆（手动实现）
@@ -43,7 +43,7 @@ public:
         return result;
     }
 private:
-	// 将根节点值不断下沉，直到找到根节点的值对应的位置
+    // 将根节点值不断下沉，直到找到根节点的值对应的位置
     void HeadAdjust(vector<int> &input, int parent, int length){
         int temp = input[parent]; // 保存根节点的值，这样只需要不断向上覆盖，从而避免交换
         int child = 2 * parent + 1;
@@ -89,7 +89,7 @@ public:
         return result;
     }
 private:
-	// 将根节点值不断下沉，直到找到根节点的值对应的位置
+    // 将根节点值不断下沉，直到找到根节点的值对应的位置
     void HeadAdjust(vector<int> &input, int parent, int length){
         int temp = input[parent]; // 保存根节点的值，这样只需要不断向上覆盖，从而避免交换
         int child = 2 * parent + 1;
@@ -120,7 +120,7 @@ public:
         vector<int> res;
         if (input.empty() || k<1 || k>input.size()) return res;
 
-        setType myset; //最大堆
+        setType myset; // multiset的迭代器是一个二叉搜索树(RB-Tree)的遍历，查找复杂度为logk;并且红黑树的增删也是logk
         int i = 0;
         for (; i < k; i++)
             myset.emplace(input[i]);
