@@ -1,6 +1,8 @@
+/*
 作者：Jimmy5555
 链接：https://www.nowcoder.com/discuss/221051
 来源：牛客网
+*/
 
 #include<iostream>
 #include<cstring>

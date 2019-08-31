@@ -74,3 +74,34 @@ public:
 		return p;
 	}
 };
+
+
+// @Athor zzg
+class Solution {
+public:
+    ListNode* deleteDuplication(ListNode* pHead)
+    {
+        ListNode* sentry = new ListNode(0); // 哨兵
+        sentry->next = pHead;
+        ListNode *pre = sentry, *p = pHead;
+        while (p) {
+            if (!p->next) break;
+            if (p->next->val != p->val) {
+                pre = p;
+                p = p->next;
+            }
+            else {
+                int value = p->val;
+                while (p && value == p->val) {
+                    ListNode* post = p->next;
+                    delete p;
+                    p = post;
+                }
+                pre->next = p;
+            }
+        }
+        ListNode *res = sentry->next;
+        delete sentry;
+        return res;
+    }
+};
