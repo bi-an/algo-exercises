@@ -3,7 +3,7 @@
 using namespace std;
 
 int main(){
-	SchoolGirl mm("ΩøΩø");
+	SchoolGirl mm("Â∞èÁ∫¢");
 	Proxy proxy(&mm);
 	
 	proxy.GiveDolls();

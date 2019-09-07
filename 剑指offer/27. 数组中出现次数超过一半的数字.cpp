@@ -39,8 +39,8 @@ public:
 		//if(numbers.size()<=1 || start<0 || end<start || end>=numbers.size()) return -1;
 		//if (start < 0 || end < start || end >= numbers.size()) return -1;
 		if (end == start) return start; //为了提高性能，实际上注释掉一样。
-		int i = rand() % (end - start + 1) + start;
-		swap(numbers[i], numbers[end]);
+		int j = rand() % (end - start + 1) + start;
+		swap(numbers[j], numbers[end]);
 		int small = start - 1;
 		for (int i = start; i < end; i++) {
 			if (numbers[i] < numbers[end]) {

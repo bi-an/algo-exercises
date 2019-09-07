@@ -1,5 +1,6 @@
 /*
 Given a positive integer n, break it into the sum of at least two positive integers and maximize the product of those integers. Return the maximum product you can get.
+把n加数分解，使得所有加数之积最大
 
 Example 1:
 Input: 2

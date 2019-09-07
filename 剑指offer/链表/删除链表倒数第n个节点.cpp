@@ -13,10 +13,11 @@ struct Node {
 // 注意：delete之前要把链表连接起来
 // 可以用链表1->2->3作为例子来思考：
 // 1. 删除中间节点2，first到达null，last指向要删除的2，pre指向1，则pre->next = last->next即可连接起来；
-// 2. 删除尾节点3，first到达null，last指向要删除的3，pre指向2，则pre->next = last->next；
+// 2. 删除尾节点3，first到达null，last指向要删除的3，pre指向2，则pre->next = last->next，与1相同；
 // 3. 删除头节点1，first到达null，last指向1，pre==nullptr（初始化为nullptr，可以作为判断是否是要删除头节点的标识），
 //	  此时，把root指向last->next即可。
 // 由于last一定不为null，所以last->next一定存在。
+// TODO: 改进：使用哨兵，这样直接删除节点即可，不需要判断。
 bool deleteNth(Node** root, int n) {
 	if (root == nullptr || n <= 0) return false;
 	Node *p = *root;

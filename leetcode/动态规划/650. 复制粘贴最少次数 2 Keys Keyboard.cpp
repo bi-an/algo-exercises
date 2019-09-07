@@ -4,7 +4,11 @@ Initially on a notepad only one character 'A' is present. You can perform two op
 Copy All: You can copy all the characters present on the notepad (partial copy is not allowed).
 Paste: You can paste the characters which are copied last time.
 
-Given a number n. You have to get exactly n 'A' on the notepad by performing the minimum number of steps permitted. Output the minimum number of steps to get n 'A'.
+Given a number n. You have to get exactly n 'A' on the notepad by performing the minimum number of steps permitted. 
+Output the minimum number of steps to get n 'A'.
+
+初始时，你写一个'A'，接下来，你可以有两种操作：复制你写下的所有字符（不允许部分复制）、粘贴你上次复制的字符，
+要得到n个'A'，最少需要多少次操作？
 
 Example 1:
 Input: 3

@@ -40,7 +40,9 @@ Singleton::Garbo Singleton::garbo;//类外定义, 全局对象在程序结束时
 Singleton* Singleton::pm = NULL;//类外定义
 
 
-//懒汉式，线程安全，C++标准版
+// 懒汉式，线程安全，C++标准版
+// 双检锁，实际不能保证线程安全，因为sm_pInstance = new Singleton();
+
 class Singleton {
 private:
 	Singleton() {
@@ -67,7 +69,10 @@ public:
 		if (sm_pInstance == NULL) {
 			sm_mutex.lock(); // TODO： 会不会发生锁竞争
 			if (sm_pInstance == NULL) // 进入临界区，再次检查，确保安全
-				sm_pInstance = new Singleton();
+				sm_pInstance = new Singleton(); // 不能保证安全，因为：
+			// new一个对象，逻辑上的顺序是，先申请空间，然后构造对象，最后返回指针；
+			// 但是可能因为编译器的优化，实际执行顺序是，先申请空间，然后返回指针，最后构造对象，
+			// 在返回指针之后，上面的语句就已经返回了，
 			sm_mutex.unlock();
 		}
 		return sm_pInstance;

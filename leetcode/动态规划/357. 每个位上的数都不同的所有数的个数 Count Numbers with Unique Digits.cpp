@@ -1,6 +1,6 @@
 /*
 Given a non-negative integer n, count all numbers with unique digits, x, where 0 ≤ x < 10^n.
-求每个位上的数字都不同的数的总个数
+求0~2^n中的所有数中，每个位上的数字都不同的数的总个数
 
 Example:
 Input: 2
