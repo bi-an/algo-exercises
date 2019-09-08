@@ -9,7 +9,7 @@ public:
 		//当a和b尽可能地接近时，a*b最大。也就是说，当a和b尽可能地远离时，a*b最小。
 		int left = 0, right = array.size() - 1;
 		
-		while (right - left >= 1) {
+		while (right > left) {
 			int curSum = array[left] + array[right];
 			if (curSum == sum) {
 				res.push_back(array[left]);
