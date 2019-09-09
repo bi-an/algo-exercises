@@ -1,0 +1,26 @@
+三个printf注释之后，输出
+11 55 44
+
+Dump of assembler code for function main():
+   0x0000000000400550 <+0>:     push   %rbp
+   0x0000000000400551 <+1>:     mov    %rsp,%rbp
+   0x0000000000400554 <+4>:     sub    $0x10,%rsp
+   0x0000000000400558 <+8>:     movb   $0x11,-0x1(%rbp)
+   0x000000000040055c <+12>:    movb   $0x22,-0x3(%rbp)
+   0x0000000000400560 <+16>:    movb   $0x33,-0x2(%rbp)
+   0x0000000000400564 <+20>:    lea    -0x3(%rbp),%rax
+   0x0000000000400568 <+24>:    mov    %rax,%rdi
+   0x000000000040056b <+27>:    callq  0x40053d <foo(unsigned short*)>
+   0x0000000000400570 <+32>:    movzbl -0x2(%rbp),%ecx
+   0x0000000000400574 <+36>:    movzbl -0x3(%rbp),%eax
+---Type <return> to continue, or q <return> to quit---
+   0x0000000000400578 <+40>:    movzbl %al,%edx
+   0x000000000040057b <+43>:    movzbl -0x1(%rbp),%eax
+   0x000000000040057f <+47>:    mov    %eax,%esi
+   0x0000000000400581 <+49>:    mov    $0x400630,%edi
+   0x0000000000400586 <+54>:    mov    $0x0,%eax
+   0x000000000040058b <+59>:    callq  0x400420 <printf@plt>
+=> 0x0000000000400590 <+64>:    mov    $0x0,%eax
+   0x0000000000400595 <+69>:    leaveq 
+   0x0000000000400596 <+70>:    retq   
+End of assembler dump.
