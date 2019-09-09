@@ -1,0 +1,23 @@
+成员函数指针：
+
+#include <iostream>
+using namespace std;
+
+class Base{
+public:
+	Base(){
+	}
+	void fun(){
+		cout << "Base::fun()" << endl;
+	}
+};
+
+typedef void (Base::*pf)(); // 定义成员函数指针
+
+int main(){
+	Base b;
+	pf f = &Base::fun; // 一些老编译器允许不使用"&"符号，但是标准C++要求必须使用"&"
+	(b.*f)(); // "*"不可省略，否则编译器会认为f是对象b的一个成员
+	
+	return 0;
+}
