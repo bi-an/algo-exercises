@@ -1,0 +1,46 @@
+三个printf没有注释掉，输出
+44 55 33
+
+
+Dump of assembler code for function main():
+   0x0000000000400550 <+0>:     push   %rbp
+   0x0000000000400551 <+1>:     mov    %rsp,%rbp
+   0x0000000000400554 <+4>:     sub    $0x10,%rsp
+   0x0000000000400558 <+8>:     movb   $0x11,-0x1(%rbp)
+   0x000000000040055c <+12>:    movb   $0x22,-0x2(%rbp)
+   0x0000000000400560 <+16>:    movb   $0x33,-0x3(%rbp)
+   0x0000000000400564 <+20>:    lea    -0x2(%rbp),%rax
+   0x0000000000400568 <+24>:    mov    %rax,%rdi
+   0x000000000040056b <+27>:    callq  0x40053d <foo(unsigned short*)>
+   0x0000000000400570 <+32>:    lea    -0x1(%rbp),%rax
+   0x0000000000400574 <+36>:    mov    %rax,%rsi
+---Type <return> to continue, or q <return> to quit---
+   0x0000000000400577 <+39>:    mov    $0x400670,%edi
+   0x000000000040057c <+44>:    mov    $0x0,%eax
+   0x0000000000400581 <+49>:    callq  0x400420 <printf@plt>
+   0x0000000000400586 <+54>:    lea    -0x2(%rbp),%rax
+   0x000000000040058a <+58>:    mov    %rax,%rsi
+   0x000000000040058d <+61>:    mov    $0x400677,%edi
+   0x0000000000400592 <+66>:    mov    $0x0,%eax
+   0x0000000000400597 <+71>:    callq  0x400420 <printf@plt>
+   0x000000000040059c <+76>:    lea    -0x3(%rbp),%rax
+   0x00000000004005a0 <+80>:    mov    %rax,%rsi
+   0x00000000004005a3 <+83>:    mov    $0x40067e,%edi
+   0x00000000004005a8 <+88>:    mov    $0x0,%eax
+---Type <return> to continue, or q <return> to quit---
+   0x00000000004005ad <+93>:    callq  0x400420 <printf@plt>
+   0x00000000004005b2 <+98>:    movzbl -0x3(%rbp),%eax
+   0x00000000004005b6 <+102>:   movzbl %al,%ecx
+   0x00000000004005b9 <+105>:   movzbl -0x2(%rbp),%eax
+   0x00000000004005bd <+109>:   movzbl %al,%edx
+   0x00000000004005c0 <+112>:   movzbl -0x1(%rbp),%eax
+   0x00000000004005c4 <+116>:   movzbl %al,%eax
+   0x00000000004005c7 <+119>:   mov    %eax,%esi
+   0x00000000004005c9 <+121>:   mov    $0x400685,%edi
+   0x00000000004005ce <+126>:   mov    $0x0,%eax
+   0x00000000004005d3 <+131>:   callq  0x400420 <printf@plt>
+=> 0x00000000004005d8 <+136>:   mov    $0x0,%eax
+---Type <return> to continue, or q <return> to quit---
+   0x00000000004005dd <+141>:   leaveq 
+   0x00000000004005de <+142>:   retq   
+End of assembler dump.
