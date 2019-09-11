@@ -174,3 +174,5 @@ int main(){
 	delete pb;
 	pb->fun();
 }
+
+// linux C++下，shared_ptr_base.h中有delete this的案例

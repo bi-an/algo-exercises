@@ -1,0 +1,17 @@
+32位对齐，4字节的倍数
+64位对齐，8字节的倍数，但是8字节之内，会对齐成4的倍数
+
+例如：64位(gcc)
+struct foo{
+	char a; // 地址0
+	int b; // 地址4
+	long c; // 地址8
+};
+int main(){
+	foo* f=0;
+	printf("&f=%p\n",&f); // 0000002138FEF688
+	printf("f=%p\n",f); // (nill)
+	printf("&(f->a)=%p\n",&(f->a)); // (nil)
+	printf("&(f->b)=%p\n",&(f->b)); // 4
+	printf("&(f->c)=%p\n",&(f->c)); // 8
+}
