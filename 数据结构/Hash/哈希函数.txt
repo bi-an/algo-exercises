@@ -1,0 +1,4 @@
+MD5，SHA1，SHA256还有Java自己的hashCode()
+MurmurHash、Fnv 
+
+MurmurHash源码网址： https://sites.google.com/site/murmurhash/
