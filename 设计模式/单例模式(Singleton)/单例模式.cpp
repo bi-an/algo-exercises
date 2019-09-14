@@ -5,15 +5,20 @@ private:
 		cout << "Constructor of the singleton object." << endl;
 	}
 
-	~Singleton() { // 私有析构函数表示，不可以在外部用delete来释放，Singleton消亡时，也不可以调用-->只能通过Garbo对象来析构，作为成员对象的garbo对象析构时，调用Singleton的析构函数把pm释放掉
+	~Singleton() { 
+		// 必须用私有析构函数，不可以在外部用delete来释放，Singleton消亡时，也不可以调用
+		// -->只能通过Garbo对象来析构，作为成员对象的garbo对象析构时，调用Singleton的析构函数把pm释放掉
+		// 如果析构函数是public的，（当然这时候应该在析构时释放内存），
+		// 那么线程可以显式调用析构函数，这样会导致单例被提前释放了，必然出现错误。
 		cout << "Deconstructor of the singleton object." << endl;
 	}
 
 	class Garbo {
 	public: 
 	// 这里必须是public，因为要在外部析构（对象消亡），这里static对象相当于全局对象，在程序结束时析构
-	// TODO: 发现一个问题，在VS中，如果定义一个对象，必须有public的构造、析构函数
-	// 如果是new出来的对象，析构函数可以是private
+	// 发现一个问题，在VS中，如果定义一个对象，必须有public的构造、析构函数
+	// 如果是new出来的对象，析构函数可以是private，但是，如果手动delete这个堆指针，依然会编译报错，
+	// 综上，析构函数也是成员函数，并且必定是在外部调用的（对象消亡时），要想正确析构这个对象，必须用public析构函数
 		~Garbo() {
 			if (pm != NULL) {
 				cout << "Delete the Singleton." << endl;
@@ -155,14 +160,16 @@ public:
 // @Athor zzg
 // std::call_once和std::once_flag
 class Singleton {
+	static Singleton* instance;
+	static std::once_flag init_flag;
+
 	Singleton() {
 		cout << "Singleton()" << endl;
 	}
 	~Singleton() {
 		cout << "~Singleton()" << endl;
 	}
-	static Singleton* instance;
-	static std::once_flag init_flag;
+
 	static void getInit() {
 		instance = new Singleton;
 	}
@@ -182,6 +189,7 @@ public:
 	}
 };
 
+// 必须在头文件中定义static变量
 Singleton* Singleton::instance = nullptr;
 std::once_flag Singleton::init_flag;
 Singleton::Garbo Singleton::garbo;
@@ -232,3 +240,5 @@ int main() {
 
 	return 0;
 }
+
+
