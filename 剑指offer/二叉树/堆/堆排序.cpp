@@ -23,7 +23,7 @@ void heap_sort(int arr[], int len) {
     //初始化，i从最後一个父节点开始调整
     for (int i = len / 2 - 1; i >= 0; i--)
         max_heapify(arr, i, len - 1);
-    //先将第一个元素和已经排好的元素前一位做交换，再从新调整(刚调整的元素之前的元素)，直到排序完毕
+    //先将第一个元素和已经排好的元素前一位做交换(即不断删除堆顶)，再从新调整(刚调整的元素之前的元素)，直到排序完毕
     for (int i = len - 1; i > 0; i--) {
         swap(arr[0], arr[i]);
         max_heapify(arr, 0, i - 1);
