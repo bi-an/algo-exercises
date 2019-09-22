@@ -1,3 +1,6 @@
+// 用一个双向链表存储cache，最近访问的在链表头，最早访问的在链表尾
+// unordered_map存储key-list::iterator，目的是为了在O(1)时间内找到list的某个节点。
+
 class LRUCache {
 public:
     LRUCache(int capacity) {
@@ -35,7 +38,7 @@ public:
 private:
     int cap;
     list<pair<int,int>> cache; // key-value
-    unordered_map<int, list<pair<int,int>>::iterator> map; //key-iterator
+    unordered_map<int, list<pair<int,int>>::iterator> map; // key-iterator
 };
 
 /**
