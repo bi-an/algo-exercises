@@ -34,6 +34,28 @@ public:
 };
 
 
+// @Athor zzg
+class Solution {
+public:
+    vector<int> printMatrix(vector<vector<int> > matrix) {
+        vector<int> ans;
+        if (matrix.empty() || matrix[0].empty()) return ans;
+        int left = 0, right = (int)matrix[0].size() - 1, bottom = (int)matrix.size() - 1;
+        while (left <= right && left <= bottom) {
+            for (int i = left; i <= right; i++) // 从左到右
+                ans.push_back(matrix[left][i]);
+            for (int i = left + 1; i <= bottom; i++) // 从上到下
+                ans.push_back(matrix[i][right]);
+            for (int i = right - 1; i >= left && left!=bottom; i--) // 从右到左：要保证与“从左到右”不是同一行
+                ans.push_back(matrix[bottom][i]);
+            for (int i = bottom - 1; i >= left + 1 && left!=right; i--) // 从下到上：要保证与“从上到下”不是同一列
+                ans.push_back(matrix[i][left]);
+            left++, right--, bottom--;
+        }
+        return ans;
+    }
+};
+
 
 // @Athor zzg
 // 写法2
