@@ -27,10 +27,8 @@ public:
 			m_data = data_;
 		}
 	}
-	SharedPtr(const SharedPtr& other) {
-		m_data = other.m_data;
+	SharedPtr(const SharedPtr& other) : m_data(other.m_data), m_cnt(other.m_cnt) {
 		(other.m_cnt->__use_count)++;
-		m_cnt = other.m_cnt;
 	}
 	~SharedPtr() {
 		if (m_cnt->__use_count > 0) {
@@ -43,7 +41,6 @@ public:
 		}
 	}
 };
-
 
 template<typename T>
 class WeakPtr {
