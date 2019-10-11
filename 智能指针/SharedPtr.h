@@ -30,14 +30,20 @@ public:
 	SharedPtr(const SharedPtr& other) : m_data(other.m_data), m_cnt(other.m_cnt) {
 		(other.m_cnt->__use_count)++;
 	}
+	SharedPtr(SharedPtr&& other) noexcept :m_data(other.m_data), m_cnt(other.m_cnt) {
+		other.m_cnt = nullptr;
+		other.m_data = nullptr;
+	}
 	~SharedPtr() {
-		if (m_cnt->__use_count > 0) {
-			(m_cnt->__use_count)--;
-		}
-		if (m_cnt->__use_count == 0) {
-			delete m_data;
-			if (m_cnt->__weak_count == 0)
-				delete m_cnt;
+		if (m_cnt != nullptr) {
+			if (m_cnt->__use_count > 0) {
+				(m_cnt->__use_count)--;
+			}
+			if (m_cnt->__use_count == 0) {
+				delete m_data;
+				if (m_cnt->__weak_count == 0)
+					delete m_cnt;
+			}
 		}
 	}
 	operator bool() {
@@ -51,21 +57,25 @@ class WeakPtr {
 	Count* m_cnt = nullptr;
 public:
 	WeakPtr() {}
-	WeakPtr(const WeakPtr& other) {
-		m_data = other.m_data;
+	WeakPtr(const WeakPtr& other): m_data(other.m_data), m_cnt(other.m_cnt) {
 		(other.m_cnt->__weak_count)++;
-		m_cnt = other.m_cnt;
+	}
+	WeakPtr(WeakPtr&& other) noexcept: m_data(other.m_data), m_cnt(other.m_cnt) {
+		other.m_cnt = nullptr;
+		other.m_data = nullptr;
 	}
 	WeakPtr(const SharedPtr<T>& sp):m_data(sp.m_data), m_cnt(sp.m_cnt) {
 		m_cnt->__use_count = sp.m_cnt->__use_count;
 		sp.m_cnt->__weak_count++;
 	}
 	~WeakPtr() {
-		if (m_cnt->__weak_count > 0) {
-			(m_cnt->__weak_count)--;
-		}
-		if (m_cnt->__use_count == 0 && m_cnt->__weak_count == 0) {
-			delete m_cnt;
+		if (m_cnt != nullptr) {
+			if (m_cnt->__weak_count > 0) {
+				(m_cnt->__weak_count)--;
+			}
+			if (m_cnt->__use_count == 0 && m_cnt->__weak_count == 0) {
+				delete m_cnt;
+			}
 		}
 	}
 	SharedPtr<T> lock() {
