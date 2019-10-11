@@ -40,6 +40,9 @@ public:
 				delete m_cnt;
 		}
 	}
+	operator bool() {
+		return m_cnt->__use_count!=0;
+	}
 };
 
 template<typename T>
