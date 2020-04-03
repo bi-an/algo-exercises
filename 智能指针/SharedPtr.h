@@ -1,5 +1,5 @@
-#ifndef __Shared_Ptr
-#define __Shared_Ptr
+#ifndef SHARED_PTR_H
+#define SHARED_PTR_H
 
 #include <iostream>
 
