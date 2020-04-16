@@ -35,23 +35,26 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
-class Solution {
+class Solution
+{
 public:
-    int maxPathSum(TreeNode* root) {
-        max_sum=root->val;
+    int maxPathSum(TreeNode *root)
+    {
+        max_sum = root->val;
         maxPathSumCore(root);
         return max_sum;
     }
-    
-    int maxPathSumCore(TreeNode* root){
-        if(root==nullptr) return 0;
-        int left=maxPathSumCore(root->left);
-        int right=maxPathSumCore(root->right);
-        max_sum=std::max(std::max(std::max(left,right)+root->val,
-                                  std::max(left+right+root->val,root->val)),max_sum);
-        return std::max(std::max(left,right)+root->val,root->val);
+
+    int maxPathSumCore(TreeNode *root)
+    {
+        if (root == nullptr)
+            return 0;
+        int left = maxPathSumCore(root->left);
+        int right = maxPathSumCore(root->right);
+        max_sum = std::max(std::max(std::max(left, right) + root->val, std::max(left + right + root->val, root->val)), max_sum);
+        return std::max(std::max(left, right) + root->val, root->val);
     }
-    
+
 private:
-    int max_sum=0;
+    int max_sum = 0;
 };
