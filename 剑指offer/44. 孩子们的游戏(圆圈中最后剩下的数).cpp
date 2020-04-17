@@ -7,30 +7,34 @@ HF作为牛客的资深元老,自然也准备了一些小游戏。
 请你试着想下,哪个小朋友会得到这份礼品呢？(注：小朋友的编号是从0到n-1)
 */
 
-
 // 用环形链表模拟圆圈
-class Solution {
-public:
-	int LastRemaining_Solution(int n, int m)
-	{
-		if (n==0) return -1;
-		if (m == 0) return n - 1;
+class Solution
+{
+ public:
+  int LastRemaining_Solution(int n, int m)
+  {
+    if (n == 0)
+      return -1;
+    if (m == 0)
+      return n - 1;
 
-		list<int> List; // list不是环形结构，所以每次到达List.end()要将其换成链表头List.begin()
-		for (size_t i = 0; i < n; i++) {
-			List.push_back(i);
-		}
-		int pos = 0;
-		while (List.size() > 1) {
-			pos += m-1; // pos不断累加，保证下一次循环从下一个小朋友开始
-			pos %= List.size(); // list不是环形结构，所以每次到达List.end()要将其换成链表头List.begin()
-			auto itr = List.begin();
-			for (int i = 0; i < pos; i++)
-				++itr;
-			List.erase(itr);
-		}
-		return List.front();
-	}
+    list<int> List; // list不是环形结构，所以每次到达List.end()要将其换成链表头List.begin()
+    for (size_t i = 0; i < n; i++)
+    {
+      List.push_back(i);
+    }
+    int pos = 0;
+    while (List.size() > 1)
+    {
+      pos += m - 1;       // pos不断累加，保证下一次循环从下一个小朋友开始
+      pos %= List.size(); // list不是环形结构，所以每次到达List.end()要将其换成链表头List.begin()
+      auto itr = List.begin();
+      for (int i = 0; i < pos; i++)
+        ++itr;
+      List.erase(itr);
+    }
+    return List.front();
+  }
 };
 
 // 优化思路：
@@ -38,16 +42,19 @@ public:
 // 2. 上面从n个人到最后一个人，这样会有很多重复运算（其实没有重复计算，与动态规划是一样的）-> 动态规划：从最后剩下的一个人倒推到第n个人。
 
 //设f(n,m)表示最后的结果(当前选出的小朋友编号)（当前有n个小朋友）
-class Solution {
-public:
-	int LastRemaining_Solution(int n, int m)
-	{
-		if(n<1 || m<1) return -1;
-		int res=0;//n=1时，f(n,m)=0
-		for(size_t i=2;i<=n;i++){
-			//res=(res+m)%n;//wrong
-			res=(res+m)%i;//f(n,m)=[f(n-1,m)+m]%n, 这里的n实际上是i，需要不断迭代。 注释：表示在上一次的基础上，再沿环走m步
-		}
-		return res;
-	}
+class Solution
+{
+ public:
+  int LastRemaining_Solution(int n, int m)
+  {
+    if (n < 1 || m < 1)
+      return -1;
+    int res = 0; //n=1时，f(n,m)=0
+    for (size_t i = 2; i <= n; i++)
+    {
+      //res=(res+m)%n;//wrong
+      res = (res + m) % i; //f(n,m)=[f(n-1,m)+m]%n, 这里的n实际上是i，需要不断迭代。 注释：表示在上一次的基础上，再沿环走m步
+    }
+    return res;
+  }
 };

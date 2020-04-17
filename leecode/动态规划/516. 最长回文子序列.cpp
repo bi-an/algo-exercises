@@ -1,26 +1,30 @@
-class Solution {
-public:
-    int longestPalindromeSubseq(string s) {
-        int n = s.size();
-        vector<vector<int> > dp(n);
-        for(int i=0;i<n;i++)
-            dp[i] = vector<int>(n,0);
-        for(int i=0;i<n;i++)
-            dp[i][i] = 1; // dp[i][i]都要初始化为1，其他的位置应该初始化为0，详见下面分析
+class Solution
+{
+ public:
+  int longestPalindromeSubseq(string s)
+  {
+    int n = s.size();
+    vector<vector<int>> dp(n);
+    for (int i = 0; i < n; i++)
+      dp[i] = vector<int>(n, 0);
+    for (int i = 0; i < n; i++)
+      dp[i][i] = 1; // dp[i][i]都要初始化为1，其他的位置应该初始化为0，详见下面分析
 
-        for(int i=n-1;i>=0;i--){
-            for(int j=i+1;j<n;j++){
-                if(s[i]==s[j])
-                    dp[i][j]=dp[i+1][j-1]+2; // 技巧：这里一下子把字符串长度为奇数或者偶数的情况都考虑到了；
-                    // 但是，有个初始化细节，
-                    // 例如"bb"，i=0,j=1,此时dp[i+1][j-1]=dp[1][0]，所以dp初始化时，dp[i][i]之外都要初始化为0
-                else
-                    dp[i][j]=max(dp[i+1][j],dp[i][j-1]);
-            }
-        }
-
-        return dp[0][n-1];
+    for (int i = n - 1; i >= 0; i--)
+    {
+      for (int j = i + 1; j < n; j++)
+      {
+        if (s[i] == s[j])
+          dp[i][j] = dp[i + 1][j - 1] + 2; // 技巧：这里一下子把字符串长度为奇数或者偶数的情况都考虑到了；
+                                           // 但是，有个初始化细节，
+                                           // 例如"bb"，i=0,j=1,此时dp[i+1][j-1]=dp[1][0]，所以dp初始化时，dp[i][i]之外都要初始化为0
+        else
+          dp[i][j] = max(dp[i + 1][j], dp[i][j - 1]);
+      }
     }
+
+    return dp[0][n - 1];
+  }
 };
 
 /*

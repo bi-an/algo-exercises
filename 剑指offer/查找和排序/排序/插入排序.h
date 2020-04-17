@@ -8,16 +8,17 @@
 // 最坏情形：完全逆序，逆序偶的个数为C(n,2)=n(n-1)/2，复杂度为O(n^2)，比较和交换次数都是O(N^2)
 // 最好情形：完全有序，逆序偶的个数为0，总复杂度为O(N)，交换次数O(1)，比较次数O(N)
 // 稳定排序
-template<typename T>
-void insertSort(std::vector<T>& a) {
-	for (int i = 1; i < a.size(); i++) {
-		int j;
-		int temp = a[i];
-		for (j = i; j > 0 && temp < a[j - 1]; j--) { // 比较
-			a[j] = a[j - 1]; // 交换
-		}
-		a[j] = temp;
-	}
+template <typename T>
+void insertSort(std::vector<T> &a)
+{
+  for (int i = 1; i < a.size(); i++)
+  {
+    int j;
+    int temp = a[i];
+    for (j = i; j > 0 && temp < a[j - 1]; j--)
+    {                  // 比较
+      a[j] = a[j - 1]; // 交换
+    }
+    a[j] = temp;
+  }
 }
-
-

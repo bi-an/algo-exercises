@@ -1,14 +1,11 @@
 #include "CashContext.h"
 
+int main()
+{
 
-int main(){
+  CashContextFactory context("Âú300¼õ100");
 
-	CashContextFactory context("Âú300¼õ100");
+  double result = context.GetResult(300);
 
-	double result = context.GetResult(300);
-
-
-
-
-	return 0;
+  return 0;
 }

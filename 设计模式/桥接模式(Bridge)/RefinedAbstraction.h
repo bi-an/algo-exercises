@@ -4,11 +4,12 @@
 #include "Abstraction.h"
 
 // 被提炼的抽象
-class RefinedAbstraction : public Abstraction {
-public:
-	//void Operation() override {
-	//	implementor->Operation(); // TODO
-	//}
+class RefinedAbstraction : public Abstraction
+{
+ public:
+  //void Operation() override {
+  //	implementor->Operation(); // TODO
+  //}
 };
 
 #endif

@@ -6,14 +6,16 @@
 //最坏的情况：num--之后，除了最高位，其他都是0；右移1位后按位或，那么结果有两个1(最高位和次高位)；
 //再右移两位后按位或，结果则有四个1；
 //再右移四位后按位或，结果则有八个1；依次类推。
-inline size_t getNextPow2(size_t num) {
-	size_t bit_cnt = sizeof(num) * 8;
-	int i = 1;
-	num--; //防止num本身是2整数次方
-	while (i < bit_cnt) {
-		num |= num >> i;
-		i *= 2;
-	}
-	num++;
-	return num;
+inline size_t getNextPow2(size_t num)
+{
+  size_t bit_cnt = sizeof(num) * 8;
+  int i = 1;
+  num--; //防止num本身是2整数次方
+  while (i < bit_cnt)
+  {
+    num |= num >> i;
+    i *= 2;
+  }
+  num++;
+  return num;
 }

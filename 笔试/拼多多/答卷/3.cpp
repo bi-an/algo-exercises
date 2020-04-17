@@ -1,14 +1,9 @@
-#include <iostream>
-#include <vector>
-#include <string>
 #include <algorithm>
+#include <iostream>
+#include <string>
+#include <vector>
 using namespace std;
 
-int fun(string tree1, string tree2) {
+int fun(string tree1, string tree2) {}
 
-}
-
-int main() {
-
-
-}
+int main() {}

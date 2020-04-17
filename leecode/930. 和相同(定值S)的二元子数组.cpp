@@ -21,44 +21,53 @@
 // 所以可以对hashmap优化，数组下标表示sum（因为sum不会超过n），作为hasmap的key；
 // hashmap的value为前缀和出现的次数
 
-class Solution {
-public:
-    int numSubarraysWithSum(vector<int>& A, int S) {
-        if(A.empty()) return 0;
-        int preSum=0;
-        int *sum2times=new int[A.size()+1]();
-        int ans=0;
-        for(int i=0;i<A.size();i++){
-            preSum+=A[i];
-            int sum_j=preSum-S;
-            if(sum_j>=0)
-                ans+=sum2times[sum_j];
-            if(sum_j==0) ans++;
-            sum2times[preSum]++;
-        }
-        return ans;
+class Solution
+{
+ public:
+  int numSubarraysWithSum(vector<int> &A, int S)
+  {
+    if (A.empty())
+      return 0;
+    int preSum = 0;
+    int *sum2times = new int[A.size() + 1]();
+    int ans = 0;
+    for (int i = 0; i < A.size(); i++)
+    {
+      preSum += A[i];
+      int sum_j = preSum - S;
+      if (sum_j >= 0)
+        ans += sum2times[sum_j];
+      if (sum_j == 0)
+        ans++;
+      sum2times[preSum]++;
     }
+    return ans;
+  }
 };
 
 // 初始化技巧
 // 注意到我们要判断sum_j为0（即A[i]本身等于S）的情况
 // 这可以通过将sum2times[0]初始为1来避免
-class Solution {
-public:
-    int numSubarraysWithSum(vector<int>& A, int S) {
-        if(A.empty()) return 0;
-        int preSum=0;
-        int *sum2times=new int[A.size()+1]();
-        sum2times[0]=1; // 初始化为1，而不是0
-        int ans=0;
-        for(int i=0;i<A.size();i++){
-            preSum+=A[i];
-            int sum_j=preSum-S;
-            if(sum_j>=0)
-                ans+=sum2times[sum_j];
-           // if(sum_j==0) ans++;
-            sum2times[preSum]++;
-        }
-        return ans;
+class Solution
+{
+ public:
+  int numSubarraysWithSum(vector<int> &A, int S)
+  {
+    if (A.empty())
+      return 0;
+    int preSum = 0;
+    int *sum2times = new int[A.size() + 1]();
+    sum2times[0] = 1; // 初始化为1，而不是0
+    int ans = 0;
+    for (int i = 0; i < A.size(); i++)
+    {
+      preSum += A[i];
+      int sum_j = preSum - S;
+      if (sum_j >= 0)
+        ans += sum2times[sum_j];
+      // if(sum_j==0) ans++;
+      sum2times[preSum]++;
     }
+    return ans;
+  }
 };

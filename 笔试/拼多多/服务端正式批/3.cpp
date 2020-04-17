@@ -10,47 +10,47 @@
 
 // num[i,j]表示含有i个a和j个b时，该树的节点总数
 
-int n,m;
-long long int k,num[55][55];
-void dfs(int na,int nb,string s,long long int kk)
+int n, m;
+long long int k, num[55][55];
+void dfs(int na, int nb, string s, long long int kk)
 {
-    if(kk==1)
-    {
-        cout<<s<<endl;
-        return;
-    }
-
-    if(na>0&&num[na-1][nb]>=kk-1)
-    {
-        s=s+"a";
-        dfs(na-1,nb,s,kk-1);
-    }
-    else if(nb>0)
-    {
-        kk-=num[na-1][nb];
-        s=s+"b";
-        dfs(na,nb-1,s,kk-1);
-    }
+  if (kk == 1)
+  {
+    cout << s << endl;
     return;
+  }
+
+  if (na > 0 && num[na - 1][nb] >= kk - 1)
+  {
+    s = s + "a";
+    dfs(na - 1, nb, s, kk - 1);
+  }
+  else if (nb > 0)
+  {
+    kk -= num[na - 1][nb];
+    s = s + "b";
+    dfs(na, nb - 1, s, kk - 1);
+  }
+  return;
 }
 int main()
-{         
-    cin>>n>>m>>k;
-    k++;
-    num[0][0]=1;
+{
+  cin >> n >> m >> k;
+  k++;
+  num[0][0] = 1;
 
-    for(int i=0;i<=n;i++)
-        for(int j=0;j<=m;j++)
-        {
-            num[i][j]=1;
-            if(i>0)
-                num[i][j]+=num[i-1][j];
-            if(j>0)
-                num[i][j]+=num[i][j-1];
-        }
-    num[n][m]-=1;
-    string ss="";
-    dfs(n,m,ss,k);
+  for (int i = 0; i <= n; i++)
+    for (int j = 0; j <= m; j++)
+    {
+      num[i][j] = 1;
+      if (i > 0)
+        num[i][j] += num[i - 1][j];
+      if (j > 0)
+        num[i][j] += num[i][j - 1];
+    }
+  num[n][m] -= 1;
+  string ss = "";
+  dfs(n, m, ss, k);
 
-    return 0;
+  return 0;
 }

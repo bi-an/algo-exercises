@@ -13,57 +13,64 @@
         |_|   |_|_|_|_|_|_|_|_|
 */
 
-
 //递归，运行400ms
-class Solution {
-public:
-	int rectCover(int number) {
-		if (number <= 0)
-			return 0;
-		if (number == 1)
-			return 1;
-		if (number == 2)
-			return 2;
+class Solution
+{
+ public:
+  int rectCover(int number)
+  {
+    if (number <= 0)
+      return 0;
+    if (number == 1)
+      return 1;
+    if (number == 2)
+      return 2;
 
-		return rectCover(number - 1) + rectCover(number-2);
-	}
+    return rectCover(number - 1) + rectCover(number - 2);
+  }
 };
-
 
 //迭代，运行3ms
-class Solution {
-public:
-	int rectCover(int number) {
-		if (number <= 0)
-			return 0;
-		if (number == 1)
-			return 1;
-		if (number == 2)
-			return 2;
+class Solution
+{
+ public:
+  int rectCover(int number)
+  {
+    if (number <= 0)
+      return 0;
+    if (number == 1)
+      return 1;
+    if (number == 2)
+      return 2;
 
-		int first = 1, second = 2, third = 2;
-		for (size_t i = 2; i < number;i++) {
-			third = first + second;
-			first = second;
-			second = third;
-		}
-		return third;
-	}
+    int first = 1, second = 2, third = 2;
+    for (size_t i = 2; i < number; i++)
+    {
+      third = first + second;
+      first = second;
+      second = third;
+    }
+    return third;
+  }
 };
 
-
-class Solution {
-public:
-    int rectCover(int number) {
-        if(number<=0) return 0;
-        if(number==1) return 1;
-        int first=1, second=1;
-        int res=0;
-        for(int i=2;i<=number;i++){
-            res=first+second;
-            first=second;
-            second=res;
-        }
-        return res;
+class Solution
+{
+ public:
+  int rectCover(int number)
+  {
+    if (number <= 0)
+      return 0;
+    if (number == 1)
+      return 1;
+    int first = 1, second = 1;
+    int res = 0;
+    for (int i = 2; i <= number; i++)
+    {
+      res = first + second;
+      first = second;
+      second = res;
     }
+    return res;
+  }
 };

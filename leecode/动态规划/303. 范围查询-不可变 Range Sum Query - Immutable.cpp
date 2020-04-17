@@ -14,21 +14,26 @@ There are many calls to sumRange function.
 */
 
 // sumRange()时间复杂度O(1), 空间复杂度O(n)
-class NumArray {
-public:
-	NumArray(vector<int>& nums) {
-		dp.resize(nums.size()+1);
-		dp[0] = 0;
-		for (int i = 1; i < dp.size(); i++) {
-			dp[i] = dp[i - 1] + nums[i-1];
-		}
-	}
+class NumArray
+{
+ public:
+  NumArray(vector<int> &nums)
+  {
+    dp.resize(nums.size() + 1);
+    dp[0] = 0;
+    for (int i = 1; i < dp.size(); i++)
+    {
+      dp[i] = dp[i - 1] + nums[i - 1];
+    }
+  }
 
-	int sumRange(int i, int j) {
-		return dp[j+1] - dp[i];
-	}
-private:
-	std::vector<int> dp;
+  int sumRange(int i, int j)
+  {
+    return dp[j + 1] - dp[i];
+  }
+
+ private:
+  std::vector<int> dp;
 };
 
 /**

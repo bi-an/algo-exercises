@@ -4,17 +4,21 @@
 #include "Implementor.h"
 
 // Abstraction与Implementor是聚合关系
-class Abstraction {
-public:
-	void setImplementor(Implementor* implementor) {
-		this->implementor = implementor;
-	}
+class Abstraction
+{
+ public:
+  void setImplementor(Implementor *implementor)
+  {
+    this->implementor = implementor;
+  }
 
-	virtual void Operation() {
-		implementor->Operation();
-	}
-protected:
-	Implementor* implementor;
+  virtual void Operation()
+  {
+    implementor->Operation();
+  }
+
+ protected:
+  Implementor *implementor;
 };
 
 #endif
