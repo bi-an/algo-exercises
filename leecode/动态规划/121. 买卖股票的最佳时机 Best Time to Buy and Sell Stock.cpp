@@ -21,18 +21,22 @@ Explanation: In this case, no transaction is done, i.e. max profit = 0.
 // （1）尽可能以最低价格买入；
 // （2）以最高价格卖出；
 // （3）卖出时间一定要在买入之后。
-class Solution {
-public:
-	int maxProfit(vector<int>& prices) {
-		if (prices.empty()) return 0;
-		int min_price_pos = 0, max_profit = 0;
-		for (int i = 1; i < prices.size(); i++) {
-			int profit = prices[i] - prices[min_price_pos];
-			if (profit > max_profit)
-				max_profit = profit;
-			else if (profit < 0)
-				min_price_pos = i; // 说明min_price_pos处不是最低的买入价格, i处的买入价格更低
-		}
-		return max_profit;
-	}
+class Solution
+{
+ public:
+  int maxProfit(vector<int> &prices)
+  {
+    if (prices.empty())
+      return 0;
+    int min_price_pos = 0, max_profit = 0;
+    for (int i = 1; i < prices.size(); i++)
+    {
+      int profit = prices[i] - prices[min_price_pos];
+      if (profit > max_profit)
+        max_profit = profit;
+      else if (profit < 0)
+        min_price_pos = i; // 说明min_price_pos处不是最低的买入价格, i处的买入价格更低
+    }
+    return max_profit;
+  }
 };

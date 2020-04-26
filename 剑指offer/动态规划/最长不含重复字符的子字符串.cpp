@@ -8,37 +8,44 @@
 // 没有重复的字符，所以f(i)=f(i-1)+1.
 
 // @Athor zzg
-int longestSubstringWithoutDuplication(const string& str) {
-	if (str.empty()) return 0;
-	int position[26];
-	for (int i = 0; i < 26; i++)
-		position[i] = -1;
+int longestSubstringWithoutDuplication(const string &str)
+{
+  if (str.empty())
+    return 0;
+  int position[26];
+  for (int i = 0; i < 26; i++)
+    position[i] = -1;
 
-	int curLen = 0, maxLen = 0;
-	for (int i = 0; i < str.length(); i++) {
-		char ch = str[i];
-		int pos = ch - 'a';
-		if (position[pos] < 0) {//没有出现过
-			position[pos] = i;
-			curLen++;
-		}
-		else {//这个字符之前出现过
-			int d = i - position[pos];
-			if (d <= curLen) {
-				curLen = d;
-			}
-			else {
-				curLen++;
-			}
-			//lastLen=curLen;
-			position[pos] = i; //记录本次的位置
-		}
-		if (curLen > maxLen)
-			maxLen = curLen;
-	}
+  int curLen = 0, maxLen = 0;
+  for (int i = 0; i < str.length(); i++)
+  {
+    char ch = str[i];
+    int pos = ch - 'a';
+    if (position[pos] < 0)
+    { //没有出现过
+      position[pos] = i;
+      curLen++;
+    }
+    else
+    { //这个字符之前出现过
+      int d = i - position[pos];
+      if (d <= curLen)
+      {
+        curLen = d;
+      }
+      else
+      {
+        curLen++;
+      }
+      //lastLen=curLen;
+      position[pos] = i; //记录本次的位置
+    }
+    if (curLen > maxLen)
+      maxLen = curLen;
+  }
 
-	if (curLen > maxLen)
-		maxLen = curLen;
+  if (curLen > maxLen)
+    maxLen = curLen;
 
-	return maxLen;
+  return maxLen;
 }

@@ -1,12 +1,13 @@
 #include "OperationFactory.h"
 
-int main(){
+int main()
+{
 
-	Operation *operAdd=OperationFactory::CreateOperation("+");
-	operAdd->numberA = 10;
-	operAdd->numberB = 7;
+  Operation *operAdd = OperationFactory::CreateOperation("+");
+  operAdd->numberA = 10;
+  operAdd->numberB = 7;
 
-	double result = operAdd->GetResult();
+  double result = operAdd->GetResult();
 
-	return 0;
+  return 0;
 }

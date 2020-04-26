@@ -30,19 +30,22 @@ In the second example, doubling the number is unnecessary, so we need to push th
 #include <iostream>
 using namespace std;
 
-int minOperations(int n, int m) {
-	int res = 0;
-	while (n < m) {
-		m % 2 ? m++ : m /= 2; // m为奇数，m++；m为偶数，m/=2
-		res++;
-	}
-	return res + n - m; // 如果n>m最佳答案是：不断n--，直到相等，操作次数为n-m
+int minOperations(int n, int m)
+{
+  int res = 0;
+  while (n < m)
+  {
+    m % 2 ? m++ : m /= 2; // m为奇数，m++；m为偶数，m/=2
+    res++;
+  }
+  return res + n - m; // 如果n>m最佳答案是：不断n--，直到相等，操作次数为n-m
 }
 
-int main() {
-	int n, m;
-	cin >> n >> m;
-	cout << minOperations(n, m);
+int main()
+{
+  int n, m;
+  cin >> n >> m;
+  cout << minOperations(n, m);
 
-	return 0;
+  return 0;
 }

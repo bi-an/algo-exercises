@@ -40,56 +40,64 @@ All elements of each string will have an ASCII value in [97, 122].
 
 // 时间复杂度: O(m*n)
 // 空间复杂度: O(m*n)
-class Solution {
-public:
-    int minimumDeleteSum(string s1, string s2) {
-    	int m=s1.length(), n=s2.length();
-        vector<vector<int>> dp(m+1,vector<int>(n+1));
-        dp[m][n]=0; // s1与s2都为空
-        for(int i=m-1;i>=0;i--)
-        	dp[i][n]=dp[i+1][n]+s1[i]; // s2为空
-        for(int j=n-1;j>=0;j--)
-        	dp[m][j]=dp[m][j+1]+s2[j]; // s1为空
+class Solution
+{
+ public:
+  int minimumDeleteSum(string s1, string s2)
+  {
+    int m = s1.length(), n = s2.length();
+    vector<vector<int>> dp(m + 1, vector<int>(n + 1));
+    dp[m][n] = 0; // s1与s2都为空
+    for (int i = m - 1; i >= 0; i--)
+      dp[i][n] = dp[i + 1][n] + s1[i]; // s2为空
+    for (int j = n - 1; j >= 0; j--)
+      dp[m][j] = dp[m][j + 1] + s2[j]; // s1为空
 
-        for(int i=m-1;i>=0;i--)
-        	for(int j=n-1;j>=0;j--){
-        		if(s1[i]!=s2[j])
-        			dp[i][j]=std::min(dp[i+1][j]+s1[i],dp[i][j+1]+s2[j]); // 删除s1[i]，则dp[i][j]=dp[i+1][j]+s1[i];
-        																  // 删除s2[j]，则dp[i][j]=dp[i][j+1]+s2[j]
-        		else
-        			dp[i][j]=dp[i+1][j+1]; // s1[i]==s2[j]，跳过这两个字符
-        	}
-        return dp[0][0];
-    }
+    for (int i = m - 1; i >= 0; i--)
+      for (int j = n - 1; j >= 0; j--)
+      {
+        if (s1[i] != s2[j])
+          dp[i][j] = std::min(dp[i + 1][j] + s1[i], dp[i][j + 1] + s2[j]); // 删除s1[i]，则dp[i][j]=dp[i+1][j]+s1[i];
+                                                                           // 删除s2[j]，则dp[i][j]=dp[i][j+1]+s2[j]
+        else
+          dp[i][j] = dp[i + 1][j + 1]; // s1[i]==s2[j]，跳过这两个字符
+      }
+    return dp[0][0];
+  }
 };
 
 // 时间复杂度: O(m*n)
 // 空间复杂度: O(n)
-class Solution {
-public:
-	int minimumDeleteSum(string s1, string s2) {
-		int m = s1.length(), n = s2.length();
-		vector<int> dp(n + 1);
-		dp[n] = 0;
-		for (int j = n - 1; j >= 0; j--)
-			dp[j] = dp[j + 1] + s2[j];
-		int temp = 0, dialog = 0; // temp为dp[i+1][j+1]
+class Solution
+{
+ public:
+  int minimumDeleteSum(string s1, string s2)
+  {
+    int m = s1.length(), n = s2.length();
+    vector<int> dp(n + 1);
+    dp[n] = 0;
+    for (int j = n - 1; j >= 0; j--)
+      dp[j] = dp[j + 1] + s2[j];
+    int temp = 0, dialog = 0; // temp为dp[i+1][j+1]
 
-		for (int i = m - 1; i >= 0; i--) {
-			dialog += s1[i];
-			dp[n] = dialog; // dp[n]为dp[i][n]
-			for (int j = n - 1; j >= 0; j--)
-				if (s1[i] == s2[j]) {
-					int tm = dp[j];
-					dp[j] = temp;
-					temp = tm;
-				}
-				else {
-					temp = dp[j];
-					dp[j] = std::min(s1[i] + dp[j], s2[j] + dp[j + 1]); // 等式左边dp[j]为dp[i][j]，等式右边dp[j]为dp[i+1][j]
-				}
-			temp = dialog; // temp为dp[i+1][j+1]
-		}
-		return dp[0];
-	}
+    for (int i = m - 1; i >= 0; i--)
+    {
+      dialog += s1[i];
+      dp[n] = dialog; // dp[n]为dp[i][n]
+      for (int j = n - 1; j >= 0; j--)
+        if (s1[i] == s2[j])
+        {
+          int tm = dp[j];
+          dp[j] = temp;
+          temp = tm;
+        }
+        else
+        {
+          temp = dp[j];
+          dp[j] = std::min(s1[i] + dp[j], s2[j] + dp[j + 1]); // 等式左边dp[j]为dp[i][j]，等式右边dp[j]为dp[i+1][j]
+        }
+      temp = dialog; // temp为dp[i+1][j+1]
+    }
+    return dp[0];
+  }
 };

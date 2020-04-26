@@ -5,39 +5,50 @@
 
 //递归法
 //运行：430ms
-class Solution {
-public:
-	int jumpFloor(int number) {
-		if (number == 0) {
-			return 0;
-		}
-		if (number == 1) {
-			return 1;
-		}
-		if (number == 2) {
-			return 2;
-		}
-		return jumpFloor(number - 1) + jumpFloor(number-2);
-	}
+class Solution
+{
+ public:
+  int jumpFloor(int number)
+  {
+    if (number == 0)
+    {
+      return 0;
+    }
+    if (number == 1)
+    {
+      return 1;
+    }
+    if (number == 2)
+    {
+      return 2;
+    }
+    return jumpFloor(number - 1) + jumpFloor(number - 2);
+  }
 };
 
 //循环法
 //运行：3ms
-class Solution {
-public:
-    int jumpFloor(int number) {
-        if(number<=0) return 0;
-        if(number==1) return 1;
-        if(number==2) return 2;
-        int first=1, second=2;
-        int res=0;
-        for(int i=3;i<=number;i++){
-        	res=first+second;
-        	first=second;
-        	second=res;
-        }
-        return res;
+class Solution
+{
+ public:
+  int jumpFloor(int number)
+  {
+    if (number <= 0)
+      return 0;
+    if (number == 1)
+      return 1;
+    if (number == 2)
+      return 2;
+    int first = 1, second = 2;
+    int res = 0;
+    for (int i = 3; i <= number; i++)
+    {
+      res = first + second;
+      first = second;
+      second = res;
     }
+    return res;
+  }
 };
 
 //扩展1：题目改成，青蛙一次可以跳1~n步，问总共有几种跳法？

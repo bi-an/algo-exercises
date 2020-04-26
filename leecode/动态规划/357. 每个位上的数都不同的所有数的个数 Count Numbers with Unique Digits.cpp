@@ -17,21 +17,27 @@ Explanation: The answer should be the total numbers in the range of 0 ≤ x < 10
 // n=10, dp=C(9,1)*C(9,1)*...*C(1,1)
 // n>10, 一定会有两个位是相同的，所以返回0.
 // n==0, 返回1 // 0 ≤ x < 10^n, 那么x可以为0，也就是有1个
-class Solution {
-public:
-    int countNumbersWithUniqueDigits(int n) {
-        if(n<0 || n>10) return 0;
-        if(n==0) return 1;
-        if(n==1) return 10;
-        vector<int> dp(n); // dp[i]保存i位数的每位都不相同的数字个数
-        dp[0]=10;
-        dp[1]=9*9;
-        int factor=9, res=dp[0]+dp[1];
-        for(int i=2;i<n;i++){
-            factor--;
-            dp[i]=dp[i-1]*factor; // 由于是不断连乘，所以可以利用前面的结果，减小时间复杂度
-            res+=dp[i];
-        }
-        return res;
+class Solution
+{
+ public:
+  int countNumbersWithUniqueDigits(int n)
+  {
+    if (n < 0 || n > 10)
+      return 0;
+    if (n == 0)
+      return 1;
+    if (n == 1)
+      return 10;
+    vector<int> dp(n); // dp[i]保存i位数的每位都不相同的数字个数
+    dp[0] = 10;
+    dp[1] = 9 * 9;
+    int factor = 9, res = dp[0] + dp[1];
+    for (int i = 2; i < n; i++)
+    {
+      factor--;
+      dp[i] = dp[i - 1] * factor; // 由于是不断连乘，所以可以利用前面的结果，减小时间复杂度
+      res += dp[i];
     }
+    return res;
+  }
 };

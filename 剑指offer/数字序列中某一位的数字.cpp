@@ -5,37 +5,47 @@
 // 注意:这个数列是0,1,2,...,9,10,11,...构成的序列
 
 // n位的数总共有多少个
-int CountOfIntegers(int bits) {
-	if (bits <= 0) return 0;
-	if (bits == 1) return 10;
+int CountOfIntegers(int bits)
+{
+  if (bits <= 0)
+    return 0;
+  if (bits == 1)
+    return 10;
 
-	int count = pow(10, bits - 1);
-	return 9 * count;
+  int count = pow(10, bits - 1);
+  return 9 * count;
 }
 
 // n位的第一个数字
-int BeginNumber(int bits) {
-	if (bits <= 0) return -1;
-	if (bits == 1) return 0;
-	return (int)(pow(10, bits - 1));
+int BeginNumber(int bits)
+{
+  if (bits <= 0)
+    return -1;
+  if (bits == 1)
+    return 0;
+  return (int)(pow(10, bits - 1));
 }
 
-int DigitAtIndex(int index) {
-	if (index < 0) return -1;
-	int bits = 1;
-	int numsOfNbits = CountOfIntegers(bits);
-	while (numsOfNbits <= index) {
-		index -= bits * numsOfNbits;
-		bits++;
-		numsOfNbits = CountOfIntegers(bits);
-	}
-	
-	int num = BeginNumber(bits);
-	int div = index / bits;
-	int rem = index % bits;
-	num += div;
-	for (int i = 0; i < bits - rem-1; i++) {
-		num /= 10;
-	}
-	return num%10;
+int DigitAtIndex(int index)
+{
+  if (index < 0)
+    return -1;
+  int bits = 1;
+  int numsOfNbits = CountOfIntegers(bits);
+  while (numsOfNbits <= index)
+  {
+    index -= bits * numsOfNbits;
+    bits++;
+    numsOfNbits = CountOfIntegers(bits);
+  }
+
+  int num = BeginNumber(bits);
+  int div = index / bits;
+  int rem = index % bits;
+  num += div;
+  for (int i = 0; i < bits - rem - 1; i++)
+  {
+    num /= 10;
+  }
+  return num % 10;
 }

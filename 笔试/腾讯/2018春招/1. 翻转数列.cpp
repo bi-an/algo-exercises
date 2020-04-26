@@ -11,13 +11,14 @@ using namespace std;
 // int 4字节
 // long long 8字节
 
-int main(){
-	long n,m; // 注意，这里要用long，用int会越界
-	cin >> n >> m;
+int main()
+{
+  long n, m; // 注意，这里要用long，用int会越界
+  cin >> n >> m;
 
-	long res = n*m/2;
+  long res = n * m / 2;
 
-	cout << res;
+  cout << res;
 
-	return 0;
+  return 0;
 }

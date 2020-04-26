@@ -1,12 +1,11 @@
 #include <iostream>
 using namespace std;
 
-struct Node {
-	int val;
-	Node *next;
-	Node(int val_) :val(val_), next(nullptr) {
-
-	}
+struct Node
+{
+  int val;
+  Node *next;
+  Node(int val_) : val(val_), next(nullptr) {}
 };
 
 // 如果是删除倒数第1个节点，那么first要先走1步，当first到达null时，last则指向倒数第一个，类推
@@ -18,43 +17,50 @@ struct Node {
 //	  此时，把root指向last->next即可。
 // 由于last一定不为null，所以last->next一定存在。
 // TODO: 改进：使用哨兵，这样直接删除节点即可，不需要判断。
-bool deleteNth(Node** root, int n) {
-	if (root == nullptr || n <= 0) return false;
-	Node *p = *root;
-	int diff = 0;
-	while (p != nullptr && diff < n) {
-		diff++;
-		p = p->next;
-	}
-	if (diff < n) // 不可以用p==nullptr作为判断条件，例如n个节点链表，要删除倒数第n个，则diff==n, p==nullptr，即while的两个条件可能同时满足
-		return false;
-	Node *p1 = *root, *pre = nullptr;
-	while (p != nullptr) {
-		pre = p1;
-		p = p->next;
-		p1 = p1->next;
-	}
-	if (pre == nullptr) {
-		*root = p1->next;
-	}
-	else {
-		pre->next = p1->next; // 仅仅delete是不够的，还要把链表连接起来
-	}
-	delete p1;
-	return true;
+bool deleteNth(Node **root, int n)
+{
+  if (root == nullptr || n <= 0)
+    return false;
+  Node *p = *root;
+  int diff = 0;
+  while (p != nullptr && diff < n)
+  {
+    diff++;
+    p = p->next;
+  }
+  if (diff < n) // 不可以用p==nullptr作为判断条件，例如n个节点链表，要删除倒数第n个，则diff==n, p==nullptr，即while的两个条件可能同时满足
+    return false;
+  Node *p1 = *root, *pre = nullptr;
+  while (p != nullptr)
+  {
+    pre = p1;
+    p = p->next;
+    p1 = p1->next;
+  }
+  if (pre == nullptr)
+  {
+    *root = p1->next;
+  }
+  else
+  {
+    pre->next = p1->next; // 仅仅delete是不够的，还要把链表连接起来
+  }
+  delete p1;
+  return true;
 }
 
-int main() {
-	Node *p = new Node(1);
-	p->next = new Node(2);
-	p->next->next = new Node(3);
+int main()
+{
+  Node *p = new Node(1);
+  p->next = new Node(2);
+  p->next->next = new Node(3);
 
-	// 分别删除倒数第0，1，2，3，4个节点，测试正确
-	bool flag = deleteNth(&p, 2);
+  // 分别删除倒数第0，1，2，3，4个节点，测试正确
+  bool flag = deleteNth(&p, 2);
 
-	// 如果只有一个节点
-	Node *p2 = new Node(1);
-	bool flag2 = deleteNth(&p2, 1);
+  // 如果只有一个节点
+  Node *p2 = new Node(1);
+  bool flag2 = deleteNth(&p2, 1);
 
-	return 0;
+  return 0;
 }

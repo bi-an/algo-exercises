@@ -1,31 +1,32 @@
 #include "Finery.h"
 using namespace std;
 
-int main(){
+int main()
+{
 
-	Person xc("小菜");
+  Person xc("小菜");
 
-	Sneaker sneaker;
-	BigTrouser bigtrouser;
-	TShirts tshirts;
+  Sneaker sneaker;
+  BigTrouser bigtrouser;
+  TShirts tshirts;
 
-	// 装饰过程
-	std::cout << "第一种装扮: " << std::endl;
-	tshirts.Decorate(&xc);
-	bigtrouser.Decorate(&tshirts);
-	sneaker.Decorate(&bigtrouser);
+  // 装饰过程
+  std::cout << "第一种装扮: " << std::endl;
+  tshirts.Decorate(&xc);
+  bigtrouser.Decorate(&tshirts);
+  sneaker.Decorate(&bigtrouser);
 
-	sneaker.Show();
+  sneaker.Show();
 
-	std::cout << std::endl;
+  std::cout << std::endl;
 
-	cout << "第二种装扮: " << endl;
-	Tie tie;
-	Suit suit;
-	suit.Decorate(&xc);
-	tie.Decorate(&suit);
-	
-	tie.Show();
+  cout << "第二种装扮: " << endl;
+  Tie tie;
+  Suit suit;
+  suit.Decorate(&xc);
+  tie.Decorate(&suit);
 
-	return 0;
+  tie.Show();
+
+  return 0;
 }
