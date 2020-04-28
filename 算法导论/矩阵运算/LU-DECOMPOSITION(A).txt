@@ -1,0 +1,18 @@
+LU-DECOMPOSITION(A)
+---------------------------------------------------------------
+n=A.rows
+let L and U be new n*n matrices
+initialize U with 0s below the diagonal
+initialize L with 1s on the diagonal and 0s above the diagonal
+for k = 1:n
+    u(k,k)=a(k,k)
+    for i = k+1:n
+        l(i,k)=a(i,k)/u(k,k)    // a(i,k) holds v(i)
+        u(k,i)=a(k,i)           // a(k,i) holds w(i)
+    for i = k+1:n
+        for j = k+1:n
+            a(i,j)=a(i,j)-l(i,k)u(k,j)
+return L and U
+---------------------------------------------------------------
+
+

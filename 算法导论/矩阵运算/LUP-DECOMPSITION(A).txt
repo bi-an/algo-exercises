@@ -1,0 +1,27 @@
+LUP-DECOMPSITION(A)
+---------------------------------------------------------------
+n = A.rows
+let L and U be new n*n matrices
+let pi[1...n] be a new array
+initialize U with 0s below the diagonal
+initialize L with 1s on the diagonal and 0s above the diagonal
+for i = 1:n
+    pi[i] = i
+for k = 1:n
+    p = 0
+    for i = k:n
+        if abs(a[i,k]) > p
+            p = abs(a[i,k])     // a(i,k) holds v(i)
+            k1 = i              
+    if p==0
+        error "singular matrix"
+    exchange pi[k] with pi[k1]
+    for i = 1:n
+        exchange a[k,i] with a[k1,i]    // a(k,i) holds w(i)
+    for i = k+1:n
+        a[i,k] = a[i,k]/a[k,k]
+        for j = k+1:n
+            a[i,j] = a[i,j]-a[i,k]*a[k,j]
+return L,U,pi
+---------------------------------------------------------------
+
