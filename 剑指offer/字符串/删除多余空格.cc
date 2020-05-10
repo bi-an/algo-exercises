@@ -1,3 +1,8 @@
+/**
+ * 删除多余空格
+ * 如果有标点符号，删除标点之前的空格
+ */
+
 // C++ program to implement custom trim() function
 #include <algorithm>
 #include <iostream>
