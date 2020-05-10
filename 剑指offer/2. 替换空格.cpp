@@ -41,3 +41,41 @@ class Solution
     }
   }
 };
+
+/**
+ * @author zzg
+ */
+#include <stdio.h>
+#include <string.h>
+class Solution
+{
+ public:
+  // length：数组大小，不是字符串长度
+  void replaceSpace(char *str, int length)
+  {
+    if (str == nullptr || length <= 0)
+      return;
+    int numBlanks = 0, n = strlen(str);
+    for (int i = 0; i < n; i++)
+    {
+      if (str[i] == ' ')
+        numBlanks++;
+    }
+    int i = n - 1, j = n + numBlanks * 2 - 1; // i: read; j: write
+    str[j + 1] = '\0';
+    while (i >= 0)
+    {
+      if (str[i] == ' ')
+      {
+        str[j--] = '0';
+        str[j--] = '2';
+        str[j--] = '%';
+      }
+      else
+      {
+        str[j--] = str[i];
+      }
+      --i;
+    }
+  }
+};

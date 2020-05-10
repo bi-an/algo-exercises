@@ -55,6 +55,14 @@ class Solution
 };
 
 //写法2
+// 1->2->3->4->NULL
+// 递归过程：
+// f(1)->f(2)->f(3)->f(4)->f(NULL)
+// 到达f(NULL)，return vector<int>();
+// 回到f(4)，vec.push_back(4)，return;
+// ...
+// 没有重复计算
+// 但是，递归要保存上下文，内存耗费应该要多一些。
 class Solution
 {
  public:
@@ -103,5 +111,34 @@ class Solution
     }
     //反向迭代器创建临时对象
     return vector<int>(v.rbegin(), v.rend());
+  }
+};
+
+/**
+ * @brief 两次遍历：
+ * 第一次，计算链表长度，确定vector的大小；
+ * 第二次，从vector的最右边开始填充
+ * 
+ */
+class Solution
+{
+ public:
+  vector<int> printListFromTailToHead(ListNode *head)
+  {
+    int n = 0;
+    ListNode *p = head;
+    while (p != nullptr)
+    {
+      n++;
+      p = p->next;
+    }
+    vector<int> vec(n);
+    p = head;
+    while (p != nullptr)
+    {
+      vec[--n] = p->val;
+      p = p->next;
+    }
+    return vec;
   }
 };

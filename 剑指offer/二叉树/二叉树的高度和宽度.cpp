@@ -45,7 +45,8 @@ int TreeHeight(TreeNode *pRoot)
   return height;
 }
 
-//树的宽度
+/// 树的宽度
+/// 按层打印，每次保存下层最大宽度
 int TreeWidth(TreeNode *pRoot)
 {
   if (!pRoot)

@@ -2,6 +2,10 @@
 题目：二维数组，从左至右递增，从上至下递增
 */
 
+#include <iostream>
+#include <vector>
+using namespace std;
+
 class Solution
 {
  public:
@@ -101,6 +105,42 @@ class Solution
       else
       {
         i++;
+      }
+    }
+    return false;
+  }
+};
+
+/**
+ * @brief 时间 O(m+n)
+ * 
+ */@author zzg
+ */
+class Solution
+{
+ public:
+  bool Find(int target, vector<vector<int>> array)
+  {
+    if (array.size() <= 0 || array[0].size() <= 0)
+      return false;
+    int rows = array.size(), cols = array[0].size();
+    // 从右上角开始查找
+    for (int i = 0; i < rows; i++)
+    {
+      for (int j = cols - 1; j >= 0; j--)
+      {
+        if (array[i][j] == target)
+        {
+          return true;
+        }
+        else if (array[i][j] > target)
+        {
+          cols--;
+        }
+        else
+        {
+          break;
+        }
       }
     }
     return false;
