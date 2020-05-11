@@ -1,13 +1,14 @@
 #include <algorithm>
 #include <functional>
 #include <vector>
+using namespace std;
 
 class Solution
 {
  public:
   void Insert(int num)
   {
-    if (((max.size() + min.size()) & 1) == 0)
+    if (((max.size() + min.size()) & 1) == 0) // 奇数
     {
       if (min.size() > 0 && num > min[0])
       {
@@ -20,7 +21,7 @@ class Solution
       max.push_back(num);
       push_heap(max.begin(), max.end(), less<int>());
     }
-    else
+    else // 偶数
     {
       if (max.size() > 0 && num < max[0])
       {
@@ -45,7 +46,9 @@ class Solution
       return ((double)max[0] + (double)min[0]) / 2;
     }
     else
+    {
       return max[0];
+    }
   }
 
  private:
