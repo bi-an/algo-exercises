@@ -107,3 +107,21 @@ class Solution
     return ConstructCore(pre, 0, pre.size() - 1, vin, 0, vin.size() - 1);
   }
 };
+
+/**
+ * @brief 递归
+ * @author zzg
+ */
+TreeNode* reConstructBinaryTree(vector<int> pre,vector<int> vin) {
+    if(pre.empty()) return NULL;
+    int rootVal = pre[0];
+    vector<int>::iterator it = find(vin.begin(), vin.end(), rootVal);
+    if(it==vin.end()) return NULL; // error
+    int rootPos = it - vin.begin();
+    TreeNode* root = new TreeNode(rootVal);
+    root->left = reConstructBinaryTree(vector<int>(pre.begin()+1, pre.begin()+rootPos+1),
+                                      vector<int>(vin.begin(),vin.begin()+rootPos));
+    root->right = reConstructBinaryTree(vector<int>(pre.begin()+rootPos+1, pre.end()),
+                                       vector<int>(vin.begin()+rootPos+1, vin.end()));
+    return root;
+}
