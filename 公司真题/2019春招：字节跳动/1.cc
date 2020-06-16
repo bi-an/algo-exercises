@@ -37,24 +37,46 @@ woow
 #include <string>
 using namespace std;
 
+// int main(){
+//   int n;
+//   string s;
+//   cin >> n;
+//   while(n--){
+//     cin >> s;
+//     string ans(s); // TODO：其实没有必要，因为写指针j在写入时，始终在读指针之后，不会覆盖原始数据
+//     int j = 0; // 写指针
+//     for(int i = 0;i < s.size();i++){
+//       ans[j++] = s[i];
+//       if(j>2 && ans[j-1]==ans[j-2] && ans[j-2]==ans[j-3]){
+//         j--;
+//       }
+//       if(j>3 && ans[j-1]==ans[j-2] && ans[j-3]==ans[j-4]){
+//         j--;
+//       }
+//     }
+//     ans.erase(ans.begin()+j,ans.end());
+//     cout << ans << endl;
+//   }
+// }
+
 int main(){
   int n;
   string s;
   cin >> n;
   while(n--){
     cin >> s;
-    string ans(s);
+//    string ans(s);
     int j = 0; // 写指针
     for(int i = 0;i < s.size();i++){
-      ans[j++] = s[i];
-      if(j>2 && ans[j-1]==ans[j-2] && ans[j-2]==ans[j-3]){
+      s[j++] = s[i];
+      if(j>2 && s[j-1]==s[j-2] && s[j-2]==s[j-3]){
         j--;
       }
-      if(j>3 && ans[j-1]==ans[j-2] && ans[j-3]==ans[j-4]){
+      if(j>3 && s[j-1]==s[j-2] && s[j-3]==s[j-4]){
         j--;
       }
     }
-    ans.erase(ans.begin()+j,ans.end());
-    cout << ans << endl;
+    s.erase(s.begin()+j,s.end());
+    cout << s << endl;
   }
 }
