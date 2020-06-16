@@ -25,7 +25,7 @@ class Solution {
 public:
     int widthOfBinaryTree(TreeNode* root) {
         if(root==nullptr) return 0;
-        queue<pair<TreeNode*,unsigned long long>> Q;
+        queue<pair<TreeNode*,unsigned long long>> Q; // 保存节点的id（按满二叉树计算），根节点id=1
         Q.push(make_pair(root, 1));
         int maxWidth = 1;
         while(!Q.empty()){
@@ -41,7 +41,7 @@ public:
                 if(node->left)
                     Q.push(make_pair(node->left, id*2)); // int*2可能溢出，所以id类型使用unsigned long long
                 if(node->right)
-                    Q.push(make_pair(node->right, id*2+1));
+                    Q.push(make_pair(node->right, id*2+1)); // 左子节点id = 父节点id*2；右子节点id = 父节点id*2+1
             }
         }
         return maxWidth;
