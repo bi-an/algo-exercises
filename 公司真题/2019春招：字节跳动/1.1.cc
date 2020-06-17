@@ -62,7 +62,8 @@ int main()
           }
           else
           {
-            state = 0; // 可以使用continue跳过本次循环
+            state = 0;
+            ans += cur;
           }
           break;
         case 1:
