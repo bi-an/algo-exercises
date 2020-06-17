@@ -58,7 +58,7 @@ int main()
           if (cur == last)
           {
             state = 1;
-            ans += cur;
+            ans += cur; // 可以使用continue跳过本次循环，让程序代码更简洁
           }
           else
           {
