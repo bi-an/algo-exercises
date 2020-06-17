@@ -31,7 +31,7 @@ hello
 woow
 */
 
-// 思路2：状态机
+// 思路2：状态机/自动机
 
 #include <iostream>
 #include <string>
@@ -62,7 +62,7 @@ int main()
           }
           else
           {
-            state = 0;
+            state = 0; // 可以使用continue跳过本次循环
           }
           break;
         case 1:
