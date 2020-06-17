@@ -31,52 +31,68 @@ hello
 woow
 */
 
-// 思路1：读、写指针
+// 思路2：状态机
 
 #include <iostream>
 #include <string>
 using namespace std;
 
-int main(){
+int main()
+{
   int n;
   string s;
   cin >> n;
-  while(n--){
+  while (n--)
+  {
     cin >> s;
-//    string ans(s);
-    int j = 0; // 写指针
-    for(int i = 0;i < s.size();i++){
-      s[j++] = s[i];
-      if(j>2 && s[j-1]==s[j-2] && s[j-2]==s[j-3]){
-        j--;
+    char cur = s[0], last = s[0];
+    int state = 0;
+    string ans;
+    ans += s[0];
+    for (int i = 1; i < s.size(); i++)
+    {
+      cur = s[i];
+      switch (state)
+      {
+        case 0:
+          if (cur == last)
+          {
+            state = 1;
+            ans += cur;
+          }
+          else
+          {
+            state = 0;
+          }
+          break;
+        case 1:
+          if (cur == last)
+          {
+            state = 1;
+          }
+          else
+          {
+            state = 2;
+            ans += cur;
+          }
+          break;
+        case 2:
+          if (cur == last)
+          {
+            state = 2;
+          }
+          else
+          {
+            state = 0;
+            ans += cur;
+          }
+          break;
+        default:
+          break;
       }
-      if(j>3 && s[j-1]==s[j-2] && s[j-3]==s[j-4]){
-        j--;
-      }
+      last = cur;
     }
-    s.erase(s.begin()+j,s.end());
-    cout << s << endl;
+    cout << ans << endl;
   }
+  return 0;
 }
-
-// int main(){
-//   int n;
-//   string s;
-//   cin >> n;
-//   while(n--){
-//     cin >> s;
-//     string ans(s); // TODO：其实没有必要，因为写指针j在写入时，始终在读指针之后，不会覆盖原始数据
-//     int j = 0; // 写指针
-//     for(int i = 0;i < s.size();i++){
-//       ans[j++] = s[i];
-//       if(j>2 && ans[j-1]==ans[j-2] && ans[j-2]==ans[j-3]){
-//         j--;
-//       }
-//       if(j>3 && ans[j-1]==ans[j-2] && ans[j-3]==ans[j-4]){
-//         j--;
-//       }
-//     }
-//     ans.erase(ans.begin()+j,ans.end());
-//     cout << ans << endl;
-//   }
-// }
