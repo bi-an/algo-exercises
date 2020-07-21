@@ -62,7 +62,7 @@ template <class T>
 MaxHeap<T>::MaxHeap(int MaxHeapSize)
 {
   MaxSize = MaxHeapSize;
-  heap = new T[MaxSize + 1]; //µÚ0¸ö½Úµã²»ÓÃ
+  heap = new T[MaxSize + 1]; //ç¬¬0ä¸ªèŠ‚ç‚¹ä¸ç”¨
   CurrentSize = 0;
 }
 template <class T>
@@ -70,13 +70,13 @@ MaxHeap<T> &MaxHeap<T>::Insert(const T &x)
 {
   if (CurrentSize == MaxSize)
     throw NoMem();
-  //ÎªxÑ°ÕÒÓ¦²åÈëµÄÎ»ÖÃ
-  //i´ÓĞÂµÄÒ¶½Úµã¿ªÊ¼£¬²¢ÑØ×ÅÊ÷ÉÏÉı
+  //ä¸ºxå¯»æ‰¾åº”æ’å…¥çš„ä½ç½®
+  //iä»æ–°çš„å¶èŠ‚ç‚¹å¼€å§‹ï¼Œå¹¶æ²¿ç€æ ‘ä¸Šå‡
   int i = ++CurrentSize;
   while (i != 1 && x > heap[i / 2])
   {
-    heap[i] = heap[i / 2]; // ½«ÔªËØÏÂÒÆ
-    i /= 2;                // ÒÆÏò¸¸½Úµã
+    heap[i] = heap[i / 2]; // å°†å…ƒç´ ä¸‹ç§»
+    i /= 2;                // ç§»å‘çˆ¶èŠ‚ç‚¹
   }
   heap[i] = x;
   return *this;
@@ -87,21 +87,21 @@ MaxHeap<T> &MaxHeap<T>::DeleteMax(T &x)
   if (CurrentSize == 0)
     throw OutOfBounds();
   x = heap[1];
-  T y = heap[CurrentSize--]; //×îºóÒ»¸öÔªËØ
-  // ´Ó¸ù¿ªÊ¼, ÎªyÑ°ÕÒºÏÊÊµÄÎ»ÖÃ
-  int i = 1,  // ¶ÑµÄµ±Ç°½Úµã
-      ci = 2; // iµÄ×Ó½Úµã
+  T y = heap[CurrentSize--]; //æœ€åä¸€ä¸ªå…ƒç´ 
+  // ä»æ ¹å¼€å§‹, ä¸ºyå¯»æ‰¾åˆé€‚çš„ä½ç½®
+  int i = 1,  // å †çš„å½“å‰èŠ‚ç‚¹
+      ci = 2; // içš„å­èŠ‚ç‚¹
   while (ci <= CurrentSize)
   {
-    // Ê¹heap[ci] ÊÇi½Ï´óµÄ×Ó½Úµã
+    // ä½¿heap[ci] æ˜¯iè¾ƒå¤§çš„å­èŠ‚ç‚¹
     if (ci < CurrentSize && heap[ci] < heap[ci + 1])
       ci++;
-    // ÄÜ°Ñy·ÅÈëheap[i]Âğ?
+    // èƒ½æŠŠyæ”¾å…¥heap[i]å—?
     if (y >= heap[ci])
-      break; //ÄÜ
-    //²»ÄÜ
-    heap[i] = heap[ci]; // ×Ó½ÚµãÉÏÒÆ
-    i = ci;             // ÏÂÒÆÒ»²ã
+      break; //èƒ½
+    //ä¸èƒ½
+    heap[i] = heap[ci]; // å­èŠ‚ç‚¹ä¸Šç§»
+    i = ci;             // ä¸‹ç§»ä¸€å±‚
     ci *= 2;
   }
   heap[i] = y;
@@ -115,29 +115,29 @@ void MaxHeap<T>::Initialize(T a[], int size, int ArraySize)
   heap = new T[ArraySize + 1];
   for (int ii = 1; ii <= size; ii++)
   {
-    heap[ii] = a[ii - 1]; //ÕâÖÖÖØĞÂ³õÊ¼»¯µÄ·½Ê½°²È«£¬µ«ÊÇºÄÊ± //µÚ¶şÖÖ·½Ê½£º½«heap±©Â¶¸øµ÷ÓÃÕß£¬ÈÃµ÷ÓÃÕßÍê³É¸³³õÊ¼Öµ¹¤×÷
+    heap[ii] = a[ii - 1]; //è¿™ç§é‡æ–°åˆå§‹åŒ–çš„æ–¹å¼å®‰å…¨ï¼Œä½†æ˜¯è€—æ—¶ //ç¬¬äºŒç§æ–¹å¼ï¼šå°†heapæš´éœ²ç»™è°ƒç”¨è€…ï¼Œè®©è°ƒç”¨è€…å®Œæˆèµ‹åˆå§‹å€¼å·¥ä½œ
   }
   CurrentSize = size;
   MaxSize = ArraySize;
-  // ²úÉúÒ»¸ö×î´ó¶Ñ
-  // ´Óµ¹ÊıµÚÒ»¸ö¸¸½Úµã£¨CurrentSize/2£©¿ªÊ¼´¦Àí
+  // äº§ç”Ÿä¸€ä¸ªæœ€å¤§å †
+  // ä»å€’æ•°ç¬¬ä¸€ä¸ªçˆ¶èŠ‚ç‚¹ï¼ˆCurrentSize/2ï¼‰å¼€å§‹å¤„ç†
   for (int i = CurrentSize / 2; i >= 1; i--)
   {
-    T y = heap[i]; // ×ÓÊ÷µÄ¸ù
-    // Ñ°ÕÒ·ÅÖÃyµÄÎ»ÖÃ
-    int c = 2 * i; // c µÄ¸¸½ÚµãÊÇyµÄÄ¿±êÎ»ÖÃ
+    T y = heap[i]; // ä¿å­˜å­æ ‘çš„æ ¹ï¼Œé¿å…äº¤æ¢ï¼Œæ”¹ä¸ºä¸‹æ²‰
+    // å¯»æ‰¾æ”¾ç½®yçš„ä½ç½®
+    int c = 2 * i; // c çš„çˆ¶èŠ‚ç‚¹æ˜¯yçš„ç›®æ ‡ä½ç½®
 
     while (c <= CurrentSize)
     {
-      // Ê¹heap[c]ÊÇ½Ï´óµÄ×Ó½Úµã
+      // ä½¿heap[c]æ˜¯è¾ƒå¤§çš„å­èŠ‚ç‚¹
       if (c < CurrentSize && heap[c] < heap[c + 1])
         c++;
-      // ÄÜ°Ñy·ÅÈëheap[c/2]Âğ?
+      // èƒ½æŠŠyæ”¾å…¥heap[c/2]å—?
       if (y >= heap[c])
-        break; // ÄÜ
-      // ²»ÄÜ
-      heap[c / 2] = heap[c]; // ×Ó½ÚµãÉÏÒÆ
-      c *= 2;                // ÏÂÒÆÒ»²ã
+        break; // èƒ½
+      // ä¸èƒ½
+      heap[c / 2] = heap[c]; // å­èŠ‚ç‚¹ä¸Šç§»
+      c *= 2;                // ä¸‹ç§»ä¸€å±‚
     }
     heap[c / 2] = y;
   }
