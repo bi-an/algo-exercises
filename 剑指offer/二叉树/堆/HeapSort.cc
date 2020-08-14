@@ -1,5 +1,3 @@
-// https://practice.geeksforgeeks.org/problems/heap-sort/1
-
 // { Driver Code Starts
 // C++ program for implementation of Heap Sort
 #include <bits/stdc++.h>
@@ -47,6 +45,7 @@ int main()
 }
 // } Driver Code Ends
 
+
 /* Main function to do heap sort. This function uses buildHeap()
    and heapify()
 void heapSort(int arr[], int n)  {
@@ -60,29 +59,29 @@ void heapSort(int arr[], int n)  {
 // in increasing order when above heapSort() is called.
 // To heapify a subtree rooted with node i which is  an index in arr[]. 
 // n is size of heap. This function  is used in above heapSor()
-// 可以使用递归
-// 交换操作可以避免，改为“半堆”顶下沉
+// 半堆顶下沉
 void heapify(int arr[], int n, int i)  {
     // Your Code Here
-    int parent = i;
-    while(parent < n){
-        int left = parent*2+1, right = left + 1;
-        int larger = left;
-        if(right < n && arr[left] < arr[right])
-            larger = right;
-        if(larger < n && arr[parent] < arr[larger]){
-            swap(arr[parent], arr[larger]); // TODO
-            parent = larger;
-        }
-        else
-            break;
+    int val = arr[i];
+    while(i<n){
+      int left = i*2+1, right = left+1;
+      int larger = left;
+      if(right<n && arr[left] < arr[right])
+        larger = right;
+      if(larger<n && val<arr[larger]){
+        arr[i]=arr[larger];
+        i = larger;
+      }
+      else
+        break;
     }
+    arr[i]=val;
 }
 
 // Rearranges input array so that it becomes a max heap
 void buildHeap(int arr[], int n)  { 
     // Your Code Here
-    for(int i=(n-1)/2;i>=0;i--){
+    for(int i=(n-2)/2;i>=0;i--){
         heapify(arr, n, i);
     }
 }
