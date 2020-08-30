@@ -58,6 +58,8 @@ https://www.nowcoder.com/question/next?pid=16516564&qid=362292&tid=34100077
 using namespace std;
 #define NMAX 99997867
 
+// 二分查找，降低时间复杂度
+
 int findN(const vector<int> & nums, int n, int left, int right) {
 	int middle = left;
 	while (left <= right) {
