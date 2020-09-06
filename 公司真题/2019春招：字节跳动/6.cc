@@ -1,3 +1,5 @@
+// https://www.nowcoder.com/question/next?pid=16516564&qid=362290&tid=37072880
+
 #include <bits/stdc++.h>
 using namespace std;
 
