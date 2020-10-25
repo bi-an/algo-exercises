@@ -31,6 +31,6 @@ public:
             del->next = saved->next;
             saved->next = del;
         }
-        return dummy->next;
+        return dummy->next; // TODO: 删除dummy
     }
 };
