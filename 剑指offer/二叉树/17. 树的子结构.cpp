@@ -11,7 +11,8 @@ class Solution
       return true;
     else
     {
-      return HasSubtree(parent->left, child) || HasSubtree(parent->right, child); // 其实这里的两个HasSubtree换成DoesParentHasChild也行，只是时间复杂度高一些
+      // 其实这里的两个HasSubtree换成DoesParentHasChild也行，只是时间复杂度高一些
+      return HasSubtree(parent->left, child) || HasSubtree(parent->right, child);
     }
   }
 

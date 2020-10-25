@@ -76,3 +76,30 @@ class Solution
     }
   }
 };
+
+// @Athor
+// @brief 空间复杂度 O(1)
+class Solution {
+public:
+    string ReverseSentence(string str) {
+        if(str.empty()) return str;
+        Reverse(str, 0, str.size() - 1);
+        int lo=0, hi=1;
+        while(hi<=str.size()){
+            if(hi==str.size() || str[hi]==' ')
+            {
+                Reverse(str, lo, hi-1);
+                lo=hi+1;
+            }
+            hi++;
+        }
+        return str;
+    }
+
+    void Reverse(string& str, int lo, int hi){
+        while(lo < hi){
+            swap(str[lo], str[hi]);
+            lo++,hi--;
+        }
+    }
+};
