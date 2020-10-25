@@ -42,7 +42,9 @@ int main() {
     //int a;
     //cin >> a;
     vector<int> vec = {3,30,34,5,8};
+    vector<int> vec2 = {30, 304};
     cout << fun(vec) << endl;
+    cout << fun(vec2) << endl;
     
     //cout << "Hello World!" << endl;
 }
