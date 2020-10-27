@@ -1,9 +1,12 @@
-// struct TreeNode {
-//     int val;
-//     TreeNode *left;
-//     TreeNode *right;
-//     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-// };
+#include <vector>
+using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
 
 // 注意：用前/后序遍历序列和中序遍历序列重建二叉树，要求没有数值相同的节点，
 // 否则，在中序遍历序列中有一个以上的对应值，产生不确定性，这样二叉树不唯一。

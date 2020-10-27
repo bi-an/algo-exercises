@@ -31,7 +31,7 @@ void quickSort(int *arr, int lo, int hi)
   quickSort(arr, index + 1, hi);
 }
 
-// 快速排序： 随机化快排
+// 快速排序：随机化快排
 // 交换次数：small值的个数+2(选取的元素交换了2次)
 int Partition(int *arr, int lo, int hi)
 {

@@ -35,8 +35,10 @@ int leftBound(int nums[], int n, int val){
             right = mid - 1;
     }
     // if(right < 0 || left >= n) return -1; // right < 0 的判断错误
+    // 特殊处理：如果没找到，返回-1
     if(left >= n || nums[left] != val)
         return -1;
+    // left的值可以理解为，数组中小于val的数字个数
     return left; // left == right + 1
 }
 
