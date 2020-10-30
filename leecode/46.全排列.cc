@@ -29,6 +29,7 @@ public:
 		return res;
 	}
 
+    // 除了res，其他参数的引用类型可以改为值类型，引用类型可以降低内存和提高运行速度
 	void dfs(vector<vector<int>> &res, vector<int> &nums, vector<int>& path, vector<bool>& used, int depth)
 	{
 		if (depth == nums.size())
@@ -48,3 +49,9 @@ public:
 		}
 	}
 };
+
+/**
+ * @brief BFS
+ * 
+ */
+
