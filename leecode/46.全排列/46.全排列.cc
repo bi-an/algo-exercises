@@ -1,10 +1,13 @@
 #include <iostream>
-#include <stack>
+// #include <stack>
 #include <vector>
+#include <queue>
 using namespace std;
 
 /**
  * @brief 回溯法（DFS）
+ * 
+ * 先画出递归树，然后DFS或者BFS
  * 
  * 三个状态变量
  * 1. path: stack
@@ -44,14 +47,9 @@ public:
 			path.push_back(nums[i]);
 			used[i] = true;
 			dfs(res, nums, path, used, depth + 1);
+			// 状态回退
 			path.pop_back();
 			used[i] = false;
 		}
 	}
 };
-
-/**
- * @brief BFS
- * 
- */
-
