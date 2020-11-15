@@ -46,6 +46,7 @@ public:
         vector<int> top(nums.size());
         for(int i=0;i<nums.size();i++){
             int left = 0, right = piles - 1;
+			// 左边界的二分查找法
             while(left <= right){
                 int mid = (left+right)/2;
                 if(top[mid] >= nums[i]){
