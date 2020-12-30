@@ -1,12 +1,4 @@
 /*
- * @Author: your name
- * @Date: 2020-10-15 14:55:18
- * @LastEditTime: 2020-11-19 10:34:28
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \leecode\leetcode-cn\动态规划\121. 买卖股票的最佳时机 Best Time to Buy and Sell Stock.cpp
- */
-/*
 Say you have an array for which the ith element is the price of a given stock on day i.
 
 If you were only permitted to complete at most one transaction (i.e., buy one and sell one share of the stock), design an algorithm to find the maximum profit.
@@ -49,21 +41,54 @@ class Solution
   }
 };
 
-
 // @Athor zzg
 class Solution_2 {
 public:
     int maxProfit(vector<int>& prices) {
-		if(prices.empty()) return 0;
-        int cur_min = prices[0];
+        int n = prices.size();
+        if(n==0) return 0;
+
         int res = 0;
-        for(int i = 0;i<prices.size();i++){
-            int diff = prices[i] - cur_min;
-            if(diff > res)
-                res = diff;
-            if(diff < 0)
-                cur_min = prices[i];
+        int min_val = prices[0];
+        for(int i=1;i<n;i++){
+            if(prices[i]-min_val>res)
+                res = prices[i]-min_val;
+            if(prices[i] < min_val) 
+                min_val = prices[i];
         }
+
         return res;
     }
+};
+
+// 根据题“188.买卖股票的最佳时机IV”的框架
+// 点评：时空复杂度都偏高
+class Solution {
+public:
+	int maxProfit(vector<int>& prices) {
+		int n = prices.size();
+		if (n == 0) return 0;
+		vector<vector<int>> dp(n, vector<int>(2));
+
+		dp[0][0] = 0, dp[0][1] = -prices[0];
+
+    // // 状态转移方程
+    // for (int i = 1; i <= n; i++) {
+    //   for (int j = 1; j <= k; j++) {
+    //     dp[i][j][0] = max(dp[i - 1][j][0], dp[i - 1][j][1] + prices[i - 1]);
+    //     dp[i][j][1] = max(dp[i - 1][j][1],
+    //                       dp[i - 1][j - 1][0] - prices[i - 1]); // buy，所以j-1（在sell时标记成j-1是一样的）
+    //   }
+    // }
+
+    // 直接令188题中的k=1即可，但是我们可以适度优化。
+    // k=1, 那么j=0或1
+    // 根据上面的状态转移方程，只有dp[i - 1][j - 1][0]涉及j==0时，我们把它提前计算出来就可以了
+		for (int i = 1; i < n; i++) {
+			dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+			dp[i][1] = max(dp[i - 1][1], -prices[i]); // dp[i - 1][j - 1][0] = 0
+		}
+
+		return dp[n - 1][0];
+	}
 };
