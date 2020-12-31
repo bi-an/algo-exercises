@@ -67,27 +67,28 @@ public:
 };
 
 // 状态压缩
+// 为什么状态压缩之后，运行时间也会显著提高呢？是因为减少了读写内存的时间吗？
 class Solution {
 public:
-    int maxProfit(int k, vector<int>& prices){
-        if (prices.empty())
-        return 0;
-        int n = prices.size();
-        vector<vector<int>> dp(k+1, vector<int>(2));
+  int maxProfit(int k, vector<int> &prices) {
+    if (prices.empty())
+      return 0;
+    int n = prices.size();
+    vector<vector<int>> dp(k + 1, vector<int>(2));
 
-        for(int j=0;j<k+1;j++)
-        dp[j][0] = 0, dp[j][1] = -prices[0]; // 第0天
+    for (int j = 0; j < k + 1; j++)
+      dp[j][0] = 0, dp[j][1] = -prices[0]; // 第0天
 
-        for(int i=1;i<n;i++){
-        int pre = dp[0][0]; // dp[i - 1][j - 1][0]
-        for(int j=1;j<=k;j++){
-            int temp = dp[j][0]; // 防止被覆盖
-            dp[j][0] = max(dp[j][0], dp[j][1] + prices[i]);
-            dp[j][1] = max(dp[j][1], pre - prices[i]);
-            pre = temp;
-        }
-        }
-
-        return dp[k][0];
+    for (int i = 1; i < n; i++) {
+      int pre = dp[0][0];
+      for (int j = 1; j <= k; j++) {
+        int temp = dp[j][0];
+        dp[j][0] = max(dp[j][0], dp[j][1] + prices[i]);
+        dp[j][1] = max(dp[j][1], pre - prices[i]);
+        pre = temp;
+      }
     }
+
+    return dp[k][0];
+  }
 };
