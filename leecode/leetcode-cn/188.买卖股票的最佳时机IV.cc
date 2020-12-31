@@ -80,9 +80,9 @@ public:
       dp[j][0] = 0, dp[j][1] = -prices[0]; // 第0天
 
     for (int i = 1; i < n; i++) {
-      int pre = dp[0][0];
+      int pre = dp[0][0]; // dp[i - 1][j - 1][0]
       for (int j = 1; j <= k; j++) {
-        int temp = dp[j][0];
+        int temp = dp[j][0]; // 防止被覆盖
         dp[j][0] = max(dp[j][0], dp[j][1] + prices[i]);
         dp[j][1] = max(dp[j][1], pre - prices[i]);
         pre = temp;
