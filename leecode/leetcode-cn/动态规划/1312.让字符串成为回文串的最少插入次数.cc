@@ -75,3 +75,27 @@ class Solution_2
     return dp[n - 1];
   }
 };
+
+// 状态压缩
+class Solution {
+public:
+    int minInsertions(string s) {
+      if(s.empty()) return 0;
+      int n = s.size();
+      vector<int> dp(n, 0); // 对角线初始化为0
+
+      for(int i=n-1;i>=0;i--) {
+        int pre = dp[i]; // 每轮计算完，pre都需要重新初始化
+        for(int j=i+1;j<n;j++) {
+          int temp = dp[j];
+          if(s[i] == s[j]) 
+            dp[j] = pre;
+          else
+            dp[j] = min(dp[j-1], dp[j]) + 1;
+          pre = temp;
+        }
+      }
+
+      return dp[n-1];
+    }
+};
