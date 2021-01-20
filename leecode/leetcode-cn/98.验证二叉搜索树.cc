@@ -62,6 +62,7 @@ public:
         if(maxNode && root->val >= maxNode->val) return false;
         // 向左遍历，只有一个条件，就是最大值不得超过root，所以此时minNode一直为null
         // 向右遍历，同理
+        // 换言之，minNode还是maxNode为nullptr，实际上标志了该节点是左子树还是右子树
         return traverse(root->left, minNode, root) && traverse(root->right, root, maxNode);
     }
 };
