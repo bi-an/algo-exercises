@@ -47,3 +47,20 @@ private:
         return a > b ? a : b;
     }
 };
+
+// 前序遍历
+class Solution {
+public:
+    bool isValidBST(TreeNode* root) {
+        return traverse(root, nullptr, nullptr);
+    }
+
+    bool traverse(TreeNode* root, TreeNode* minNode, TreeNode* maxNode) {
+        if(root == nullptr) return true;
+        if(minNode && root->val <= minNode->val) return false;
+        if(maxNode && root->val >= maxNode->val) return false;
+        // 向左遍历，只有一个条件，就是最大值不得超过root，所以此时minNode一直为null
+        // 向右遍历，同理
+        return traverse(root->left, minNode, root) && traverse(root->right, root, maxNode);
+    }
+};
