@@ -10,6 +10,7 @@
  * };
  */
 
+// 后序遍历
 // 这道题会用INT_MAX单节点树作为测试用例，所以要使用long类型
 class Solution {
 public:
