@@ -93,3 +93,36 @@ public:
     return dp[0][0];
   }
 };
+
+
+// dp时间优化
+class Solution {
+public:
+  int findRotateSteps(string ring, string key) {
+    int n = ring.size(), m = key.size();
+
+    // hash table
+    unordered_map<char, vector<int>> charToIndex;
+    for (int i = 0; i < n; i++)
+      charToIndex[ring[i]].push_back(i);
+
+    // dp: key位于i，对应于ring中的位置为j时，拼出key[0...i]的最少操作次数
+    vector<vector<int>> dp(m, vector<int>(n, INT_MAX));
+
+    // key位于0，初始时ring位于0
+    for (int j : charToIndex[key[0]]) {
+      dp[0][j] = min(j, n - j) + 1;
+    }
+
+    for (int i = 1; i < m; i++) {
+      for (int j : charToIndex[key[i]]) {
+        for (int k : charToIndex[key[i - 1]]) {
+          int delta = min(abs(k - j), n - abs(k - j));
+          dp[i][j] = min(dp[i][j], 1 + delta + dp[i - 1][k]);
+        }
+      }
+    }
+
+    return *min_element(dp[m-1].begin(), dp[m-1].end()); // key最后一个字符，对应于ring中的最佳位置不一定是最后一个j
+  }
+};
