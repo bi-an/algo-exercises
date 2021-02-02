@@ -23,6 +23,7 @@ public:
         return dp(ring, 0, key, 0);
     }
 
+    // dp: 12:00当前指向ring[i]时，拼出key[j...]需要的最少操作次数
     int dp(string ring, int i, string key, int j) {
         //printIndent(::count++);
         //printf("i = %d, j = %d\n", i, j);
