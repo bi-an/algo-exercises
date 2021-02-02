@@ -11,6 +11,7 @@ static void printIndent(int n) {
         printf("  ");
 }
 
+// 递归
 class Solution {
 public:
     int findRotateSteps(string ring, string key) {
@@ -64,3 +65,31 @@ int main() {
 
 	return 0;
 }
+
+
+// dp
+class Solution {
+public:
+  int findRotateSteps(string ring, string key) {
+    int n = ring.size(), m = key.size();
+
+    // hash table
+    unordered_map<char, vector<int>> charToIndex;
+    for (int i = 0; i < n; i++)
+      charToIndex[ring[i]].push_back(i);
+
+    vector<vector<int>> dp(m + 1, vector<int>(n));
+    for (int i = m - 1; i >= 0; i--) { // 第m行默认初始化为0
+      for (int j = 0; j < n; j++) {
+        dp[i][j] = INT_MAX; // 待填入位置，初始化为INT_MAX
+        for (int k : charToIndex[key[i]]) {
+          int delta = abs(k - j);
+          delta = min(delta, n - delta);
+          dp[i][j] = min(dp[i][j], 1 + delta + dp[i + 1][k]);
+        }
+      }
+    }
+
+    return dp[0][0];
+  }
+};
