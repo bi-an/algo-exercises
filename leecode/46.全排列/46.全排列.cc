@@ -7,6 +7,8 @@ using namespace std;
 /**
  * @brief 回溯法（DFS）
  * 
+ * 回溯法本质上是遍历
+ * 
  * 先画出递归树，然后DFS或者BFS
  * 
  * 三个状态变量
