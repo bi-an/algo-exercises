@@ -1,3 +1,7 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// 快慢指针
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
