@@ -74,3 +74,29 @@ class Solution
     return ans;
   }
 };
+
+
+// 方法一：hashtable + 前缀和
+// 时间复杂度：O(n)
+// 空间复杂度：O(n)
+class Solution {
+public:
+    int numSubarraysWithSum(vector<int>& nums, int goal) {
+        int res = 0;
+        unordered_map<int,int> cnt; // 记录前缀和的出现次数
+        int sum = 0;
+        for(int num : nums) {
+            ++cnt[sum]; // preSum的个数+1。
+                        // 特别地，初始时，cnt[0]加完等于1，因为如果从第0个到当前位置的sum恰等于goal的话，
+                        // res+=cnt[preSum]，此时的cnt[preSum]要为1才行。
+            sum += num;
+            if(cnt.find(sum - goal) != cnt.end()) // sum - preSum == goal时，应该加上preSum的个数
+                res += cnt[sum-goal];
+        }
+        return res;
+    }
+};
+
+// 方法二：区间指针/双指针
+// 时间复杂度：O(n)
+// 空间复杂度：O(1)
