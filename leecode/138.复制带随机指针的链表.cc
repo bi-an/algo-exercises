@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-07-24 22:31:52
- * @LastEditTime: 2021-07-24 22:32:28
+ * @LastEditTime: 2021-07-24 22:34:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \practice\leecode\138.复制带随机指针的链表.cc
@@ -36,6 +36,7 @@ public:
 };
 */
 
+// TODO 链表的问题，用递归更优雅
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
