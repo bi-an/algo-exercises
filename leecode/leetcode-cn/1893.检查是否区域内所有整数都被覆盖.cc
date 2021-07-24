@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-07-24 20:07:23
- * @LastEditTime: 2021-07-24 20:37:17
+ * @LastEditTime: 2021-07-24 20:40:56
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \practice\leecode\leetcode-cn\1893.检查是否区域内所有整数都被覆盖.cc
@@ -61,7 +61,7 @@ public:
 
         for(auto& range: ranges) {
             ++doors[range[0]]; // 入口+1，出口-1
-            --doors[range[1]+1]; // 由于range范围为1~50，那么此处下标最大为51，这也就是数组长度选择52的原因
+            --doors[range[1]+1]; // 由题意range范围为1~50，那么此处下标最大为51，这也就是数组长度选择52的原因
         }
         int cur_sum = 0;
         for(int i=0;i<52;i++) {
