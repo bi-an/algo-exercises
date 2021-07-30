@@ -19,9 +19,9 @@ public class Codec {
             if (cur == null) sb.append("null");
             else sb.append(cur.val);
 
-            //更新count
+            // 更新count
             if (cur == null) continue;
-            else count--;
+            else count--; // 队列中取出了当前节点
 
             // 记录子节点并更新count
             q.add(cur.left);
