@@ -1,3 +1,4 @@
+// 层序遍历
 public class Codec {
 
     // Encodes a tree to a single string.
