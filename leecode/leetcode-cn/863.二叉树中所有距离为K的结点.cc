@@ -41,10 +41,14 @@
  */
 
 // DFS + hashmap
+// Tips: 1. 如果target为根节点，那么深度为k的节点都满足
+//      2. 把target的父节点当做其子节点，那么"深度"为k的节点就也找到了
+//      3. 要去重
 class Solution {
     unordered_map<int, TreeNode*> parents;
     vector<int> ans;
 
+    // 从root出发，记录所有节点的父节点
     // 题外话：hashmap中没有存入root，当访问到root时，hashmap会自动存入[root.val, 0]，也就是认为root的父节点为NULL，恰好是满足的
     void findParents(TreeNode* node) {
         if (node->left != nullptr) {
@@ -57,6 +61,7 @@ class Solution {
         }
     }
 
+    // 从target出发
     void findAns(TreeNode* node, TreeNode* from, int depth, int k) {
         if (node == nullptr) {
             return;
