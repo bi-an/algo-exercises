@@ -1,11 +1,14 @@
 /*
  * @Author: your name
  * @Date: 2021-08-01 20:28:24
- * @LastEditTime: 2021-08-01 22:49:03
+ * @LastEditTime: 2021-08-01 22:52:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \practice\lib\String.h
  */
+
+#ifndef STRING_UTILS_H
+#define STRING_UTILS_H
 
 #include <vector>
 #include <string>
@@ -58,3 +61,5 @@ namespace StringUtils {
 		return str;
 	}
 };
+
+#endif
