@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-08-01 20:28:24
- * @LastEditTime: 2021-08-01 22:52:19
+ * @LastEditTime: 2021-08-01 23:49:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \practice\lib\String.h
@@ -17,7 +17,8 @@ using std::string;
 using std::vector;
 
 // 提供string相关的static函数
-namespace StringUtils {
+class StringUtils {
+public:
 	static vector<string> split(string str, const char c) {
 		vector<string> ans;
 

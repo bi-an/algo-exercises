@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-07-31 21:11:00
- * @LastEditTime: 2021-07-31 21:19:48
+ * @LastEditTime: 2021-08-02 00:12:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \practice\leecode\987.二叉树的垂序遍历.cc
@@ -73,7 +73,62 @@
  * };
  */
 
-// 方法一：用set和map
+// 方法一：自定义排序规则
+// 先一次遍历将节点的row,col,val存入数组；
+// 然后按照col,row,val的优先规则定义排序规则；
+// 由于题目要求同一列的节点值要放入同一个组中，我们排序后相同col的节点值必然连续，那么用一个数last_col记录上一次访问的col，
+// 如果本次col与last_col相同，放入同一个组。
+class Solution {
+	struct Node {
+		int row, col, val;
+	};
+
+	vector<Node> nodes;
+
+	static bool comp(const Node& node1, const Node& node2) {
+		if (node1.col < node2.col) {
+			return true;
+		}
+		else if (node1.col == node2.col) {
+			if (node1.row < node2.row)
+				return true;
+			else if (node1.row == node2.row) {
+				return node1.val < node2.val;
+			}
+		}
+		return false;
+	}
+
+	void dfs(TreeNode* root, int row, int col) {
+		if (root == nullptr) return;
+		nodes.push_back({ row, col, root->val });
+		dfs(root->left, row + 1, col - 1);
+		dfs(root->right, row + 1, col + 1);
+	}
+public:
+	vector<vector<int>> verticalTraversal(TreeNode* root) {
+		vector<vector<int>> ans;
+		if (root == nullptr) return ans; // TODO need or not?
+		dfs(root, 0, 0);
+		std::sort(nodes.begin(), nodes.end(), comp);
+		vector<int> vec_by_col;
+		int last_col;
+		for (int i = 0; i < nodes.size(); i++) {
+			if (i == 0)
+				last_col = nodes[i].col;
+			if (last_col != nodes[i].col) {
+				ans.push_back(vec_by_col);
+				vec_by_col.clear();
+			}
+			vec_by_col.push_back(nodes[i].val);
+			last_col = nodes[i].col;
+		}
+		ans.push_back(vec_by_col);
+		return ans;
+	}
+};
+
+// 方法二：用set和map
 // 注意：不可用unordered_map和unordered_set，因为hash表要求key能够求hash，
 // 而std::hash则要求key不能为容器，key不可变且唯一
 // Keys are immutable, therefore, the elements in an unordered_set cannot be modified once in the container 
