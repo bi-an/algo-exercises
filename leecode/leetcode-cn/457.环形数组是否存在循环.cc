@@ -3,37 +3,32 @@ class Solution {
 public:
     bool circularArrayLoop(vector<int>& nums) {
         int n = nums.size();
-        auto next = [&](int cur) {
-            return ((cur + nums[cur]) % n + n) % n; // 保证返回值在 [0,n) 中
-        };
+        // 因为 (cur+nums[cur])%n 可能为负，所以需要加上n再取一次余
+        auto next = [&](int cur) {return ((cur + nums[cur]) % n + n) % n;}; // 保证index在 [0,n) 范围
 
-        for (int i = 0; i < n; i++) {
-            if (!nums[i]) {
-                continue;
-            }
-            int slow = i, fast = next(i);
-            // 判断非零且方向相同
-            while (nums[slow] * nums[fast] > 0 && nums[slow] * nums[next(fast)] > 0) { // 每一步都要判断方向
-                if (slow == fast) {
-                    if (slow != next(slow)) {
+        for(int i=0;i<nums.size();i++) {
+            int slow = i, fast = next(slow);
+            // 非零并且方向相同，每一步都要判断
+            // 判断fast的方向就行，因为slow必定在走fast走过的路
+            // 因为fast会每次移动两次，所以要额外判断一次方向
+            while(nums[slow] * nums[fast] > 0 && nums[slow] * nums[next(fast)] > 0) {
+                if(slow == fast) {
+                    if(slow != next(slow)) // 说明循环长度大于1
                         return true;
-                    }
-                    else {
-                        break;
-                    }
+                    else
+                        break; // 说明循环长度为1
                 }
                 slow = next(slow);
-                // 因为这里走了两步，每一步都必须判断方向是否相同，所以在循环条件上要先判断nums[slow] * nums[next(fast)] > 0
                 fast = next(next(fast));
             }
-            // 把走过的位置全部置0（因为题目中nums不可能有0），防止重复遍历，降低时间复杂度
+            // 把快慢指针走过的地方标记为0（因为nums不存在0），可以降低时间复杂度
             int add = i;
-            while (nums[add] * nums[next(add)] > 0) {
-                int tmp = add;
+            while(nums[add] * nums[next(add)] > 0) {
+                nums[add] = 0;
                 add = next(add);
-                nums[tmp] = 0;
             }
         }
+
         return false;
     }
 };
