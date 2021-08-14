@@ -56,3 +56,47 @@ class Solution
 来源：力扣（LeetCode）
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 */
+
+// @Athor zzg
+// 刷第二遍
+class Solution {
+public:
+    int longestPalindromeSubseq(string s) {
+        int n = s.length();
+        vector<vector<int>> dp(n, vector<int>(n, 0));
+        for(int i = n-1; i >=0;i--) {
+            for(int j=i;j<n;j++) {
+                if(j==i) dp[i][j] = 1;
+                else if(s[i]==s[j])
+                    dp[i][j] = dp[i+1][j-1] + 2;
+                else
+                    dp[i][j] = max(dp[i+1][j], dp[i][j-1]);
+            }
+        }
+        return dp[0][n-1];
+    }
+};
+
+// @Athor zzg
+// 状态压缩
+class Solution {
+public:
+    int longestPalindromeSubseq(string s) {
+        int n = s.length();
+        vector<int> dp(n, 0);
+        
+        int tmp, last;
+        for(int i=n-1;i>=0;i--) {
+            for(int j=i;j<n;j++) {
+                last = tmp; // 每行开始（即j=i）时，这一步其实没有作用，tmp为任意值都可以
+                tmp = dp[j];
+                if(j==i) dp[j] = 1;
+                else if(s[i]==s[j])
+                  dp[j] = last + 2;
+                else
+                  dp[j] = max(dp[j], dp[j-1]);
+            }
+        }
+        return dp[n-1];
+    }
+};
