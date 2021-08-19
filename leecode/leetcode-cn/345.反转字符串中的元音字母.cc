@@ -29,10 +29,10 @@ public:
     string reverseVowels(string s) {
         int n = s.size();
         int left = 0, right = n - 1;
-        while(left < right) {
-            while(left < n && !isVowel(s[left])) left++;
-            while(right >= 0 && !isVowel(s[right])) right--;
-            if(/*left < n && right >= 0 &&*/ left <= right) {
+        while (left < right) {
+            while (left < n && !isVowel(s[left])) left++;
+            while (right >= 0 && !isVowel(s[right])) right--;
+            if (/*left < n && right >= 0 &&*/ left <= right) {
                 std::swap(s[left], s[right]);
                 left++, right--;
             }
@@ -40,11 +40,16 @@ public:
         return s;
     }
 
+    // bool isVowel(char c) {
+    //     string vowels = "aeiouAEIOU";
+    //     for(char cc : vowels) {
+    //         if(cc == c) return true;
+    //     }
+    //     return false;
+    // }
+
     bool isVowel(char c) {
         string vowels = "aeiouAEIOU";
-        for(char cc : vowels) {
-            if(cc == c) return true;
-        }
-        return false;
+        return vowels.find(c) != std::string::npos;
     }
 };
