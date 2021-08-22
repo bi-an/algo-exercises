@@ -85,6 +85,7 @@ vector<string> Permutation(string str)
   return res;
 }
 
+// 这种解法错误："fxx"会出现重复
 class Solution
 {
  public:
