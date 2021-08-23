@@ -76,7 +76,7 @@ public:
         vector<vector<int>> res;
         if(nums.empty()) return res;
 
-        sort(nums.begin(), nums.end());
+        sort(nums.begin(), nums.end()); // 先排序，方便去重
         vector<bool> visited(nums.size());
         vector<int> path;
         path.reserve(nums.size());
@@ -92,12 +92,12 @@ public:
             return;
         } 
         for(int i=0;i<nums.size();i++){
-            if(visited[i] || i>0 && nums[i]==nums[i-1] && !visited[i-1])
+            if(visited[i] || i>0 && nums[i]==nums[i-1] && !visited[i-1]) // 如果i-1没有被纳入path，那么此时i和之前的i-1的情况是完全相同的
                 continue;
             visited[i]=true;
             path.push_back(nums[i]);
             backtrace(res, nums, path, visited, depth+1);
-            visited[i] = false;
+            visited[i] = false; // 这两步还原状态一定要有，因为会影响下一次循环
             path.pop_back();
         }
     }
