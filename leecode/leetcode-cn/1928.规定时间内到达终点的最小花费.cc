@@ -1,5 +1,8 @@
 // https://leetcode-cn.com/problems/minimum-cost-to-reach-destination-in-time/
 
+// 动态规划（理论基础：Bellman-Ford算法，证明参见《算法导论》）
+// 时间复杂度O(V*E)，其中V为顶点数，E为边数
+// 
 // 注意：“图中两个节点之间可能有多条路径”，指不经过第三个节点的路径也不止一条
 // 如果使用邻接表遍历，需要注意这一点，创建时邻接表时需要更新为最短的那条路径
 // 由于题目的取值范围，不能使用邻接表遍历，会超时
@@ -15,8 +18,6 @@ public:
         int ans = INTY;
 
         // Bellman-Ford算法，可以证明，最多经过 V 次遍历所有边，可以求出最短路径
-        // 证明过程可以参考《算法导论》
-        // 该算法时间复杂度为 O(V*E)，其中V为顶点数，E为边数
         dp[0][0] = passingFees[0];
         for(int t=0;t<=maxTime;t++) {
             for(vector<int>& edge : edges) {
