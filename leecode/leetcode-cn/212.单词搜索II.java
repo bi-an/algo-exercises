@@ -46,7 +46,6 @@ class Solution {
 class Trie {
     String word;
     Map<Character, Trie> children;
-    boolean isWord;
 
     public Trie() {
         this.word = "";
