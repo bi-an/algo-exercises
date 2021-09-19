@@ -19,7 +19,7 @@ class Solution {
     }
 
     public void dfs(char[][] board, Trie now, int i1, int j1, Set<String> ans) {
-        if (!now.children.containsKey(board[i1][j1])) {
+        if (!now.children.containsKey(board[i1][j1])) { // 注意：前缀的头结点为哑节点
             return;
         }
         char ch = board[i1][j1];
@@ -32,14 +32,14 @@ class Solution {
             ans.add(now.word);
         }
 
-        board[i1][j1] = '#';
+        board[i1][j1] = '#'; // 状态标记，避免重复计算
         for (int[] dir : dirs) {
             int i2 = i1 + dir[0], j2 = j1 + dir[1];
             if (i2 >= 0 && i2 < board.length && j2 >= 0 && j2 < board[0].length) {
                 dfs(board, now, i2, j2, ans);
             }
         }
-        board[i1][j1] = ch;
+        board[i1][j1] = ch; // 状态恢复
     }
 }
 
