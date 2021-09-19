@@ -57,7 +57,7 @@ public class Trie {
      */
     public Trie() {
         children = new Trie[26]; // 只有英文小写字母
-        ended = false; // 根为哑节点
+        ended = false; // 根为哑节点，这样能表示所有字母开头的字符串
     }
 
     /**
