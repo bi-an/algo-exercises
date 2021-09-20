@@ -1,4 +1,5 @@
 // 法一：动态规划
+// 时间复杂度O(n)
 class Solution {
 public:
     int minSteps(int n) {
@@ -19,7 +20,8 @@ public:
     }
 };
 
-// 法一优化
+// 法一优化，减少遍历次数
+// 时间复杂度O(sqrt(n))
 class Solution {
 public:
     int minSteps(int n) {
