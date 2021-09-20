@@ -40,3 +40,21 @@ public:
         return dp[n];
     }
 };
+
+// https://leetcode-cn.com/problems/2-keys-keyboard/solution/zhi-you-liang-ge-jian-de-jian-pan-by-lee-ussa/
+// 分解质因子
+class Solution {
+public:
+    int minSteps(int n) {
+        int ans = 0;
+        for(int i = 2; i * i <= n; i++) { // n最多有一个大于sqrt(n)的质因子，因为如果有2个的话，它们的乘积必然大于n
+            while(n % i == 0) {
+                n /= i;
+                ans += i;
+            }
+        }
+        if(n > 1) // 有一个大于sqrt(n)的质因子，比如 26 = 2*13
+            ans += n;
+        return ans;
+    }
+};
