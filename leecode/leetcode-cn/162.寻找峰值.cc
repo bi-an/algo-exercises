@@ -47,6 +47,7 @@ public:
 // 法二：二分查找，局部爬坡
 // 只要注意判断middle爬坡方向是左还是右即可
 // 时间复杂度O(logn)
+// 二分法的本质不是有序，而是不断压缩范围以找到答案
 class Solution {
 public:
     int findPeakElement(vector<int>& nums) {
