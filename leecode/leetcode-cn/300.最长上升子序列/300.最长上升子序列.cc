@@ -68,3 +68,36 @@ public:
         return piles;
 	}
 };
+
+// 贪心 + 二分查找
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        int n = nums.size(), len = 1; // len表示dp长度
+        // 贪心：要想子序列尽可能长，那么在所有长度i的递增子序列中，应该选择结尾值最小的那个
+        vector<int> dp(n, INT_MAX); // dp[i]为长度为i的最长递增子序列的最小元素
+        // 反证法可以证明，dp[i]是关于i的递增函数
+        dp[0] = nums[0];
+        for(int i = 1; i < n; i++) {
+            if(nums[i] > dp[len - 1]) {
+                dp[len++] = nums[i];
+            } else {
+                // 找到第1个大于或等于nums[i]的位置，更新dp
+                int left = 0, right = len - 1;
+                while(left <= right) {
+                    int middle = (left + right) / 2;
+                    if(dp[middle] > nums[i])
+                        right = middle - 1;
+                    else if(dp[middle] < nums[i])
+                        left = middle + 1;
+                    else {
+                        left = middle;
+                        break;
+                    }
+                }
+                dp[left >= len ? right : left] = nums[i];
+            }
+        }
+        return len;
+    }
+};
