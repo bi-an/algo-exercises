@@ -4,16 +4,16 @@
 class Solution {
 public:
     vector<string> findRepeatedDnaSequences(string s) {
+        const int L = 10;
         vector<string> ans;
-        if(s.size() < 10) return ans;
+        if(s.size() < L) return ans;
         unordered_map<string, int> hash;
 
-        for(int i = 0; i + 10 <= s.size(); i++) {
-            string subs = s.substr(i, 10);
-            if(hash[subs] == 1) {
+        for(int i = 0; i + L <= s.size(); i++) {
+            string subs = s.substr(i, L);
+            if(++hash[subs] == 2) {
                 ans.push_back(subs);
             }
-            ++hash[subs];
         }
 
         return ans;
