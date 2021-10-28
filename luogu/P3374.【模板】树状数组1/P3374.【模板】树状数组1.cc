@@ -1,11 +1,18 @@
 // https://www.luogu.com.cn/problem/solution/P3374
+// 数据范围
+// 对于 30% 的数据，1≤m≤10；
+// 对于 70% 的数据，1≤n,m≤10^4;
+// 对于 100% 的数据，1≤n,m≤5×10^5.
+
+// 树状数组
+// n个数据的树状数组的节点数为n
 #include <iostream>
 #include <cstdio>
 #include <algorithm>
 #include <cmath>
 #include <cstring>
 using namespace std;
-int n, m, tree[2000010];
+int n, m, tree[2000010]; // 根据数据范围，tree大小为5×10^5就足够了，亲测通过
 int lowbit(int k)
 {
     return k & -k;
