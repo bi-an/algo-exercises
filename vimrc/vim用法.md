@@ -142,3 +142,10 @@ call plug#end()
 
 `:vsplit`左右分屏，光标默认放在左屏。如果先执行`:set splitright`，再执行`:vsplit`，那么分屏之后光标放在右边。
 
+分屏之间跳转，`ctrl`+`w`，然后用`hjkl`跳转。
+
+
+
+## vim中打开新文件
+
+`:e`：edit，打开新文件
