@@ -11,7 +11,6 @@
 #include "../wrap.h"
 
 #define MAX_SIZE 1024
-#define N4G 1024 * 1024 * 1024
 
 int Open(const char *pathname, int flags, mode_t mode) {
   int fd;
