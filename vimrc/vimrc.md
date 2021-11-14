@@ -2,6 +2,8 @@ vim用法
 
 [视频教程](https://www.bilibili.com/video/BV1e4411V7AA/?spm_id_from=autoNext)
 
+[vimrc github模板](https://github.com:theniceboy/.vim)
+
 
 
 # 概念：
