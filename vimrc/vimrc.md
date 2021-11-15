@@ -161,14 +161,43 @@ call plug#end()
 
 #### 常用插件
 
-| 插件名                       | 功能                                               | 安装方法                                                     |
-| ---------------------------- | -------------------------------------------------- | ------------------------------------------------------------ |
-| scrooloose/nerdtree          | 文件树功能                                         |                                                              |
-| ycm-core/YouCompleteMe       | 代码补全，支持所有语言                             | 需要手动安装。cd plugged/YouCompleteMe，sudo python3 install.py会安装。 |
-| w0rp/ale   dense-analysis/ale                    | 实时代码语法检查                                   |                                                              |
-| preservim/tagbar             | 在vim右边显示函数列表                              |                                                              |
-| mbbill/undotree              | 浏览文件修改历史，树状图展示，可以在历史版本中切换 |                                                              |
-| iamcco/markdown-preview.nvim | 实时预览markdown                                   |                                                              |
+| 插件名                        | 功能                                               | 安装方法                                                     |
+| ----------------------------- | -------------------------------------------------- | ------------------------------------------------------------ |
+| scrooloose/nerdtree           | 文件树功能                                         |                                                              |
+| ycm-core/YouCompleteMe        | 代码补全，支持所有语言                             | 需要手动安装。cd plugged/YouCompleteMe，sudo python3 install.py会安装。 |
+| w0rp/ale   dense-analysis/ale | 实时代码语法检查                                   |                                                              |
+| preservim/tagbar              | 在vim右边显示函数列表                              |                                                              |
+| mbbill/undotree               | 浏览文件修改历史，树状图展示，可以在历史版本中切换 |                                                              |
+| iamcco/markdown-preview.nvim  | 实时预览markdown                                   |                                                              |
+
+
+
+**插件安装方式：**
+
+（抄录自 airline 插件的README）
+
+**Installation:**
+
+This plugin follows the standard runtime path structure, and as such it can be installed with a variety of plugin managers:
+
+| Plugin Manager                                        | Install with...                                              |
+| ----------------------------------------------------- | ------------------------------------------------------------ |
+| [Pathogen](https://github.com/tpope/vim-pathogen)     | `git clone https://github.com/vim-airline/vim-airline ~/.vim/bundle/vim-airline` Remember to run `:Helptags` to generate help tags |
+| [NeoBundle](https://github.com/Shougo/neobundle.vim)  | `NeoBundle 'vim-airline/vim-airline'`                        |
+| [Vundle](https://github.com/VundleVim/Vundle.vim)     | `Plugin 'vim-airline/vim-airline'`                           |
+| [Plug](https://github.com/junegunn/vim-plug)          | `Plug 'vim-airline/vim-airline'`                             |
+| [VAM](https://github.com/MarcWeber/vim-addon-manager) | `call vam#ActivateAddons([ 'vim-airline' ])`                 |
+| [Dein](https://github.com/Shougo/dein.vim)            | `call dein#add('vim-airline/vim-airline')`                   |
+| [minpac](https://github.com/k-takata/minpac/)         | `call minpac#add('vim-airline/vim-airline')`                 |
+| pack feature (native Vim 8 package feature)           | `git clone https://github.com/vim-airline/vim-airline ~/.vim/pack/dist/start/vim-airline` Remember to run `:helptags ~/.vim/pack/dist/start/vim-airline/doc` to generate help tags |
+| manual                                                | copy all of the files into your `~/.vim` directory           |
+
+**Documentation:**
+
+```
+:help airline
+```
+
 
 
 
