@@ -11,3 +11,13 @@ INC := -I./ -I../cutest-1.5
 
 a.out : $(src)
 	$(CC) $(INC) -o $@ $^
+
+select.server.out : select.server.c wrap.c
+	$(CC) -o select.server $^
+
+.PHONY : clear
+
+clear :
+	find . -name "*.out" | xargs rm -rf
+	find . -name "*.tmp" | xargs rm -rf
+	find . -name "*.o" | xargs rm -rf
