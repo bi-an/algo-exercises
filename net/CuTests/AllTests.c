@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-#include "../../cutest-1.5/CuTest.h"
-#include "../wrap.h"
+#include "CuTest.h"
+#include "wrap.h"
 
 CuSuite *wrapGetSuite();
 
