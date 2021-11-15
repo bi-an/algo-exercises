@@ -164,7 +164,7 @@ call plug#end()
 | 插件名                       | 功能                                               | 安装方法                                                     |
 | ---------------------------- | -------------------------------------------------- | ------------------------------------------------------------ |
 | scrooloose/nerdtree          | 文件树功能                                         |                                                              |
-| Valloric/YouCompleteMe       | 代码补全，支持所有语言                             | 需要手动安装。cd plugged/YouCompleteMe，sudo python3 install.py会安装。 |
+| ycm-core/YouCompleteMe       | 代码补全，支持所有语言                             | 需要手动安装。cd plugged/YouCompleteMe，sudo python3 install.py会安装。 |
 | w0rp/ale                     | 实时代码语法检查                                   |                                                              |
 | preservim/tagbar             | 在vim右边显示函数列表                              |                                                              |
 | mbbill/undotree              | 浏览文件修改历史，树状图展示，可以在历史版本中切换 |                                                              |
