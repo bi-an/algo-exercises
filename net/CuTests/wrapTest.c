@@ -20,7 +20,7 @@ int Open(const char *pathname, int flags, mode_t mode) {
 
 // test functions
 void TestReadWrite(CuTest *tc) {
-  int fd = Open("testfile", O_RDWR | O_CREAT | O_TRUNC, 0644);
+  int fd = Open("testfile.tmp", O_RDWR | O_CREAT | O_TRUNC, 0644);
   char buf[MAX_SIZE];
   int n;
 
@@ -35,7 +35,7 @@ void TestReadWrite(CuTest *tc) {
 }
 
 void TestReadnWriten(CuTest *tc) {
-  int fd = Open("testfile", O_RDWR | O_CREAT | O_TRUNC, 0644);
+  int fd = Open("testfile.tmp", O_RDWR | O_CREAT | O_TRUNC, 0644);
   char out_buf[MAX_SIZE], in_buf[MAX_SIZE];
   int n, kTestTimes = 1024*1024; // 大约1GB
 
