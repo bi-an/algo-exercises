@@ -343,3 +343,5 @@ $ figlet ABC
 `:help xxx`或`:h xxx`：查询帮助文档。
 
 `:set`：不输入其他命令，直接按下`Enter`，就会显示能够设置的`options`。`:h set`可以查看`options`的说明。
+
+`:help CTRL-W_o` ：查看 `Ctrl` + `W`+ `o` 组合键的作用。

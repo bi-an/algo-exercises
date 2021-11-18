@@ -90,7 +90,8 @@ int main() {
     }
 
     // process other type fds except from accepting requests
-    for(i = 0; i < FD_SETSIZE; i++) {
+    // 避免轮询1024个fd
+    for(i = 0; i < maxi; i++) {
       if((peerfd = clients[i]) < 0)
         continue;
 

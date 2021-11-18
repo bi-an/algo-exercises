@@ -7,9 +7,15 @@ set(LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
 
 include_directories(lib)
 
-set(DIRS lib select ) # poll epoll
-
+set(DIRS lib)
 foreach(dir IN LISTS DIRS)
     message(STATUS "add_subdirectory ${dir}")
     add_subdirectory(${dir})
+endforeach()
+
+set(bins server_select client) # server_poll server_epoll
+foreach(i IN LISTS bins)
+    message(STATUS "build ${i}")
+    add_executable(${i} ${i}.c)
+    target_link_libraries(${i} wrap)
 endforeach()
