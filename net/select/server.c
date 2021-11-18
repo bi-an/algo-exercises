@@ -85,8 +85,8 @@ int main() {
       if(i > maxi)
         maxi = i; // maxi always points to the last position of the clients array
 
-      if(--nready <=0) // have processed one ready fd
-        break;
+      if(--nready <= 0) // have processed one ready fd
+        continue;
     }
 
     // process other type fds except from accepting requests
@@ -95,10 +95,11 @@ int main() {
         continue;
 
       if(FD_ISSET(peerfd, &rset)) {
-        if((n = Read(peerfd, buf, sizeof(buf)) == 0)) { // socket was closed by the peer
+        if((n = Read(peerfd, buf, sizeof(buf))) == 0) { // socket was closed by the peer
           Close(peerfd);
           FD_CLR(peerfd, &allset);
           clients[i] = -1;
+          puts("peer closed");
         } else if(n > 0) {
           for(j = 0; j < n; j++)
             buf[j] = toupper(buf[j]);
@@ -106,7 +107,7 @@ int main() {
           Write(STDOUT_FILENO, buf, n);
         }
         if(--nready <= 0) // have processed one ready fd
-          break;
+          break; // jump out of for, but still in while
       }
     }
   }

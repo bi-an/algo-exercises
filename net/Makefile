@@ -2,8 +2,6 @@
 # CC = gcc
 # CFLAGS = -Wall -std=gnu99
 
-
-
 # VPATH = ./:CuTests:../cutest-1.5
 # src := wrap.c AllTests.c wrapTest.c CuTest.c
 # INC := -I./ -I../cutest-1.5
@@ -26,6 +24,6 @@
 
 # $(HOME) 表示 ~/目录
 
-ROOT = ..
-DIRS = Select Poll Epoll
+# ROOT = ..
+# DIRS = Select Poll Epoll
 
