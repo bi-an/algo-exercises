@@ -13,7 +13,7 @@ foreach(dir IN LISTS DIRS)
     add_subdirectory(${dir})
 endforeach()
 
-set(bins server_select client) # server_poll server_epoll
+set(bins server_select server_poll client) # server_poll server_epoll
 foreach(i IN LISTS bins)
     message(STATUS "build ${i}")
     add_executable(${i} ${i}.c)

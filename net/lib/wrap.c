@@ -83,10 +83,7 @@ again:
     if (errno == EINTR)
       goto again;
     else
-    {
-      perror("Read error");
       return -1;
-    }
 
   return n;
 }
@@ -100,10 +97,7 @@ again:
     if (errno == EINTR)
       goto again;
     else
-    {
-      perror("Write error");
       return -1;
-    }
 
   return n;
 }
