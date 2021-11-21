@@ -28,7 +28,7 @@ int main(int argc, char **argv) {
   while (fgets(buf, sizeof(buf), stdin) != NULL) {
     Write(sockfd, buf, strlen(buf));
     if ((n = Read(sockfd, buf, sizeof(buf))) == 0) {
-      printf("The connection was closed by the peer\n");
+      printf("The connection was closed by peer\n");
       break;
     } else if (n < 0) {
       perr_exit("Read error");
