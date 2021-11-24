@@ -27,3 +27,10 @@
 # ROOT = ..
 # DIRS = Select Poll Epoll
 
+all: client server
+
+server: epoll_loop.c
+    gcc -o $@ $^
+
+client: lib/wrap.c client.c
+    gcc -Ilib -o $@ $^
