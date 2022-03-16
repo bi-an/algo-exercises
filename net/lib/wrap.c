@@ -160,7 +160,7 @@ ssize_t Writen(int fd, const void *buf, size_t count)
 
 // static函数，该函数只在本文件使用，不对外提供接口
 // 这是 ReadLine 函数的内置函数
-// @ret 读取到ptr中的字节数：0, 1, -1, 其中 -1 表示出错
+// @return 读取到ptr中的字节数：0, 1, -1, 其中 -1 表示出错
 static ssize_t my_read(int fd, char *ptr)
 {
   static ssize_t read_cnt; // global变量，默认初始化为0
@@ -192,7 +192,7 @@ static ssize_t my_read(int fd, char *ptr)
 
 // 从套接字中读取一行
 // 库函数提供的 fgets, gets, readline 都只能从标准缓冲区中读取，不能从 fd 中读取
-// @ret 读取到的字节数
+// @return 读取到的字节数
 ssize_t ReadLine(int fd, void *buf, int maxlen)
 {
   ssize_t rc, n; // returned count

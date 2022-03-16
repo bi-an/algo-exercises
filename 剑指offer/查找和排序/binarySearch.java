@@ -1,5 +1,5 @@
 class Solution {
-    // @ret 取值范围 [0, nums.length]
+    // @return 取值范围 [0, nums.length]
     // 如果lower为true，那么返回的iterator指向第一个等于或大于（不存在时）target的位置，
     //  与C++ lower_bound()相同；
     // 如果lower为false，那么返回的iterator指向第一个大于target的位置，

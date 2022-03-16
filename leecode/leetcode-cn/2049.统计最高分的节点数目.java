@@ -19,7 +19,7 @@ class Solution {
       return cnt;
   }
 
-  // @ret 当前子树的大小
+  // @return 当前子树的大小
   public int dfs(int node) {
       // size 表示剪掉当前子树之后，剩余子树的大小
       // 初始时，假设当前子树为叶子（也包括根树只有一个节点的情况），剪去叶子，剩余的子树大小则为 n-1
