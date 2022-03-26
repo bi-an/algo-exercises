@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-07-24 14:22:44
+ * @LastEditTime: 2022-03-26 21:03:21
+ * @LastEditors: Please set LastEditors
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: \practice\leecode\leetcode-cn\3.无重复字符的最长子串.cc
+ */
 /**
  * 给定一个字符串 s ，请你找出其中不含有重复字符的 最长子串 的长度。
 
@@ -33,7 +41,11 @@ s 由英文字母、数字、符号和空格组成
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 
-// 滑动窗口+hashtable
+// 滑动窗口 + 哈希表
+// 关键：当枚举 left 时，right 也是递增的。
+// 因为 left 右移，必然从之前无重复子串删去了一个字符，此时剩余子串依然是无重复的，
+// 但是长度必然小于之前，right 只需右移即可。
+//
 // 时间复杂度O(N)，因为滑动窗口遍历所有字符一次
 // 空间复杂度O(C)，C的取值为0~256，也就所有char的取值数
 class Solution {
@@ -57,5 +69,26 @@ public:
             // 这样，hashtable也没有必要重置
         }
         return max_len;
+    }
+};
+
+// 写法二
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        unordered_set<char> window; // 记录窗口中的元素
+        // 左闭右开区间
+        int left = 0, right = 0, maxLen = 0;
+        while (right < s.length()) {
+            if (window.count(s[right])) {
+                window.erase(s[left]);
+                ++left;
+            } else {
+                window.insert(s[right]);
+                maxLen = max(maxLen, right - left + 1);
+                ++right;
+            }
+        }
+        return maxLen;
     }
 };
