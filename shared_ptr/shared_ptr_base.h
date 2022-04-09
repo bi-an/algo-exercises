@@ -19,34 +19,40 @@ class _Sp_counted_base {
   // Called when _M_weak_count drops to zero.
   virtual void _M_destroy() noexcept { delete this; }
 
+  // TODO 原子操作
   void _M_release() noexcept {
-    // TODO 原子操作
-    if (--_M_use_count == 0) _M_dispose();
+    if (--_M_use_count == 0) {
+      _M_dispose();
+      if (--_M_weak_count == 0) _M_destroy();
+    }
+  }
 
-    // TODO 原子操作
+  void _M_weak_release() noexcept {
     if (--_M_weak_count == 0) _M_destroy();
   }
 
-  void _M_add_ref_copy() {
-    // TODO 原子操作
-    ++_M_use_count;
-  }
+  void _M_add_ref_copy() { ++_M_use_count; }
 
-  void _M_weak_add_ref() noexcept {
-    // TODO 原子操作
-    ++_M_weak_count;
-  }
+  void _M_weak_add_ref() noexcept { ++_M_weak_count; }
+  // void _M_add_ref_lock() {
+  //   // if (_M_use_count == 0) __throw_bad_weak_ptr();
+  //   ++_M_use_count;
+  // }
+
+  long _M_get_use_count() const noexcept { return _M_use_count; }
 
  private:
-  // TODO 原子类型
-  int _M_use_count;   // #shared
-  int _M_weak_count;  // #weak + (#shared != 0)
+  _Sp_counted_base(_Sp_counted_base const&) = delete;
+  _Sp_counted_base& operator=(_Sp_counted_base const&) = delete;
+
+  /*_Atomic_word*/ int _M_use_count;   // #shared
+  /*_Atomic_word*/ int _M_weak_count;  // #weak + (#shared != 0)
 };
 
 /**
- * @brief 实现 _Sp_counted_ptr 接口
- * 
- * @tparam _Ptr 
+ * @brief _Sp_counted_base 接口的一个实现
+ *
+ * @tparam _Ptr
  */
 template <typename _Ptr>
 class _Sp_counted_ptr final : public _Sp_counted_base {
@@ -77,6 +83,10 @@ class __weak_count {
     if (_M_pi != nullptr) _M_pi->_M_weak_add_ref();  // ++weak_refcount
   }
 
+  ~__weak_count() noexcept {
+    if (_M_pi != nullptr) _M_pi->_M_weak_release();
+  }
+
  private:
   friend class __shared_count;  // 友元，使得 __shared_count 可以访问任何成员
   _Sp_counted_base* _M_pi;
@@ -92,7 +102,12 @@ class __shared_count {
 
   template <typename _Ptr>
   explicit __shared_count(_Ptr __p) : _M_pi(0) {
-    _M_pi = new _Sp_counted_ptr;
+    try {
+      _M_pi = new _Sp_counted_ptr;
+    } catch (...) {
+      delete __p;
+      throw;
+    }
   }
 
   __shared_count(const __shared_count& __r) noexcept : _M_pi(__r._M_pi) {
@@ -106,7 +121,7 @@ class __shared_count {
   explicit __shared_count(const __weak_count& __r) {}
 
  private:
-  friend class __weak_count; // 友元，使得 __weak_count 可以访问所有成员
+  friend class __weak_count;  // 友元，使得 __weak_count 可以访问所有成员
   _Sp_counted_base* _M_pi;
 };
 

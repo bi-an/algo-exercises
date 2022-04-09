@@ -4,9 +4,9 @@
  * @brief minimum realization from gcc %shared_ptr
  * @version 0.1
  * @date 2022-04-08
- * 
+ *
  * @copyright Copyright (c) 2022
- * 
+ *
  */
 
 #include "shared_ptr_base.h"
@@ -26,6 +26,7 @@ class shared_ptr : public __shared_ptr<_Tp> {
 
   explicit shared_ptr(const weak_ptr<_Tp>& __r) : __shared_ptr<_Tp>(__r) {}
 
+ private:
   friend class weak_ptr<_Tp>;
 };
 
@@ -37,6 +38,8 @@ class weak_ptr : public __weak_ptr<_Tp> {
   weak_ptr(const shared_ptr<_Tp>& __r) noexcept : __weak_ptr<_Tp>(__r) {}
 
   shared_ptr<_Tp> lock() const noexcept { return shared_ptr<_Tp>(*this); }
+
+ private:
 };
 
 }  // namespace ghan
