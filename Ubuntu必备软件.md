@@ -22,11 +22,18 @@ mysql-workbench
 
 - [ smplayer](https://www.smplayer.info/)
 
-```
+```bash
 sudo snap install smplayer
 ```
 
 - VLC播放器：VLC Media Player
+
+  ```bash
+  # 安装
+  sudo apt-get install vlc
+  # 启动
+  vlc
+  ```
 
 5. 画图软件
 
@@ -40,6 +47,10 @@ sudo snap install smplayer
 7. 词典
    - GoldenDict
 
+     ```bash
+     sudo apt-get install goldendict
+     ```
+   
 8. 编辑器
 
 - typora
