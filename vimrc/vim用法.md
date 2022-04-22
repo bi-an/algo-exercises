@@ -2,6 +2,10 @@ vim用法
 
 [视频教程](https://www.bilibili.com/video/BV1e4411V7AA/?spm_id_from=autoNext)
 
+gvim: vim 的增强版。
+
+
+
 
 
 # 概念：
