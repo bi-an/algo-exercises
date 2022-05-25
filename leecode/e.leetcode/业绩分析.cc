@@ -5,6 +5,14 @@
 #include <stdio.h>
 using namespace std;
 
+/// 测试用例
+///
+/// 2
+/// 5
+/// 4 1 3 2 5
+/// 4
+/// 1 2 3 4
+
 
 // @Attention 仅供测试
 void printAll(string name, vector<int>& nums) {
