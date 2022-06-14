@@ -224,7 +224,7 @@ class Singleton
   static Garbo garbo;
 };
 
-// 必须在头文件中定义static变量
+// 必须在外部定义static变量
 Singleton *Singleton::instance = nullptr;
 std::once_flag Singleton::init_flag;
 Singleton::Garbo Singleton::garbo;
