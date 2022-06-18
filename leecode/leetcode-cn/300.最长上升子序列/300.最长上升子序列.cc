@@ -75,27 +75,32 @@ public:
     int lengthOfLIS(vector<int>& nums) {
         int n = nums.size(), len = 1; // len表示dp长度
         // 贪心：要想子序列尽可能长，那么在所有长度i的递增子序列中，应该选择结尾值最小的那个
-        vector<int> dp(n, INT_MAX); // dp[i]为长度为i的最长递增子序列的最小元素
-        // 反证法可以证明，dp[i]是关于i的递增函数
-        dp[0] = nums[0];
+        vector<int> d(n, INT_MAX); // d[i]为长度为i的最长递增子序列的最小元素。(0)
+        // 反证法可以证明，dp[i]是关于i的递增函数。
+        // 证明：假设 d[i] 不是关于 i 的递增函数，则存在 j < i, d[j] > d[i]。(1)
+        // 我们从 d 中删除 d[j+1,...,i]，得到新序列长度为 j，设此时 j 位置的元素为 x，
+        // 那么，x >= d[j]。(2)
+        // 结合 (1) 和 (2)，得到 x > d[i]。于是，我们在原来的序列中找到了一个 x ，它大于 d[i]。
+        // 这与我们的定义 (0) 矛盾。得证。
+        d[0] = nums[0];
         for(int i = 1; i < n; i++) {
-            if(nums[i] > dp[len - 1]) {
-                dp[len++] = nums[i];
+            if(nums[i] > d[len - 1]) {
+                d[len++] = nums[i];
             } else {
-                // 找到第1个大于或等于nums[i]的位置，更新dp
+                // 找到第1个大于或等于nums[i]的位置，更新d
                 int left = 0, right = len - 1;
                 while(left <= right) {
                     int middle = (left + right) / 2;
-                    if(dp[middle] > nums[i])
+                    if(d[middle] > nums[i])
                         right = middle - 1;
-                    else if(dp[middle] < nums[i])
+                    else if(d[middle] < nums[i])
                         left = middle + 1;
                     else {
                         left = middle;
                         break;
                     }
                 }
-                dp[left >= len ? right : left] = nums[i];
+                d[left >= len ? right : left] = nums[i];
             }
         }
         return len;
