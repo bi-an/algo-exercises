@@ -1,3 +1,11 @@
+/*
+ * @Author: bi_an:desktop 2608120872@qq.com
+ * @Date: 2022-06-28 14:18:00
+ * @LastEditors: bi_an:desktop 2608120872@qq.com
+ * @LastEditTime: 2022-06-28 14:34:10
+ * @FilePath: \practice\leecode\leetcode-cn\651.4键键盘.cc
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -21,7 +29,7 @@ using namespace std;
  * 因为本来有 1 个 dp[j]，之后又粘贴了 (i-j-2) 个 dp[j]。
  *
  *    for j = 0:i-3
- *      dp[i] =  max(dp[i], dp[j] * (i-j-2) + dp[j])
+ *      dp[i] = max(dp[i], dp[j] * (i-j-2) + dp[j]) = max(dp[i], dp[j] * (i-j-1)) 
  *    dp[i] = max(dp[i], dp[i-1] + 1)
  *
  */
@@ -32,10 +40,13 @@ class Solution {
     vector<int> dp(n + 1);
     dp[0] = 0;
     dp[1] = 1;
+    // i 从 2 开始，因为：
+    // 要想执行 [Ctrl-V]，前面至少执行了两步 [Ctrl-A]、[Ctrl-C].
+    // 值得说明的是，即使一个字符都没有键入，依然可以执行 [Ctrl-A]、[Ctrl-C]、[Ctrl-V].
     for (int i = 2; i <= n; ++i) {
       dp[i] = dp[i - 1] + 1;  // 初始值，之后可能更新
       for (int j = 0; j < i - 2; ++j) {
-        dp[i] = max(dp[i], dp[j] * (i - j - 2 + 1));
+        dp[i] = max(dp[i], dp[j] * (i - j - 1));
       }
     }
     return dp[n];
