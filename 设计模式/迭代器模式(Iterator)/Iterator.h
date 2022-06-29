@@ -21,7 +21,7 @@ class Iterator
   virtual void CurrentItem() = 0;
 };
 
-// Aggregate聚集抽象类
+// Aggregate聚集（集合）抽象类
 class Aggregate
 {
  public:
@@ -52,6 +52,7 @@ class ConcreteIterator : public Iterator
   int current = 0;
 };
 
+// 具体聚合（集合）类
 class ConcreteAggregate : public Aggregate {
   vector<int> items;
   

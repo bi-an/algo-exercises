@@ -3,7 +3,7 @@
 int main()
 {
 
-  CashContextFactory context("Âú300¼õ100");
+  CashContextFactory context("æ»¡300å‡100");
 
   double result = context.GetResult(300);
 

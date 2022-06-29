@@ -10,7 +10,7 @@ class GiveGift
   virtual void GiveChocolate() = 0;
 };
 
-// ±»×·ÇóÕß
+// è¢«è¿½æ±‚è€…
 class SchoolGirl
 {
  public:
@@ -19,7 +19,7 @@ class SchoolGirl
   std::string name;
 };
 
-// ×·ÇóÕßÀà
+// è¿½æ±‚è€…ç±»
 class Pursuit : public GiveGift
 {
  public:
@@ -27,22 +27,22 @@ class Pursuit : public GiveGift
 
   void GiveDolls() override
   {
-    std::cout << mm->name << ", ËÍÄãÑóÍÞÍÞ" << std::endl;
+    std::cout << mm->name << ", é€ä½ æ´‹å¨ƒå¨ƒ" << std::endl;
   }
   void GiveFlowers() override
   {
-    std::cout << mm->name << ", ËÍÄãÏÊ»¨" << std::endl;
+    std::cout << mm->name << ", é€ä½ é²œèŠ±" << std::endl;
   }
   void GiveChocolate() override
   {
-    std::cout << mm->name << ", ËÍÄãÇÉ¿ËÁ¦" << std::endl;
+    std::cout << mm->name << ", é€ä½ å·§å…‹åŠ›" << std::endl;
   }
 
  private:
   SchoolGirl *mm;
 };
 
-// ´úÀíÀà
+// ä»£ç†ç±»
 class Proxy : public GiveGift
 {
  public:

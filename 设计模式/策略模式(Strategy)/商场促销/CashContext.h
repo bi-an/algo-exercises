@@ -2,14 +2,14 @@
 #include "CashSuper.h"
 #include <string>
 
-// ²ßÂÔÄ£Ê½
-// ĞèÒªÔÚ¿Í»§¶ËÅĞ¶Ï´òÕÛÀàĞÍ
+// ç­–ç•¥æ¨¡å¼
+// éœ€è¦åœ¨å®¢æˆ·ç«¯åˆ¤æ–­æ‰“æŠ˜ç±»å‹
 
-// ÉÏÏÂÎÄÇĞ»»Àà
+// ä¸Šä¸‹æ–‡åˆ‡æ¢ç±»
 class CashContext
 {
  public:
-  CashContext(CashSuper *csuper) // Í¨¹ı¹¹Ôìº¯Êı£¬´«Èë¾ßÌå²ßÂÔÖ¸Õë
+  CashContext(CashSuper *csuper) // é€šè¿‡æ„é€ å‡½æ•°ï¼Œä¼ å…¥å…·ä½“ç­–ç•¥æŒ‡é’ˆ
       : cs(csuper)
   {
   }
@@ -23,19 +23,19 @@ class CashContext
   CashSuper *cs;
 };
 
-// ²ßÂÔÄ£Ê½ + ¹¤³§Ä£Ê½
-// °Ñ´òÕÛ²ßÂÔÅĞ¶ÏÒÆÈë¹¤³§£¬²»ĞèÒªÔÚ¿Í»§¶ËÅĞ¶Ï´òÕÛÀàĞÍ£¬ÓÉ¹¤³§ÊµÀı»¯¶ÔÏó
+// ç­–ç•¥æ¨¡å¼ + å·¥å‚æ¨¡å¼
+// æŠŠæ‰“æŠ˜ç­–ç•¥åˆ¤æ–­ç§»å…¥å·¥å‚ï¼Œä¸éœ€è¦åœ¨å®¢æˆ·ç«¯åˆ¤æ–­æ‰“æŠ˜ç±»å‹ï¼Œç”±å·¥å‚å®ä¾‹åŒ–å¯¹è±¡
 class CashContextFactory
 {
  public:
   CashContextFactory(std::string type)
-  { // ²ÎÊı²»ÔÙÊÇ²ßÂÔ¶ÔÏóÖ¸Õë
-    if (type == "Õı³£ÊÕ·Ñ")
+  { // å‚æ•°ä¸å†æ˜¯ç­–ç•¥å¯¹è±¡æŒ‡é’ˆ
+    if (type == "æ­£å¸¸æ”¶è´¹")
       cs = new CashNormal;
-    else if (type == "´ò8ÕÛ") // ÖĞÎÄÂÒÂë¡°´ò8ÕÛ¡±£¬±¨´íÎª¡°'{': no matching token found¡±
-      // ½â¾ö£º±àÂë¸Ä³É¡°Chinese Simplified(GB2312)-Codepage 936¡±
+    else if (type == "æ‰“8æŠ˜") // ä¸­æ–‡ä¹±ç â€œæ‰“8æŠ˜â€ï¼ŒæŠ¥é”™ä¸ºâ€œ'{': no matching token foundâ€
+      // è§£å†³ï¼šç¼–ç æ”¹æˆâ€œChinese Simplified(GB2312)-Codepage 936â€
       cs = new CashRebate(0.8);
-    else if (type == "Âú300¼õ100")
+    else if (type == "æ»¡300å‡100")
       cs = new CashReturn(300, 100);
     else
       ;
@@ -50,6 +50,6 @@ class CashContextFactory
   CashSuper *cs = nullptr;
 };
 
-// µãÆÀ£º
-// Èç¹ûÖ»²ÉÓÃ¹¤³§Ä£Ê½£º¿Í»§¶ËĞèÒª½Ó´¥CashSuperºÍCashFactoryÀà£»
-// ²ÉÓÃ²ßÂÔÄ£Ê½+¹¤³§Ä£Ê½£º¿Í»§¶ËÖ»ĞèÒª½Ó´¥CashContextÀà£¬ñîºÏ¶È¸üµÍ¡£
+// ç‚¹è¯„ï¼š
+// å¦‚æœåªé‡‡ç”¨å·¥å‚æ¨¡å¼ï¼šå®¢æˆ·ç«¯éœ€è¦æ¥è§¦CashSuperå’ŒCashFactoryç±»ï¼›
+// é‡‡ç”¨ç­–ç•¥æ¨¡å¼+å·¥å‚æ¨¡å¼ï¼šå®¢æˆ·ç«¯åªéœ€è¦æ¥è§¦CashContextç±»ï¼Œè€¦åˆåº¦æ›´ä½ã€‚
