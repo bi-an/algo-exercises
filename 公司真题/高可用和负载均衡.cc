@@ -43,7 +43,7 @@ bool Connect(string &ip, int port, vector<string> &haIps, vector<int> &haPorts)
   }
   // get each node load.
   vector<NodeLoad> nodeLoads;
-  vector<int> nodeIds;
+  vector<int> nodeIds; // 在 nodeLoads 中的下标，也就是在所有节点中的下标
   g_Server.getClusterLoads(nodeLoads);
   // add node to ha site list.
   if (haIps.empty())
@@ -51,6 +51,7 @@ bool Connect(string &ip, int port, vector<string> &haIps, vector<int> &haPorts)
     int index = 0;
     for (auto one : nodeLoads)
     {
+      // FIXME: 如果是虚拟节点，则直接跳过了，没有进行 index++
       if (one.mode == 1)
         continue;
       g_haIps.push_back(one.ip);
@@ -65,10 +66,13 @@ bool Connect(string &ip, int port, vector<string> &haIps, vector<int> &haPorts)
     for (int i = 0; i < haIps.size(); i++)
     {
       int index = 0;
+      // TODO: 每次通过 for 循环查找，效率太低，可以使用 map
       for (auto one : nodeLoads)
       {
+        // FIXME: 如果是虚拟节点，则直接跳过了，没有进行 index++
         if (one.mode == 1)
           continue;
+        // TODO: 当找到之后，可以直接 break 跳出内层循环
         if (haIps[i] == one.ip && haPorts[i] == one.port)
           nodeIds.push_back(index);
         index++;
