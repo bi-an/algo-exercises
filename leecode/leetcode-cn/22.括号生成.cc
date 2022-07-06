@@ -80,3 +80,27 @@ class Solution
       dfs(res, s + ")", left, right + 1, n);
   }
 };
+
+// 递归 另一种写法
+class Solution {
+    vector<string> res;
+public:
+    vector<string> generateParenthesis(int n) {
+        dfs("", 0, 2*n); // 注意：n 表示生成括号的对数，所以需要乘2
+        return res;
+    }
+    // @param left 表示未成对的左括号的个数
+    // @param n 表示当前剩余的括号个数
+    void dfs(string s, int left, int n) {
+        if (n == 0) {
+            if (left == 0)
+                res.push_back(s);
+            return;
+        }
+        // 如果当前有未成对的左括号，则可以加上一个右括号，此时消耗掉一个左括号
+        if (left > 0)
+            dfs(s + ')', left - 1, n - 1);
+        // 增加一个左括号
+        dfs(s + '(', left + 1, n - 1);
+    }
+};
