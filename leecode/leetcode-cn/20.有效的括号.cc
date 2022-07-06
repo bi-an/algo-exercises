@@ -1,5 +1,5 @@
-#include <bits/stdc++.h>
-using namespace std;
+// #include <bits/stdc++.h>
+// using namespace std;
 
 class Solution {
 public:
@@ -30,10 +30,24 @@ public:
     }
 };
 
-int main() {
-	Solution sol;
-	bool res = sol.isValid("()");
-    cout << res << endl;
-
-	return 0;
-}
+// 写法二
+class Solution {
+public:
+    bool isValid(string s) {
+        unordered_map<char, char> mypair = {
+            {'(', ')'}, {'{', '}'}, {'[', ']'}
+        };
+        stack<char> mystack;
+        for (char c : s) {
+            if (c == '(' || c == '{' || c == '[') {
+                mystack.push(c);
+            }
+            else {
+                if (mystack.empty() || mypair[mystack.top()] != c)
+                    return false;
+                mystack.pop();
+            }
+        }
+        return mystack.empty();
+    }
+};

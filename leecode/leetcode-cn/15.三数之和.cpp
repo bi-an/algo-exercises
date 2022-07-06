@@ -123,3 +123,41 @@ class Solution
     return ans;
   }
 };
+
+// 写法二
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        std::sort(nums.begin(), nums.end());
+        vector<vector<int>> res;
+        int n = nums.size();
+        for (int i = 0; i < n; ++i) {
+            // 剪枝，实测效率提升不大，可以去掉
+            if (i + 2 < n && nums[i] + nums[i + 1] + nums[i + 2] > 0)
+                break;
+            if (i < n - 2 && nums[i] + nums[n - 2] + nums[n - 1] < 0)
+                continue;
+            if (i == 0 || nums[i] != nums[i - 1]) {
+                int target = 0 - nums[i];
+                int l = i + 1, r = n - 1;
+                while (l < r) {
+                    if (l == i + 1 || nums[l] != nums[l - 1]) {
+                        if (nums[l] + nums[r] < target) {
+                            ++l;
+                        }
+                        else if (nums[l] + nums[r] > target) {
+                            --r;
+                        }
+                        else {
+                            res.push_back({nums[i], nums[l], nums[r]});
+                            ++l;
+                        }
+                    } else {
+                        ++l;
+                    }
+                }
+            }
+        }
+        return res;
+    }
+};
