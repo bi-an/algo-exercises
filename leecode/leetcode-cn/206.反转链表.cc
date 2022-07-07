@@ -48,3 +48,19 @@ class Solution
     return newHead;
   }
 };
+
+// 迭代
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* p = head;
+        ListNode* prev = nullptr;
+        while (p) {
+            ListNode* next = p->next;
+            p->next = prev;
+            prev = p;
+            p = next;
+        }
+        return prev;
+    }
+};
