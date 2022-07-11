@@ -17,7 +17,7 @@ https://zh.m.wikipedia.org/wiki/KMP%E7%AE%97%E6%B3%95
 using namespace std;
 
 // fill the KMP table in T.
-// T[j] 记录的是前缀和后缀匹配的最大长度。
+// T[j] 表示 w[0, ..., j-1] 的前缀和后缀的最长公共长度。
 // 当主串 m[i] 和模式串 w[j] 不匹配时：
 // （1）如果 T[j]>=0，那么 j=T[j]；
 // （2）如果 T[j]==-1，那么 i=i+1。
@@ -69,3 +69,11 @@ int main() {
 }
 
 ```
+
+
+
+T[i] 表示 w[0, ..., i-1] 的前缀和后缀的最长公共长度。
+
+如果 w[pos-1] == w[cnd] ，那么 T[cnd] = cnd + 1；
+
+如果 w[pos-1] != w[cnd] ，那么判断 w[pos-1] 与 w[T[cnd]] 是否相等，如果相等，那么 T[cnd] = T[cnd]+1；否则，更新 cnd = T[cnd]，重新进行以上判断。
