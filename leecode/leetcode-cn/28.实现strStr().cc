@@ -35,14 +35,12 @@ class Solution
 
   void fillNext(string &pattern, vector<int> &next)
   {
-    if (pattern.empty())
-      return;
+    // 如果 pattern 字符个数少于 2 个，则 next 不会被访问，可以不填充
+    if (pattern.length() < 2)
+        return;
     assert(pattern.length() == next.size());
 
     next[0] = -1;
-    if (pattern.length() == 1)
-      return;
-
     next[1] = 0;
     int pos = 2, cnd = next[1];
     while (pos < pattern.length())
