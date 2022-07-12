@@ -59,6 +59,7 @@ class Solution
       root = stk.top();
       res.push_back(root->val);
       stk.pop();
+      // 如果还有右节点，应该在此处压栈，防止栈为空而提前退出循环
       if (root->right)
       {
         // 压入右节点，现在节点是根
