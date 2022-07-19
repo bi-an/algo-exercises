@@ -39,6 +39,12 @@
 
 5. 画图软件
 
+   - Xournal++
+
+     文件后缀名为 .xopp
+     
+     ![image-20220720002216353](Ubuntu必备软件.assets/image-20220720002216353.png)
+
    - kolourpaint
 
      ```bash
@@ -46,6 +52,8 @@
      ```
 
      > 参考：[绘图工具](https://blog.csdn.net/jiesunliu3215/article/details/108854739)
+
+   - iodraw
 
    - drawio
 
