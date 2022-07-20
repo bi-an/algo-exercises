@@ -47,6 +47,7 @@ class Solution_2
 
     int n = height.size(), res = 0;
     vector<int> l_max(n), r_max(n);
+    // l_max 是包括自己在内的左边最大高度。
     l_max[0] = height[0], r_max[n - 1] = height[n - 1];
     for (int i = 1; i < n; i++)
       l_max[i] = max(l_max[i - 1], height[i]);
