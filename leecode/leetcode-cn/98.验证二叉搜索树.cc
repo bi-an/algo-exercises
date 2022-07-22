@@ -41,6 +41,21 @@ public:
     }
 };
 
+// 中序遍历：递归解法
+class Solution {
+    long long cur = LLONG_MIN;
+public:
+    bool isValidBST(TreeNode* root) {
+        if (root == nullptr)
+            return true;
+        bool left = isValidBST(root->left);
+        if (root->val <= cur)
+            return false;
+        cur = root->val;
+        return left && isValidBST(root->right);
+    }
+};
+
 // 后序遍历
 // 这道题会用INT_MAX单节点树作为测试用例，所以要使用long类型
 class Solution {
