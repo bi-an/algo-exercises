@@ -14,6 +14,33 @@ public:
     }
 };
 
+// 中序遍历
+// 如果中序遍历的序列是升序的，则一定是二叉搜索树；反之一定不是。
+// 如下是官方题解
+class Solution {
+public:
+    bool isValidBST(TreeNode* root) {
+        stack<TreeNode*> stack;
+        long long inorder = (long long)INT_MIN - 1;
+
+        while (!stack.empty() || root != nullptr) {
+            while (root != nullptr) {
+                stack.push(root);
+                root = root -> left;
+            }
+            root = stack.top();
+            stack.pop();
+            // 如果中序遍历得到的节点的值小于等于前一个 inorder，说明不是二叉搜索树
+            if (root -> val <= inorder) {
+                return false;
+            }
+            inorder = root -> val;
+            root = root -> right;
+        }
+        return true;
+    }
+};
+
 // 后序遍历
 // 这道题会用INT_MAX单节点树作为测试用例，所以要使用long类型
 class Solution {
