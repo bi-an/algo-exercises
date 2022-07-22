@@ -1,14 +1,18 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     long val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(long x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(long x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
+// 递归
+class Solution {
+public:
+    bool isValidBST(TreeNode* root) {
+        return helper(root, LLONG_MIN, LLONG_MAX);
+    }
+
+    bool helper(TreeNode* root, long long lower, long long upper) {
+        if (root == nullptr)
+            return true;
+        if (root->val <= lower || root->val >= upper)
+            return false;
+        return helper(root->left, lower, root->val) && helper(root->right, root->val, upper);
+    }
+};
 
 // 后序遍历
 // 这道题会用INT_MAX单节点树作为测试用例，所以要使用long类型
