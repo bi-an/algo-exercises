@@ -1,3 +1,4 @@
+// 递归 DFS
 class Solution {
 public:
     int minDepth(TreeNode* root) {
@@ -13,3 +14,6 @@ public:
         return 1 + min(leftDepth, rightDepth);
     }
 };
+
+// 方法二：BFS
+// 层序遍历，当找到第一个叶子节点，就可以返回这个深度。
