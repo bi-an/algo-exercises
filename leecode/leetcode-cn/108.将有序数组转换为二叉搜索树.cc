@@ -1,3 +1,5 @@
+// 时间复杂度：O(n)
+// 空间复杂度：O(logn)，栈的深度取决于二叉搜索树的高度。
 class Solution {
 public:
     TreeNode* sortedArrayToBST(vector<int>& nums) {
