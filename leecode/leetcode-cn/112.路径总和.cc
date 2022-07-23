@@ -15,3 +15,6 @@ class Solution
            || hasPathSum(root->right, targetSum - root->val);
   }
 };
+
+// 方法二：广度有限搜索
+// TODO
