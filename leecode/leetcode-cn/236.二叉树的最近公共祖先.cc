@@ -20,16 +20,20 @@ using namespace std;
  */
 
 // 递归
-// 注意：后序遍历保证这是“最近”的公共祖先
+// 注意：先序遍历
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
         if (root == nullptr || root == p || root == q)
             return root;
+        // 上一步判断说明一路走到 root 都没有遇到 p 或 q.
         TreeNode* left = lowestCommonAncestor(root->left, p, q);
         TreeNode* right = lowestCommonAncestor(root->right, p, q);
+        // 说明 left 和 right 各自遇到了 p 和 q，那么 root 一定是父节点。
         if (left != nullptr && right != nullptr)
             return root;
+        // 将 p、q 或 root 递归返回，保证最终返回的是最深处的节点，也就是“最近”的父节点。
+        // 题目规定节点可以是其本身的父节点，所以这种情况也不需要特殊处理。
         return left != nullptr ? left : right;
     }
 };
