@@ -10,9 +10,16 @@ public:
     }
 
     bool dfs(string& s, int i, string& p, int j) {
+        // 注意，这里是先判断 p 的下标是否越界。
+        // 因为存在如下情况：
+        // s: abcdddd
+        // p: abcd*
+        // 当 s 遍历完，但是 p 的指针还是指向 d.
         if (j >= p.length())
             return i >= s.length();
         
+        // 如果 p 没有访问完、s 已经访问完了，此时 first_match = false.
+        // 但是这不意味着答案就是 false，因为 a* 可以出现 0 次。
         bool first_match = i < s.length() && (s[i] == p[j] || p[j] == '.');
 
         if (j + 1 < p.length() && p[j + 1] == '*') {
