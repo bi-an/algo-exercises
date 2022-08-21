@@ -62,3 +62,61 @@ public:
  * vector<int> param_1 = obj->flip();
  * obj->reset();
  */
+
+
+// 用一维数组来保存二维矩阵
+class Solution {
+    int m, n, total;
+    unordered_map<int, int> visited;
+public:
+    Solution(int m, int n) {
+        this->m = m;
+        this->n = n;
+        total = m * n;
+    }
+    
+    vector<int> flip() {
+        int x = rand() % total;
+        total--; // 注意
+
+        vector<int> ans;
+        if (visited.count(x))
+            ans = { visited[x] / n, visited[x] % n };
+        else
+            ans = { x / n, x % n };
+
+        // 假设一共 10 个矩阵位置
+        // 第 1 次翻转：可选下标范围为 [0, 9]，若选中 8，则 visited = { 8->9 }
+        // 第 2 次翻转：可选下标范围为 [0, 8]，若选中 4，则 visited = { 8->9, 4->8 }，
+        // 但是数字 8 已经被选过了，所以，应该已经抛弃的范围 [8, 9] 中找到没有被选过的那个数字：
+        // 4->8->9，也就是 4->9. 所以 visited = { 8->9, 4->9 }. 
+        // PLUS: 由于下一次可选范围为 [0， 7]，所以 "8->9" 此后永远不会被再次访问了。
+        // 这一步可以通过循环寻找直至找到没有选过的数字 9：
+        // while (visited.count(x)) { x = visited[x]; }
+        // 也可以一步到位，直接接管 visited[8]:
+        // if (visited[total]) { visited[x] = visited[total]; }
+        // 题外话：
+        // 第 3 次翻转：可选下标范围为 [0, 7]，若选中 4，则 visited = { 8->9, 4->9 改成 4->7 }，
+        // 因为 [7, 9] 范围内的数字都已经被删除了，8、9 都被访问过，4 应该映射成 [7, 9] 范围内没有被
+        // 访问过的数字。
+        if (visited.count(total))
+            visited[x] = visited[total]; // 数字 total 已经被访问过，接管 total 映射的数
+                                        // 该数字一定没有被访问过，否则
+        else
+            visited[x] = total;
+        
+        return ans;
+    }
+    
+    void reset() {
+        total = m * n;
+        visited.clear();
+    }
+};
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution* obj = new Solution(m, n);
+ * vector<int> param_1 = obj->flip();
+ * obj->reset();
+ */
