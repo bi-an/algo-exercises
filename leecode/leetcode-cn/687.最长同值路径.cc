@@ -22,8 +22,7 @@ public:
             right = right + 1;
         else
             right = 0;
-        if (left + right > maxLen)
-            maxLen = left + right;
+        maxLen = max(maxLen, left + right);
         return max(left, right); // 只能返回最大同值深度，因为下一次需要和当前树的父节点形成路径。
     }
 };
