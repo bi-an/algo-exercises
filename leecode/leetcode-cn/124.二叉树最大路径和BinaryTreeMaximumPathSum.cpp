@@ -58,3 +58,26 @@ class Solution
  private:
   int max_sum = 0;
 };
+
+// 优雅的写法，参考官方题解
+class Solution {
+    int res;
+public:
+    int maxPathSum(TreeNode* root) {
+        res = INT_MIN;
+        dfs(root);
+        return res;
+    }
+
+    // @return 从 root 出发的最大路径和
+    int dfs(TreeNode* root) {
+        if (root == nullptr)
+            return 0;
+        int leftGain = max(dfs(root->left), 0); // 只有左子树的贡献大于 0 时才选择左子树。
+        int rightGain = max(dfs(root->right), 0);
+
+        res = max(res, leftGain + rightGain + root->val);
+
+        return max(leftGain, rightGain) + root->val;
+    }
+};
