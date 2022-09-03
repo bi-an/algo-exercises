@@ -1,4 +1,6 @@
 // 参考：[一篇文章解决所有二叉树路径问题](https://leetcode.cn/problems/longest-univalue-path/solution/yi-pian-wen-zhang-jie-jue-suo-you-er-cha-94j7/)
+// 时间复杂度：O(N)。每个节点仅需访问一次。
+// 空间复杂度：O(N)。栈最坏情况下深度为 N。
 class Solution
 {
   int maxLen;

@@ -1,3 +1,5 @@
+// 时间复杂度：O(N)。每个节点仅需访问一次。
+// 空间复杂度：O(Height)。栈递归最大深度为 O(Height).
 class Solution
 {
   int res;
