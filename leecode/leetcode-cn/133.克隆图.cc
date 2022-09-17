@@ -72,6 +72,29 @@ class Solution
   map<Node *, Node *> hash;
 };
 
+// DFS 写法二
+class Solution {
+    unordered_map<Node*, Node*> visited;
+public:
+    Node* cloneGraph(Node* node) {
+        if (node == nullptr)
+            return nullptr;
+        
+        if (visited.count(node)) {
+            return visited[node];
+        }
+
+        Node* cloneNode = new Node(node->val);
+        visited[node] = cloneNode;
+        
+        for (Node* neighbor : node->neighbors) {
+            cloneNode->neighbors.push_back(cloneGraph(neighbor));
+        }
+
+        return cloneNode;
+    }
+};
+
 // DFS iteratively
 class Solution
 {
