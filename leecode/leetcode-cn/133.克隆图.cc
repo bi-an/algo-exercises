@@ -48,6 +48,39 @@ class Solution
   }
 };
 
+// BFS 写法二
+class Solution {
+public:
+    Node* cloneGraph(Node* node) {
+        if (node == nullptr)
+            return nullptr;
+
+        unordered_map<Node*, Node*> visited; // oldNode 与 newNode 一一对应
+        
+        queue<Node*> Q;
+        Q.push(node);
+
+        // 先克隆第一个节点，并且放入 visited
+        visited[node] = new Node(node->val);
+
+        while (!Q.empty()) {
+            Node* n = Q.front();
+            Q.pop();
+
+            // 取出节点是为了访问其邻居
+            for (Node * neighbor : n->neighbors) {
+                if (!visited.count(neighbor)) {
+                    visited[neighbor] = new Node(neighbor->val);
+                    Q.push(neighbor);
+                }
+                visited[n]->neighbors.push_back(visited[neighbor]);
+            }
+        }
+
+        return visited[node];
+    }
+};
+
 // DFS
 class Solution
 {
