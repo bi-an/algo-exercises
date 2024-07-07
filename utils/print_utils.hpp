@@ -38,6 +38,10 @@ void showTrunks(Trunk *p)
     cout << p->str;
 }
 
+/**
+ * 打印二叉树
+ * https://www.techiedelight.com/c-program-print-binary-tree/
+ */
 // 右序遍历，即：右-中-左。因为这是按行打印的顺序。
 // root为父级Node；prev为父级Trunk；isLeft表明是否为左子树
 // prev以行为单位。每一个节点值占据一行，两个节点不会同时出现在同一行。
