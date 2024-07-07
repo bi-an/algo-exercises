@@ -41,6 +41,25 @@ void showTrunks(Trunk *p)
 /**
  * 打印二叉树
  * https://www.techiedelight.com/c-program-print-binary-tree/
+ * 
+ * 格式形如：
+ *             .——— 15
+ *         .——— 7
+ *        |    `——— 14
+ *     .——— 3
+ *    |   |        .——— 17
+ *    |   |    .——— 13
+ *    |   |   |    `——— 16
+ *    |    `——— 6
+ *    |        `——— 12
+ * ——— 1
+ *    |        .——— 11
+ *    |    .——— 5
+ *    |   |    `——— 10
+ *     `——— 2
+ *        |    .——— 9
+ *         `——— 4
+ *             `——— 8
  */
 // 右序遍历，即：右-中-左。因为这是按行打印的顺序。
 // root为父级Node；prev为父级Trunk；isLeft表明是否为左子树
@@ -104,7 +123,7 @@ void printTree(Node* root, Trunk *prev, bool isLeft)
     printTree(root->left, trunk, true);
 }
 
-#if 0
+#if 1
 int main()
 {
     // Construct above tree
