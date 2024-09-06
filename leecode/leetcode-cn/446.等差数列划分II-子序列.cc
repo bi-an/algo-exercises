@@ -81,3 +81,41 @@ class Solution
     return ans;
   }
 };
+
+
+// 解法二：常规动态规划。
+// 来自leetcode-cn用户 @加油！！！欧里给
+// TODO: 没细看，有时间再研究。
+
+class Solution {
+public:
+    int numberOfArithmeticSlices(vector<int>& nums) {
+        using ll = long long;
+        int n = nums.size();
+        if(n<3)return 0;
+        unordered_map<ll,vector<int>>check;
+        //记录值对应的下标，由于存在重复，所以用数组存
+        for(int i=0;i<nums.size();i++){
+            check[nums[i]].emplace_back(i);
+        }
+        //dp[i][j]表示以i和j下标对应最后两元素的等差数列个数，所以存在转移关系:
+        //dp[i][j] += dp[j][k]+1;而k是怎么来的呢?
+        //nums[j] - nums[k] = nums[i] - nums[j]=>nums[k] = 2*nums[j]-nums[i]
+        //一旦存在这样的下标k便可进行状态转移
+        int dp[n][n];
+        int res = 0;
+        memset(dp,0,sizeof(dp));
+        for(int i=0;i<n;i++){
+            for(int j=0;j<i;j++){
+                ll target = (ll)2*nums[j]-nums[i];
+                vector<int>& t = check[target];
+                for(auto&& k:t){
+                    if(k<j)
+                        dp[i][j] += (dp[j][k]+1);
+                }
+                res += dp[i][j];
+            }
+        }
+        return res;
+    }
+};
