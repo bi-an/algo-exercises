@@ -1,3 +1,6 @@
+// TODO: 动态规划优化
+
+// 动态规划
 namespace solution_1 {
 // solution_1的初始化过程难以理解，建议先看solution_2
 class Solution {
@@ -32,7 +35,7 @@ public:
     }
 };
 
-}
+} // namespace solution_1
 
 namespace solution_2 {
 
@@ -79,4 +82,4 @@ public:
     }
 };
 
-}
+} // namespace solution_2
