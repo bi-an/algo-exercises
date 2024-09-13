@@ -6,7 +6,6 @@
 */conf/application.conf
 **/.idea/
 **/*.iml
-**/test/
 **/*.swp
 **/.*
 **/test
