@@ -1,4 +1,5 @@
 // 题解：https://leetcode.cn/problems/maximum-multiplication-score/solutions/2917840/jiao-ni-yi-bu-bu-si-kao-dpcong-ji-yi-hua-9ul8/
+// 动态规划一般有两种寻找递推式的方法：选或不选；枚举哪个。
 class Solution {
 public:
     long long maxScore(vector<int> &a, vector<int> &b) {
@@ -29,3 +30,6 @@ public:
         return dp[n][4];
     }
 };
+
+// 也可以使用“递归+记忆化搜索（也就是记录已经遍历的情况，避免重复遍历）”的方法。
+// 原理与动态规划类似，只是倒过来遍历

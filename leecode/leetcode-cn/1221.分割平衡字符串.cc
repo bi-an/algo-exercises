@@ -3,14 +3,14 @@
 class Solution {
 public:
     int balancedStringSplit(string s) {
-        int nL = 0, nR = 0; // 可以使用一个变量d，如果d==0时表示此时已经平衡
+        int nL = 0, nR = 0;  // 可以使用一个变量d，如果d==0时表示此时已经平衡
         int ans = 0;
-        for(char c : s) {
-            if(c == 'L')
+        for (char c : s) {
+            if (c == 'L')
                 nL++;
             else
                 nR++;
-            if(nL!=0 && nL == nR) {
+            if (nL != 0 && nL == nR) {
                 ans++;
             }
         }
@@ -23,9 +23,9 @@ class Solution {
 public:
     int balancedStringSplit(string s) {
         int d = 0, ans = 0;
-        for(char c : s) {
+        for (char c : s) {
             (c == 'L') ? d++ : d--;
-            if(d == 0) ans++;
+            if (d == 0) ans++;
         }
         return ans;
     }
