@@ -12,7 +12,8 @@ public:
             return 0;
         
         int n = routes.size();
-        vector<vector<bool>> edge(n, vector<bool>(n)); // 邻接矩阵，每条线路是一个顶点
+        // vector<vector<bool>> edge(n, vector<bool>(n)); // 测试表明，使用bool会比int慢近一倍
+        vector<vector<int>> edge(n, vector<int>(n)); // 邻接矩阵，每条线路是一个顶点
         unordered_map<int, vector<int>> rec; // 记录经过车站的线路（即图的边）
         for (int i = 0; i < n; ++i) { // 线路标号
             for (int site : routes[i]) {
