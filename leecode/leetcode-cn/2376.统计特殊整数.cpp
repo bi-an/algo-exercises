@@ -4,6 +4,7 @@
  * [2376] 统计特殊整数
  */
 
+// 题解来源：https://leetcode.cn/problems/count-special-integers/solutions/2916434/tong-ji-te-shu-zheng-shu-by-leetcode-sol-7qai/comments/2386766
 class Solution {
 public:
     int countSpecialNumbers(int n) {
@@ -16,7 +17,7 @@ public:
         reverse(a.begin(), a.end());
 
         int ans = 0, m = a.size();
-        // 总位数为 1~(m-1) 时，可求其全排列
+        // 总位数为 1~(m-1) 时，一定小于 n，故可求其全排列
         for (int i = 1; i < m; ++i) {
             ans += 9 * perm(9, i - 1);  // 固定首位，可选1~9
                                         // 剩下 i-1 位求排列（可选0~9，须排除首位）
@@ -41,7 +42,7 @@ public:
             if (s.find(a[i]) != s.end()) {
                 // 达到最后一个特殊数字
                 // 例如 82274，取到第 2 个 2 时，说明 1~82199 的数字都已经搜寻过了
-                // 已经逼近到可能的最大值，再大一点的值已经不可能是特殊数字了，可以直接返回
+                // 而 822xx 不符合条件，故再大也不符合条件了，已经逼近到可能的最大值
                 return ans;
             }
             s.insert(a[i]);
