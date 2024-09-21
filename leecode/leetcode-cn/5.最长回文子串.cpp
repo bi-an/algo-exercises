@@ -6,41 +6,39 @@
  * @FilePath: \practice\leecode\leetcode-cn\5.最长回文子串.cpp
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
-class Solution
-{
- public:
-  // 时间复杂度：O(n^2)
-  // 空间复杂度：O(n)
-  string longestPalindrome(string s)
-  {
-    if (s.empty())
-      return string();
-    string ans;
-    for (int i = 0; i < s.size(); i++)
-    {
-      string str1 = palindrome(s, i, i);
-      string str2 = palindrome(s, i, i + 1);
-      if (str1.size() > ans.size())
-        ans = str1;
-      if (str2.size() > ans.size())
-        ans = str2;
+
+// 模拟法
+// 时间复杂度：O(n^2)
+// 空间复杂度：O(n)，palindrome函数和ans变量的空间
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        if (s.empty())
+            return string();
+        string ans;
+        for (int i = 0; i < s.size(); i++) {
+            string str1 = palindrome(s, i, i);
+            string str2 = palindrome(s, i, i + 1);
+            if (str1.size() > ans.size())
+                ans = str1;
+            if (str2.size() > ans.size())
+                ans = str2;
+        }
+        return ans;
     }
-    return ans;
-  }
-  // 中心向两边
-  // 小技巧：用两个参数l和r，而不是一个参数mid，这样可以处理字符传长度为奇数和偶数的情况，
-  // 如果是偶数，则传入i和i；如果是奇数，则传入i和i+1
-  string palindrome(const string &s, int l, int r)
-  {
-    while (l >= 0 && r < s.size() && s[l] == s[r])
-    {
-      l--;
-      r++;
+    // 中心向两边
+    // 小技巧：用两个参数l和r，而不是一个参数mid，这样可以处理字符传长度为奇数和偶数的情况，
+    // 如果是偶数，则传入i和i；如果是奇数，则传入i和i+1
+    string palindrome(const string &s, int l, int r) {
+        while (l >= 0 && r < s.size() && s[l] == s[r]) {
+            l--;
+            r++;
+        }
+        return s.substr(l + 1, r - l - 1);
     }
-    return s.substr(l + 1, r - l - 1);
-  }
 };
 
+namespace solution_2 {
 // 动态规划
 // 时间复杂度为O(n^2)
 // 空间复杂度为O(n^2)
@@ -73,3 +71,41 @@ public:
         return res;
     }
 };
+}  // namespace solution_2
+
+namespace solution_3 {
+// 模拟法
+// @author bi-an
+// 时间：O(n^2)
+// 空间：O(n)，返回值ans的空间，是不能避免的
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        int n = s.length();
+        string ans;
+        int maxlen = 0;
+        for (int i = 0; i < n; ++i) {
+            // 从中间向两边
+            int l = i, r = i;
+            // 先处理中心的核（也就是全部相等的情况）
+            while (l >= 0 && s[l] == s[i]) {
+                --l;
+            }
+            while (r < n && s[r] == s[i]) {
+                ++r;
+            }
+            // 核外
+            while (l >= 0 && r < n && s[l] == s[r]) {
+                --l;
+                ++r;
+            }
+            int len = r - l - 1;
+            if (len > maxlen) {
+                maxlen = len;
+                ans = s.substr(l + 1, len);
+            }
+        }
+        return ans;
+    }
+};
+}  // namespace solution_3
