@@ -4,6 +4,7 @@
 习惯上我们把1当做是第一个丑数。求按从小到大的顺序的第N个丑数。
 */
 
+// 动态规划
 class Solution {
 public:
     int GetUglyNumber_Solution(int index) {
