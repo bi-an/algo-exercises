@@ -20,7 +20,10 @@ public:
         while (nextIndex < index) {
             int min = Min(*pMultiply2 * 2, *pMultiply3 * 3, *pMultiply5 * 5);
             pUglyNumbers[nextIndex] = min;
-            while (*pMultiply2 * 2 <= min)
+            while (*pMultiply2 * 2 <= min)  // 因数用完之后需要后移，以指向更新后的丑数
+                                            // 假设更新后的丑数为 2 ，那么 pMultiply2 移动到指向 2 之后，
+                                            // *pMultiply2 * 2 将不满足小于等于 min ，
+                                            // 不会再向后移动
                 pMultiply2++;
             while (*pMultiply3 * 3 <= min)
                 pMultiply3++;
