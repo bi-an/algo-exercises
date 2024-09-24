@@ -1,6 +1,7 @@
 // 题解：https://leetcode.cn/problems/minimum-number-of-seconds-to-make-mountain-height-zero/solutions/2925848/er-fen-da-an-pythonjavacgo-by-endlessche-myg4
 // 方法一：最小堆模拟
-// 时间复杂度：O(m*logn)，其中 m 是山的高度， n 是工人的人数
+// 时间复杂度：O(H*logn)，其中 H 是山的高度， n 是工人的人数
+//            即 10^5 * log(10^4) = 10^5 * log(2^16) = 16*10^5
 // 空间复杂度：O(n)，堆的大小始终为工人的人数
 class Solution {
 public:
@@ -58,6 +59,48 @@ public:
 };
 }  // namespace solution_2
 
-// TODO:
-// 方法二：二分法
+namespace solution_3 {
+// 方法二：数学 + 二分法
 // 题解：https://leetcode.cn/problems/minimum-number-of-seconds-to-make-mountain-height-zero/solutions/2925848/er-fen-da-an-pythonjavacgo-by-endlessche-myg4
+// 时间复杂度：O(nlog(h^2*maxT))，其中 h = H / n ，
+//            最大时间为 n 最大时，此时 h 大概只有 10 左右，总时间为 10^4 * log(10^2 * 10^6) = 26 * 10^4
+//            比最小堆解法快 10 倍左右。
+// 空间复杂度：O(1)
+class Solution {
+public:
+    long long minNumberOfSeconds(int mountainHeight, vector<int>& workerTimes) {
+        long long ans = 0;
+
+        auto check = [&](long long m) -> bool {
+            int h = mountainHeight;
+            for (int t : workerTimes) {
+                // 一元二次方程的求根公式计算出来的该工人将山降低的高度
+                h -= (int)((sqrt(1 + m / t * 8) - 1) / 2);  // 向下取整
+                // 因为题目中，第 m 秒工人 i 将山降低的高度 x 必须是整数，也就是默认是向下取整的，
+                // 所以最终得到的解不仅是合理解，并且是最优解。
+                if (h <= 0)
+                    return true;
+            }
+            return false;
+        };
+
+        // 假设每个人的 workerTimes[i] 都等于最慢的值，此时总耗时最大
+        int max_t = ranges::max(workerTimes);
+        // 每个人降低的山高度（因为效率相同），向上取整，防止遗漏
+        int h = (mountainHeight - 1) / workerTimes.size() + 1;
+        long long left = 0, right = (long long)h * (1 + h) / 2 * max_t;
+
+        // 二分查找最少的秒数 m
+        while (left + 1 < right) {
+            long long m = (left + right) / 2;
+            // 结合初始值可知，left 总是不符合条件的，right 总是符合条件的，也就是左开右闭区间
+            // 故当 left 和 right 相邻，即 left + 1 = right 时，
+            // (left, right] 可以直接得出 ans = right ，这就是循环的结束条件
+            (check(m) ? right : left) = m;
+        }
+
+        return right;
+    }
+};
+
+}  // namespace solution_3
