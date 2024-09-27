@@ -33,7 +33,7 @@ public:
         for (char i = 'a'; i <= 'z'; ++i) {
             for (char j = 'a'; j < i; ++j) {
                 // for (char j = 'a'; j <= 'z'; ++j) {
-                // if (i == j) // 如果前缀相等，那么交换之后的结果等于这两个字符串本身，必然不符合
+                // if (i == j) // 如果前缀相等，那么交换之后的结果等于这两个字符串本身，必然不符合。
                 //             // 这种写法，ans 不需要乘以 2
                 //     continue;
                 int m = get_intersection_size(names[i], names[j]);
