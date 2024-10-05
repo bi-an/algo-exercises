@@ -7,6 +7,7 @@ class Solution {
 public:
     long long minNumberOfSeconds(int mountainHeight, vector<int>& workerTimes) {
         // 每次选一个「工作后总用时最短」的工人，把山的高度降低 1
+        // 存储每个工人此时的总用时，最大的总用时就是当前的总用时
         priority_queue<tuple<long long, int, int>, vector<tuple<long long, int, int>>, greater<>> heap;  // 最小堆
         // 最小堆中是备选项，存储每个人的此次工作（将山的高度降低1）后的状态
         for (int t : workerTimes) {

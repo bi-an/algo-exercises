@@ -1,0 +1,39 @@
+/*
+ * @lc app=leetcode.cn id=2187 lang=cpp
+ *
+ * [2187] 完成旅途的最少时间
+ */
+
+// @lc code=start
+class Solution {
+   public:
+    long long minimumTime(vector<int>& time, int totalTrips) {
+        int n = time.size();
+        auto mx = ranges::max(time);
+
+        auto check = [&](long long m) -> bool {
+            long long trips = 0;
+            for (int t : time) {
+                trips += m / t;
+            }
+            return trips >= totalTrips;
+        };
+
+        // long long l = static_cast<long long>(mn_mx.min) * totalTrips / n, r = static_cast<long long>(mn_mx.max) * totalTrips / n;
+        // 上面这种边界找得不对，不等式的取整除法不能直接改成乘法，会丢失一些信息
+        long long l = 1, r = static_cast<long long>(mx) * totalTrips;
+        // 直接将最慢的公交完成所有旅途的时间作为右边界
+
+        while (l < r) {
+            long long m = (l + r) / 2;
+            if (check(m))
+                r = m;
+            else
+                l = m + 1;
+            // cout << m << " " << check(m) << endl;
+        }
+
+        return l;
+    }
+};
+// @lc code=end
