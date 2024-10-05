@@ -5,6 +5,9 @@
  */
 
 // @lc code=start
+// 二分查找
+// 这题和 「3296.移山所需的最少秒数」 一样，但是测试集的数值范围扩大了，
+// 所以最小堆解法无法通过测试，只能使用二分解法
 class Solution {
    public:
     long long minimumTime(vector<int>& time, int totalTrips) {
