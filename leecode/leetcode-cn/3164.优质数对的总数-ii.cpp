@@ -4,6 +4,9 @@
  * [3164] 优质数对的总数 II
  */
 
+#include <bits/stdc++.h>
+using namespace std;
+
 // @lc code=start
 // 这题的关键在于时间复杂度的取舍
 // 假设我们总是用 nums1[i] 去匹配 nums2[j] ，这样时间复杂度为 O(nm) ，其中 n, m 都可能达到 10^5 。
@@ -13,7 +16,30 @@
 // 对于每个 nums1[i] 的因子，可以在 O(1) 时间内找到 nums2[j] 的个数
 // 这样将 nums1 和 nums2 解耦了。
 // 时间复杂度变为 O(n sqrt(U/k) + m) ，其中 U 是最大的 nums1[i] 。
-
+class Solution {
+public:
+    long long numberOfPairs(vector<int>& nums1, vector<int>& nums2, int k) {
+        unordered_map<long long,int> cnt2;
+        for (int x : nums2) {
+            cnt2[static_cast<long long>(x) * k]++;
+        }
+        long long ans = 0;
+        for (int num1 : nums1) {
+            // 求 num1 的所有因子
+            for (int x = 1; x * x <= num1; ++x) {
+                if (num1 % x)
+                    continue;
+                if (cnt2.contains(x))
+                    ans += cnt2[x];
+                // 因子总是成对出现
+                int y = num1 / x;
+                if (y != x && cnt2.contains(y))
+                    ans += cnt2[y];
+            }
+        }
+        return ans;
+    }
+};
 
 // 方法二：与方法一类似，我们也可以找出 nums2[j]*k 的所有倍数 （检查是否小于等于 max(nums1) 以降低时间复杂度），时间复杂度为 O( U/(nums2[j]*k) )，
 // 注意到，与方法一的时间复杂度中 nums1[i] 位于分子不同，这次 nums2[j] 位于分母中，
@@ -29,6 +55,8 @@
 // 为了进一步降低时间复杂度，因为 nums2 中会有重复的数，我们用哈希表统计其频次，以去重。
 // 同样，对于 nums1 中的每个数用哈希表寻找其频次。
 // 总时间复杂度 O(n + m + U/k * logm) 。
+namespace solution_2
+{
 class Solution {
 public:
     long long numberOfPairs(vector<int>& nums1, vector<int>& nums2, int k) {
@@ -44,6 +72,7 @@ public:
         // int max1 = ranges::max_element(nums1.begin(), nums1.end());
         int max1 = ranges::max(nums1);
         for (auto [x, c] : cnt2) {
+            // 求 num2*k 的所有倍数
             for (long long y = x; y <= max1; y+= x) {
                 if (cnt1.contains(y)) {
                     ans += static_cast<long long>(cnt1[y]) * c;
@@ -53,5 +82,23 @@ public:
         return ans;
     }
 };
+} // namespace solution_2
+
 // @lc code=end
 
+void test1() {
+    vector<int> nums1 = {1,2,4,12};
+    vector<int> nums2 = {2,4};
+    int k = 3;
+
+    Solution sol;
+    int ans = sol.numberOfPairs(nums1, nums2, k);
+
+    cout << ans << endl;
+}
+
+int main() {
+    test1();
+
+    return 0;
+}
