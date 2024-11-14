@@ -19,13 +19,16 @@ public:
         vector<int> memo(last_day + 1);
 
         // dfs(i) 表示 1 到 i 天的最小花费。
-        // lambda 表达式 dfs 在这里其实是一个变量，定义变量时，不能再引用该变量本身，
-        // 否则会陷入无限递归定义。
-        // 所以需要将变量 dfs 作为引用（左值引用和右值引用都可以）传入函数参数。
-        // 右值引用可以实现完美转发。
-        // 如果不使用引用，可以将 auto 改成 std::function ，即将其封装为一个函数类型。
-        // 即 std::function<int(int)> dfs = [&]( int i) {...}; 也能使得编译通过。
-        // 但是 std::function 的开销会大一些。
+        // 写法一：
+        //  lambda 表达式 dfs 在这里其实是一个变量，定义变量时，不能再引用该变量本身，
+        //  否则会陷入无限递归定义。
+        //  所以需要将变量 dfs 作为引用（左值引用和右值引用都可以）传入函数参数。
+        //  右值引用可以实现完美转发。
+        // 写法二：
+        //  如果不使用引用，可以将 auto 改成 std::function ，即将其封装为一个函数类型。
+        //  即 std::function<int(int)> dfs = [&]( int i) {...}; 也能使得编译通过。
+        //  但是 std::function 的开销会大一些。
+        // 可以参考：https://blog.csdn.net/wang15188369698/article/details/134836293
         auto dfs = [&](auto&& dfs, int i) {
             if (i <= 0) {
                 return 0;
