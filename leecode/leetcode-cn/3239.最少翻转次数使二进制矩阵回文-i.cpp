@@ -5,6 +5,8 @@
  */
 
 // @lc code=start
+// 这题只能算简单类型。
+// 题解：https://leetcode.cn/problems/minimum-number-of-flips-to-make-binary-grid-palindromic-i/solutions/2868250/fen-bie-ji-suan-pythonjavacgo-by-endless-771t
 class Solution {
 public:
     int minFlips(vector<vector<int>>& grid) {

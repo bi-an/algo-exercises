@@ -5,6 +5,7 @@
  */
 
 // @lc code=start
+// 官方题解：https://leetcode.cn/problems/minimum-number-of-flips-to-make-binary-grid-palindromic-ii/solutions/2981502/zui-shao-fan-zhuan-ci-shu-shi-er-jin-zhi-hslz
 class Solution {
 public:
     int minFlips(vector<vector<int>>& grid) {
