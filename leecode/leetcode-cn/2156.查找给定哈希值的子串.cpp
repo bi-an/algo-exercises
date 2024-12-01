@@ -5,10 +5,12 @@
  */
 
 // @lc code=start
+// 该题主要思想是定长滑动窗口，但是注意到 p^k 本身是时间复杂度为 O(k) 的，
+// 所以如果多项式的每个项都计算一次，时间复杂度则过高，需要先分析相邻窗口内的哈希值之间的关系。
+//
 // 公式推导：https://leetcode.cn/problems/find-substring-with-given-hash-value/solutions/1249153/cha-zhao-gei-ding-ha-xi-zhi-de-zi-chuan-fi8jd/
 //
-// 注意到，递推式有减法，但是观察 hash 运算表达式，取模应该都是非负数，
-// 故我们需要用到“同余”的概念，即
+// 注意到，递推式有减法，负数与正数的模会是负数，但是观察 hash 运算表达式，其取模应该都是非负数，故我们需要用到“同余”的概念，即
 // 若 x < 0， y ≥ 0，有
 //      x % m + m = y % m
 // 模运算：https://leetcode.cn/circle/discuss/mDfnkW/
