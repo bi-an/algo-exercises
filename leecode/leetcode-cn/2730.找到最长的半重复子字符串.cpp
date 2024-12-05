@@ -40,7 +40,6 @@ public:
 
 }  // namespace solution_1
 
-// @lc code=start
 
 // 简洁写法：
 // https://leetcode.cn/problems/find-the-longest-semi-repetitive-substring/
@@ -70,12 +69,14 @@ public:
 
 }  // namespace solution_2
 
+// @lc code=start
 // 写法三：参考了评论区的更简洁写法
 // 写法二的第 (2) 点中，我们记录第一个邻等对的位置即可，不需要一直移动 left 。
+// 换言之，我们每次遇到一个邻等对，则将 left 移动到上一个邻等对的第二个元素，这样就消除了上一个邻等对。
 class Solution {
 public:
     int longestSemiRepetitiveSubstring(string s) {
-        int l = 0, pt = 0;  // pt 记录上一次连续的位置（第二个相同字符处，即下一次应该重新开始处，初始的“下一次”即第一次，所以初始值为 0）
+        int l = 0, pt = 0;  // pt（point）记录上一个邻等对的第二个元素位置（这是下一个合法窗口的起始位置，因为初始的“下一个窗口”即第一个，所以初始化为 0 ）
         int ans = 1, n = s.length();
         for (int r = 1; r < n; ++r) {
             // 保证窗口合法
