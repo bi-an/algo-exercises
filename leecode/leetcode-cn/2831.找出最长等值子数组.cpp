@@ -20,6 +20,7 @@
 class Solution {
 public:
     int longestEqualSubarray(vector<int>& nums, int k) {
+        // 也可以使用 vector<vector<int>> 存储，空间预留 nums.size 个
         unordered_map<int, vector<int>> posList;
 
         for (int i = 0; i < nums.size(); ++i) {

@@ -53,3 +53,43 @@ public:
     }
 };
 // @lc code=end
+
+// 二刷，解法相同
+// 2024-12-07 18:58:49
+namespace solution_2 {
+class Solution {
+public:
+    int takeCharacters(string s, int k) {
+        int ans = 0, n = s.length();
+        // 反向思考：从两边取，剩余的就是一个滑动窗口。
+        // 约束条件：
+        // 每种至少取走 k 个，也就是最多剩余 m - k 个，m 是原来的计数
+        // 也即是窗口内每种最多剩余 m - k 个。
+        // 解：
+        // 返回所需的最少分钟数，也即我们需要找到最大窗口
+
+        // cnt1 原数组的计数
+        // cnt2 窗口内的计数
+        unordered_map<char, int> cnt1, cnt2;
+        for (char a : s)
+            ++cnt1[a];
+
+        for (char c : {'a', 'b', 'c'}) {
+            if (cnt1[c] < k)
+                return -1;
+        }
+
+        for (int l = 0, r = 0; l < n && r < n; ++r) {
+            ++cnt2[s[r]];
+            // 之前的窗口是合法的，加入 s[r] 才不合法了
+            // cnt1[x] - k 可能小于 0
+            while (l < n && cnt2[s[r]] > cnt1[s[r]] - k)
+                --cnt2[s[l++]];
+            // 如果都不合法，right 会大于 left
+            ans = max(ans, r - l + 1);
+        }
+
+        return n - ans;
+    }
+};
+}  // namespace solution_2
