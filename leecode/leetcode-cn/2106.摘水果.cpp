@@ -34,9 +34,12 @@ public:
                 break;
             cnt += fruits[right][1];
             // 不断右移窗口左端点，直至窗口合法
-            while (left <= right && (posRight - fruits[left][0]) + min(abs(posRight - startPos), abs(fruits[left][0] - startPos)) > k) {
-                cnt -= fruits[left][0] < startPos ? fruits[left][1] : 0;
-                ++left;
+            // 这个 if 条件是为了优化时间复杂度：如果窗口左端点处于人的右侧或恰好位于人所在位置，右移左端点不能减少步数，可以直接跳过
+            if (fruits[left][0] < startPos) {
+                while (left <= right && (posRight - fruits[left][0]) + min(abs(posRight - startPos), abs(fruits[left][0] - startPos)) > k) {
+                    cnt -= fruits[left][0] < startPos ? fruits[left][1] : 0;
+                    ++left;
+                }
             }
             // 记录本次局部最优解
             ans = max(ans, cnt);
