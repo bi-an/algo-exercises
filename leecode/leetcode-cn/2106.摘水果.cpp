@@ -6,7 +6,7 @@
 
 // @lc code=start
 // 题解作者：bi-an
-// https://leetcode.cn/problems/maximum-fruits-harvested-after-at-most-k-steps/solutions/3014649/hua-dong-chuang-kou-fa-xian-gui-lu-by-bi-vj8t/
+// https://leetcode.cn/problems/maximum-fruits-harvested-after-at-most-k-steps/solutions/3015664/hua-dong-chuang-kou-fa-xian-gui-lu-by-bi-o3h6
 //
 // 不定长滑动窗口
 // (1) 如果窗口内所有水果都位于人的同一侧，那么沿着一个方向走即可。
@@ -29,6 +29,7 @@ public:
         // 遍历窗口右端点
         for (int left = 0, right = 0; right < fruits.size(); ++right) {
             int posRight = fruits[right][0];
+            // 我们是从左往右遍历，如果右端点在人的右侧，且距离大于 k ，那么从此以后都不会符合约束条件
             if (posRight - startPos > k)
                 break;
             cnt += fruits[right][1];
