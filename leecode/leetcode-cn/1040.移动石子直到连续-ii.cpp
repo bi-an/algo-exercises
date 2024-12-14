@@ -24,7 +24,7 @@ public:
         ranges::sort(stones);
         int n = stones.size();
 
-        // 区间 [s,t] 一共有 t-s+1 个位置，其中 n-1 个原本就有人，
+        // 区间 [s,t] 一共有 t-s+1 个位置，其中 n-1 个（除了区间外的那个端点石子）原本就有石子，
         // 所以还剩下 t-s+1-(n-1) 个空位
         int ma = max(stones[n - 1] - stones[1] + 1, stones[n - 2] - stones[0] + 1) - (n - 1);
 
