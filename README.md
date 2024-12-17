@@ -18,3 +18,15 @@
 
 ## 网站：
 [算法技能树](https://edu.csdn.net/skill/algorithm?utm_source=AI_act_algorithm)
+
+## Unicode 字符
+
+在百度中问 AI ：
+
+“正号的unicode上标字符是什么”，答案：‌正号的Unicode上标字符是“⁺”。
+
+负号的unicode上标字符显示成什么？答：‌⁻¹‌：表示1的负数上标
+
+
+上标字符转换器：https://teshuzifu.cn/shangbiaozhuanhuan.html
+
