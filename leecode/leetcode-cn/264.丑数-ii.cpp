@@ -46,6 +46,8 @@ public:
         int ugly = 0;
         // 最小堆
         // 因为堆内元素个数可能比 n 多许多，为了防止越界，使用 long
+        // 在 C++14 及更高版本中，可以使用 greater<> 这种省略形式，
+        // 称为透明比较器（transparent comparator），编译器会自动推导类型。
         priority_queue<long, vector<long>, greater<long>> heap;
         // 去重：在加入堆之前，先用哈希表判断是否已经存在
         unordered_set<long> seen;
