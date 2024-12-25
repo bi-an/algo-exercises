@@ -84,6 +84,7 @@ class Solution {
     }
 
     // 元音至少各有一个、辅音个数 ≥ k 的子字符串个数
+    // 反过来，求“元音至少各有一个、辅音个数 ≤ k” 的个数也行，做法类似，具体可参考「992.k-个不同整数的子数组」
     long long f(string& word, int k) {
         long long ans = 0;
         unordered_map<char, int> cnt1;    // 元音
