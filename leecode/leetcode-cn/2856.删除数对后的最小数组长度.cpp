@@ -46,8 +46,8 @@ class Solution {
 public:
     int minLengthAfterRemovals(vector<int>& nums) {
         int n = nums.size(), x = nums[n / 2];
-        // lower_bound：第一个 i ≤ x 的 i
-        // upper_bound：第一个 i > x 的 i
+        // lower_bound：下届，第一个 i ≥ x 的 i
+        // upper_bound：上界，第一个 i > x 的 i
         // 简记：左闭右开区间
         int maxCnt = ranges::upper_bound(nums, x) - ranges::lower_bound(nums, x);
         return max(2 * maxCnt - n, n & 1);
