@@ -1,0 +1,15 @@
+[submodule "utils/3party/doctest"]
+	path = utils/3party/doctest
+	url = https://github.com/doctest/doctest.git
+[submodule "easyloggingpp"]
+	path = easyloggingpp
+	url = https://github.com/abumq/easyloggingpp.git
+[submodule "utils/3party/nlohmann_json"]
+	path = utils/3party/nlohmann_json
+	url = https://github.com/nlohmann/json.git
+[submodule "utils/3party/easyloggingpp"]
+	path = utils/3party/easyloggingpp
+	url = https://github.com/abumq/easyloggingpp.git
+[submodule "utils/3party/jsoncpp"]
+	path = utils/3party/jsoncpp
+	url = https://github.com/open-source-parsers/jsoncpp.git

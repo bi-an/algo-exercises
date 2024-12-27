@@ -9,3 +9,6 @@
 **/*.swp
 **/.*
 **/output/
+**/lib/
+**/utils/include/
+# utils/3party/
