@@ -17,8 +17,8 @@ public:
             // lower - nums[i] ≤ nums[j] ≤ upper - nums[i]
 
             // 写法一：往右找
-            // lower_bound 是下界，第一个 num ≥ x 的位置（即闭区间），
-            // // 如果 num 都小于 x ，则返回 nums.end()
+            // lower_bound 以 x 为下界，第一个 nums[i] ≥ x 的 i（即闭区间），
+            // // 如果 nums 都小于 x ，则返回 nums.end()
             // auto left = lower_bound(it + 1, nums.end(), lower - *it);
             // // // 第一个 num > lower - nums[i] - 1
             // // auto left = upper_bound(it + 1, nums.end(), lower - *it - 1);
