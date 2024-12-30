@@ -30,3 +30,13 @@
 
 上标字符转换器：https://teshuzifu.cn/shangbiaozhuanhuan.html
 
+## Git 报错“Failed to connect to github.com port 443”
+
+[解决方法](https://blog.csdn.net/zpf1813763637/article/details/128340109)
+
+由于安装了 VPN ，我们设置 http 和 https 为 VPN 的代理：
+
+```bash
+git config --global http.proxy 127.0.0.1:7890
+git config --global https.proxy 127.0.0.1:7890
+```
