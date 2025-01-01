@@ -18,23 +18,28 @@ public:
 
     // 寻找 小于等于 timestamp 的元素
     string get(string key, int timestamp) {
+        // 防止插入不存在的键值对
+        if (!tms.contains(key))
+            return "";
+        auto& pairs = tms[key];
+
         // // 写法一
-        // if (!tms.contains(key))
-        //     return "";
-        // auto& values = tms[key];
-        // auto i = ranges::upper_bound(values, make_pair(timestamp, ""));
+        // auto i = ranges::upper_bound(pairs, make_pair(timestamp, ""));
         // string ans;
         // // 答案可能在 i 处，也可能在 i - 1 处，取靠后的
-        // if (i != values.begin() && prev(i)->first <= timestamp)
+        // if (i != pairs.begin() && prev(i)->first <= timestamp)
         //     ans = prev(i)->second;
-        // if (i != values.end() && i->first <= timestamp)
+        // if (i != pairs.end() && i->first <= timestamp)
         //     ans = i->second;
         // return ans;
 
         // 写法二
-        auto& values = tms[key];                                                    // 有可能为空
-        auto i = ranges::upper_bound(values, make_pair(timestamp, string({127})));  // 使用一个大于所有字符的值，127 是控制字符 DEL
-        if (i != values.begin())                                                    // values 有可能为空
+        // 使用一个大于所有字符的值，127 是控制字符 DEL
+        // char 的表示范围为 [-128, 127] ，如果用 128 初始化，
+        // 在某些系统中，可能会被强制转化为 -128 （二进制形式均为 1000'0000）
+        auto i = ranges::upper_bound(pairs, make_pair(timestamp, string({127})));
+        // 指向 begin() 所有数都大于 timestamp ，都不合法
+        if (i != pairs.begin())
             return (i - 1)->second;
         return "";
     }
