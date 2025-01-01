@@ -30,6 +30,13 @@
 
 上标字符转换器：https://teshuzifu.cn/shangbiaozhuanhuan.html
 
+上下标符号：https://www.cnblogs.com/chenyanbin/p/18560013
+
+① ② ③ ④ ⑤ ⑥ ⑦ ⑧ ⑨ ⑩ ⑪ ⑫ ⑬ ⑭ ⑮ ⑯ ⑰ ⑱ ⑲ ⑳
+上标：º ¹ ² ³ ⁴⁵ ⁶ ⁷ ⁸ ⁹ ⁺ ⁻ ⁼ ⁽ ⁾ ⁿ ′ ½
+下标：₀ ₁ ₂ ₃ ₄ ₅ ₆ ₇ ₈ ₉ ₊ ₋ ₌ ₍ ₎
+
+
 ## Git 报错“Failed to connect to github.com port 443”
 
 [解决方法](https://blog.csdn.net/zpf1813763637/article/details/128340109)
