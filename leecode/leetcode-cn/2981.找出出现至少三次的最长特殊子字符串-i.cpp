@@ -133,7 +133,13 @@ public:
         for (auto& g : groups) {
             if (g.empty())
                 continue;
-            ranges::sort(g, greater<int>());  // TODO: 为什么 greater() 不加模板参数也行
+            // ranges::sort(g, std::greater<int>());
+            // 可以缺省模板参数，默认为 void ：
+            // less<void> (C++14) function object implementing x < y deducing parameter and return types
+            ranges::sort(g, std::greater());
+            // struct ranges::greater 没有模板参数，但是其成员函数有模板参数
+            // template<type T, typename U> ranges::greater::operator()() 将自动推导类型
+            // ranges::sort(g, ranges::greater());
             // 在 g 末尾添加两个 0 ，防止 g[1] 和 g[2] 越界
             g.push_back(0);
             g.push_back(0);
